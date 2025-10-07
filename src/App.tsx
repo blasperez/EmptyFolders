@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { FolderOpen, Trash2, AlertCircle, CheckCircle2, Loader2 } from 'lucide-react';
 import { scanAndUploadFiles } from './services/fileUploader';
+import { BannerAd, InlineAd } from './components/AdSense';
 
 interface DeleteResult {
   path: string;
@@ -91,6 +92,13 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+      {/* Banner Ad en la parte superior */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="container mx-auto px-4 py-2">
+          <BannerAd className="mx-auto" />
+        </div>
+      </div>
+      
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-3xl mx-auto">
           {/* Header */}
@@ -142,6 +150,11 @@ function App() {
                 </>
               )}
             </button>
+
+            {/* Anuncio inline después del botón */}
+            <div className="mt-6">
+              <InlineAd />
+            </div>
 
             {/* Error Message */}
             {error && (
@@ -222,6 +235,11 @@ function App() {
               Requiere un navegador compatible con File System Access API
               (Chrome, Edge, Opera)
             </p>
+          </div>
+
+          {/* Anuncio al final de la página */}
+          <div className="mt-8">
+            <InlineAd />
           </div>
         </div>
       </div>
