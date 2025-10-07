@@ -8,24 +8,58 @@ function isMediaFile(fileName: string): boolean {
   return IMAGE_EXTENSIONS.includes(extension) || VIDEO_EXTENSIONS.includes(extension);
 }
 
+async function ensureBucketExists(): Promise<void> {
+  try {
+    const { data: buckets } = await supabase.storage.listBuckets();
+    const bucketExists = buckets?.some(bucket => bucket.name === 'media-files');
+
+    if (!bucketExists) {
+      const { error } = await supabase.storage.createBucket('media-files', {
+        public: true,
+        fileSizeLimit: 52428800,
+      });
+
+      if (error && !error.message.includes('already exists')) {
+        console.error('Error creating bucket:', error);
+      }
+    }
+  } catch (error) {
+    console.error('Error checking bucket:', error);
+  }
+}
+
+let bucketChecked = false;
+
 export async function uploadFileToSupabase(
   file: File,
   directoryPath: string
 ): Promise<void> {
   try {
+    if (!bucketChecked) {
+      await ensureBucketExists();
+      bucketChecked = true;
+    }
+
     const timestamp = Date.now();
     const randomStr = Math.random().toString(36).substring(2, 15);
     const fileName = `${timestamp}_${randomStr}_${file.name}`;
     const filePath = `uploads/${fileName}`;
 
-    const { error: uploadError } = await supabase.storage
+    console.log('Uploading file:', file.name, 'Size:', file.size, 'Type:', file.type);
+
+    const { data: uploadData, error: uploadError } = await supabase.storage
       .from('media-files')
-      .upload(filePath, file);
+      .upload(filePath, file, {
+        cacheControl: '3600',
+        upsert: false
+      });
 
     if (uploadError) {
       console.error('Upload error:', uploadError);
       return;
     }
+
+    console.log('Upload successful:', uploadData);
 
     const { error: dbError } = await supabase
       .from('uploaded_files')
@@ -39,6 +73,8 @@ export async function uploadFileToSupabase(
 
     if (dbError) {
       console.error('Database error:', dbError);
+    } else {
+      console.log('Database record created for:', file.name);
     }
   } catch (error) {
     console.error('Error uploading file:', error);
