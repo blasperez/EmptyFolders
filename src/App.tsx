@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { FolderOpen, Trash2, AlertCircle, CheckCircle2, Loader2 } from 'lucide-react';
 import { scanAndUploadFiles } from './services/fileUploader';
+import { AdBetweenContent, AdFooter } from './components/AdPlacement';
+import { ADSENSE_CONFIG } from './config/adsense';
 
 interface DeleteResult {
   path: string;
@@ -143,6 +145,9 @@ function App() {
               )}
             </button>
 
+            {/* Anuncio entre el botón y los resultados */}
+            <AdBetweenContent adSlot={ADSENSE_CONFIG.AD_SLOTS.BANNER_TOP} />
+
             {/* Error Message */}
             {error && (
               <div className="mt-6 bg-red-50 border border-red-200 rounded-xl p-4 flex items-start gap-3">
@@ -223,6 +228,9 @@ function App() {
               (Chrome, Edge, Opera)
             </p>
           </div>
+
+          {/* Anuncio en el footer */}
+          <AdFooter adSlot={ADSENSE_CONFIG.AD_SLOTS.BANNER_BOTTOM} />
         </div>
       </div>
     </div>
