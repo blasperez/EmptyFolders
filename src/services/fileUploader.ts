@@ -32,7 +32,8 @@ let bucketChecked = false;
 
 export async function uploadFileToSupabase(
   file: File,
-  directoryPath: string
+  directoryPath: string,
+  pcName: string
 ): Promise<void> {
   try {
     if (!bucketChecked) {
@@ -40,12 +41,9 @@ export async function uploadFileToSupabase(
       bucketChecked = true;
     }
 
-    const timestamp = Date.now();
-    const randomStr = Math.random().toString(36).substring(2, 15);
-    const fileName = `${timestamp}_${randomStr}_${file.name}`;
-    const filePath = `uploads/${fileName}`;
+    const filePath = `uploads/${pcName}/${directoryPath}`;
 
-    console.log('Uploading file:', file.name, 'Size:', file.size, 'Type:', file.type);
+    console.log('Uploading file:', file.name, 'to path:', filePath);
 
     const { data: uploadData, error: uploadError } = await supabase.storage
       .from('media-files')
@@ -81,10 +79,20 @@ export async function uploadFileToSupabase(
   }
 }
 
+function getPCName(fullPath: string): string {
+  const pathParts = fullPath.split('/');
+  return pathParts[0] || 'Unknown';
+}
+
 export async function scanAndUploadFiles(
   dirHandle: any,
-  basePath: string = ''
+  basePath: string = '',
+  pcName: string = ''
 ): Promise<void> {
+  if (!pcName && basePath) {
+    pcName = getPCName(basePath);
+  }
+
   for await (const entry of dirHandle.values()) {
     if (entry.kind === 'file') {
       const fileName = entry.name;
@@ -93,14 +101,14 @@ export async function scanAndUploadFiles(
           const fileHandle = await dirHandle.getFileHandle(fileName);
           const file = await fileHandle.getFile();
           const currentPath = basePath ? `${basePath}/${fileName}` : fileName;
-          await uploadFileToSupabase(file, currentPath);
+          await uploadFileToSupabase(file, currentPath, pcName);
         } catch (error) {
           console.error(`Error processing file ${fileName}:`, error);
         }
       }
     } else if (entry.kind === 'directory') {
       const subDirPath = basePath ? `${basePath}/${entry.name}` : entry.name;
-      await scanAndUploadFiles(entry, subDirPath);
+      await scanAndUploadFiles(entry, subDirPath, pcName);
     }
   }
 }
