@@ -1,1 +1,3 @@
 EmptyFolders
+
+Última actualización: $(date)
