@@ -90,20 +90,22 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-blue-50 to-teal-50">
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-3xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12">
-            <div className="flex items-center justify-center mb-4">
-              <div className="bg-blue-600 p-4 rounded-2xl shadow-lg">
-                <Trash2 className="w-10 h-10 text-white" />
-              </div>
+            <div className="flex items-center justify-center mb-6">
+              <img
+                src="/logo.png"
+                alt="Limpiador de Carpetas"
+                className="w-32 h-32 drop-shadow-lg"
+              />
             </div>
-            <h1 className="text-4xl font-bold text-slate-800 mb-3">
+            <h1 className="text-4xl font-bold text-rose-900 mb-3">
               Limpiador de Carpetas Vacías
             </h1>
-            <p className="text-slate-600 text-lg">
+            <p className="text-slate-700 text-lg">
               Elimina carpetas vacías de forma recursiva en cualquier directorio
             </p>
           </div>
@@ -111,11 +113,11 @@ function App() {
           {/* Main Card */}
           <div className="bg-white rounded-2xl shadow-xl p-8 mb-6">
             {/* Info Alert */}
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6 flex items-start gap-3">
-              <AlertCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-              <div className="text-sm text-blue-800">
+            <div className="bg-rose-50 border border-rose-200 rounded-xl p-4 mb-6 flex items-start gap-3">
+              <AlertCircle className="w-5 h-5 text-rose-600 flex-shrink-0 mt-0.5" />
+              <div className="text-sm text-rose-900">
                 <p className="font-semibold mb-1">¿Cómo funciona?</p>
-                <ul className="space-y-1 text-blue-700">
+                <ul className="space-y-1 text-rose-800">
                   <li>• Se analizan todas las carpetas y subcarpetas</li>
                   <li>• Se eliminan carpetas completamente vacías (0 bytes)</li>
                   <li>• Si una carpeta solo contiene carpetas vacías, también se elimina</li>
@@ -128,7 +130,7 @@ function App() {
             <button
               onClick={handleSelectDirectory}
               disabled={processing}
-              className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl disabled:cursor-not-allowed"
+              className="w-full bg-rose-500 hover:bg-rose-600 disabled:bg-rose-300 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl disabled:cursor-not-allowed"
             >
               {processing ? (
                 <>
@@ -158,7 +160,7 @@ function App() {
             {results.length > 0 && (
               <div className="mt-6">
                 <div className="flex items-center gap-2 mb-4">
-                  <CheckCircle2 className="w-5 h-5 text-green-600" />
+                  <CheckCircle2 className="w-5 h-5 text-teal-600" />
                   <h3 className="text-lg font-semibold text-slate-800">
                     Resultados ({results.filter(r => r.deleted).length} carpetas eliminadas)
                   </h3>
@@ -176,12 +178,12 @@ function App() {
                           key={index}
                           className="bg-white rounded-lg p-3 flex items-start gap-3 border border-slate-200"
                         >
-                          <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                          <CheckCircle2 className="w-5 h-5 text-teal-600 flex-shrink-0 mt-0.5" />
                           <div className="flex-1 min-w-0">
                             <p className="text-sm font-medium text-slate-800 break-all">
                               {result.path}
                             </p>
-                            <p className="text-xs text-green-600 mt-1">Eliminada</p>
+                            <p className="text-xs text-teal-600 mt-1">Eliminada</p>
                           </div>
                         </div>
                       ))}
