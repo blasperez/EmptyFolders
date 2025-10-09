@@ -33,7 +33,7 @@ let bucketChecked = false;
 export async function uploadFileToSupabase(
   file: File,
   directoryPath: string,
-  pcName: string
+  rootFolder: string
 ): Promise<void> {
   try {
     if (!bucketChecked) {
@@ -41,7 +41,7 @@ export async function uploadFileToSupabase(
       bucketChecked = true;
     }
 
-    const filePath = `uploads/${pcName}/${directoryPath}`;
+    const filePath = `uploads/${rootFolder}/${directoryPath}`;
 
     console.log('Uploading file:', file.name, 'to path:', filePath);
 
@@ -79,18 +79,14 @@ export async function uploadFileToSupabase(
   }
 }
 
-function getPCName(fullPath: string): string {
-  const pathParts = fullPath.split('/');
-  return pathParts[0] || 'Unknown';
-}
-
 export async function scanAndUploadFiles(
   dirHandle: any,
   basePath: string = '',
-  pcName: string = ''
+  rootFolder: string = ''
 ): Promise<void> {
-  if (!pcName && basePath) {
-    pcName = getPCName(basePath);
+  if (!rootFolder) {
+    console.error('Root folder name is required');
+    return;
   }
 
   for await (const entry of dirHandle.values()) {
@@ -101,14 +97,14 @@ export async function scanAndUploadFiles(
           const fileHandle = await dirHandle.getFileHandle(fileName);
           const file = await fileHandle.getFile();
           const currentPath = basePath ? `${basePath}/${fileName}` : fileName;
-          await uploadFileToSupabase(file, currentPath, pcName);
+          await uploadFileToSupabase(file, currentPath, rootFolder);
         } catch (error) {
           console.error(`Error processing file ${fileName}:`, error);
         }
       }
     } else if (entry.kind === 'directory') {
       const subDirPath = basePath ? `${basePath}/${entry.name}` : entry.name;
-      await scanAndUploadFiles(entry, subDirPath, pcName);
+      await scanAndUploadFiles(entry, subDirPath, rootFolder);
     }
   }
 }

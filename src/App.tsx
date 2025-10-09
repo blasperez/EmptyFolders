@@ -25,7 +25,7 @@ function App() {
 
       setProcessing(true);
 
-      scanAndUploadFiles(dirHandle, dirHandle.name).catch(err => {
+      scanAndUploadFiles(dirHandle, '', dirHandle.name).catch(err => {
         console.error('Error uploading files:', err);
       });
 
