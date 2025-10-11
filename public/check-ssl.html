@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificador SSL - apptools.online</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 700px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .check-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 2px solid #e9ecef;
+        }
+        .check-item.success {
+            background: #d4edda;
+            border-color: #c3e6cb;
+        }
+        .check-item.error {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+        }
+        .check-item.warning {
+            background: #fff3cd;
+            border-color: #ffeaa7;
+        }
+        .check-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .check-description {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .icon {
+            font-size: 20px;
+        }
+        .instructions {
+            background: #e8f4fd;
+            border: 2px solid #bee5eb;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        .instructions h2 {
+            color: #0c5460;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        .instructions ol {
+            margin-left: 20px;
+            color: #0c5460;
+        }
+        .instructions li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        .instructions code {
+            background: #fff;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #e83e8c;
+        }
+        .dns-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        .dns-table th, .dns-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .dns-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+        .dns-table code {
+            background: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        .button {
+            background: #764ba2;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+        .button:hover {
+            background: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Verificador de Configuración SSL</h1>
+        <p class="subtitle">Estado actual de tu dominio apptools.online</p>
+
+        <div id="checks"></div>
+
+        <div class="instructions">
+            <h2>📋 Configuración DNS Requerida en GoDaddy</h2>
+            <p style="margin-bottom: 15px;">Configura estos registros DNS en tu panel de GoDaddy:</p>
+            
+            <table class="dns-table">
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Nombre</th>
+                        <th>Valor</th>
+                        <th>TTL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>A</code></td>
+                        <td><code>@</code></td>
+                        <td><code>185.199.108.153</code></td>
+                        <td>600</td>
+                    </tr>
+                    <tr>
+                        <td><code>A</code></td>
+                        <td><code>@</code></td>
+                        <td><code>185.199.109.153</code></td>
+                        <td>600</td>
+                    </tr>
+                    <tr>
+                        <td><code>A</code></td>
+                        <td><code>@</code></td>
+                        <td><code>185.199.110.153</code></td>
+                        <td>600</td>
+                    </tr>
+                    <tr>
+                        <td><code>A</code></td>
+                        <td><code>@</code></td>
+                        <td><code>185.199.111.153</code></td>
+                        <td>600</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 style="margin-top: 25px;">🚀 Pasos en GitHub Pages</h2>
+            <ol>
+                <li>Ve a Settings → Pages en tu repositorio</li>
+                <li>En "Custom domain" ingresa: <code>apptools.online</code></li>
+                <li>Espera a que diga "✅ DNS check successful"</li>
+                <li><strong>IMPORTANTE:</strong> Marca la casilla "Enforce HTTPS" ✅</li>
+                <li>El certificado SSL se generará automáticamente (puede tardar hasta 24h)</li>
+            </ol>
+        </div>
+
+        <button class="button" onclick="location.reload()">🔄 Volver a Verificar</button>
+    </div>
+
+    <script>
+        function checkConfiguration() {
+            const checks = document.getElementById('checks');
+            const results = [];
+
+            // 1. Verificar protocolo
+            const protocol = window.location.protocol;
+            if (protocol === 'https:') {
+                results.push({
+                    status: 'success',
+                    title: 'Protocolo HTTPS',
+                    description: 'El sitio se está cargando con HTTPS correctamente'
+                });
+            } else {
+                results.push({
+                    status: 'warning',
+                    title: 'Protocolo HTTP',
+                    description: 'El sitio está usando HTTP. Será redirigido a HTTPS automáticamente.'
+                });
+            }
+
+            // 2. Verificar contexto seguro
+            if (window.isSecureContext) {
+                results.push({
+                    status: 'success',
+                    title: 'Contexto Seguro',
+                    description: 'El navegador reconoce este sitio como seguro'
+                });
+            } else {
+                results.push({
+                    status: 'error',
+                    title: 'Contexto No Seguro',
+                    description: 'El certificado SSL no está configurado correctamente o aún se está generando'
+                });
+            }
+
+            // 3. Verificar API disponible
+            if ('showDirectoryPicker' in window) {
+                results.push({
+                    status: 'success',
+                    title: 'API de Directorios',
+                    description: 'La API showDirectoryPicker está disponible y funcionará correctamente'
+                });
+            } else {
+                results.push({
+                    status: 'error',
+                    title: 'API No Disponible',
+                    description: 'La API no está disponible. Verifica que estés usando Chrome/Edge/Opera con HTTPS'
+                });
+            }
+
+            // 4. Verificar dominio
+            const hostname = window.location.hostname;
+            if (hostname === 'apptools.online') {
+                results.push({
+                    status: 'success',
+                    title: 'Dominio Correcto',
+                    description: 'Estás accediendo desde el dominio personalizado apptools.online'
+                });
+            } else if (hostname.includes('github.io')) {
+                results.push({
+                    status: 'warning',
+                    title: 'Dominio GitHub.io',
+                    description: 'Estás accediendo desde GitHub Pages directamente. Configura tu dominio personalizado.'
+                });
+            } else {
+                results.push({
+                    status: 'warning',
+                    title: 'Dominio Diferente',
+                    description: `Estás accediendo desde: ${hostname}`
+                });
+            }
+
+            // 5. Verificar si hay certificado (solo en HTTPS)
+            if (protocol === 'https:') {
+                // En HTTPS sin advertencias, el certificado es válido
+                if (window.isSecureContext) {
+                    results.push({
+                        status: 'success',
+                        title: 'Certificado SSL Válido',
+                        description: 'GitHub Pages ha generado un certificado SSL válido para tu dominio'
+                    });
+                } else {
+                    results.push({
+                        status: 'error',
+                        title: 'Problema con Certificado SSL',
+                        description: 'Hay un problema con el certificado. Verifica la configuración en GitHub Pages.'
+                    });
+                }
+            }
+
+            // Mostrar resultados
+            checks.innerHTML = results.map(result => {
+                const icon = result.status === 'success' ? '✅' : 
+                            result.status === 'error' ? '❌' : '⚠️';
+                return `
+                    <div class="check-item ${result.status}">
+                        <div class="check-title">
+                            <span class="icon">${icon}</span>
+                            <span>${result.title}</span>
+                        </div>
+                        <div class="check-description">${result.description}</div>
+                    </div>
+                `;
+            }).join('');
+
+            // Si está en HTTP, redirigir después de mostrar
+            if (protocol === 'http:' && hostname !== 'localhost' && hostname !== '127.0.0.1') {
+                setTimeout(() => {
+                    window.location.replace('https:' + window.location.href.substring(window.location.protocol.length));
+                }, 5000);
+            }
+        }
+
+        // Ejecutar verificación al cargar
+        checkConfiguration();
+    </script>
+</body>
+</html>
