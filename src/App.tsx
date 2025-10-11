@@ -97,7 +97,7 @@ function App() {
           <div className="text-center mb-12">
             <div className="flex items-center justify-center mb-6">
               <img
-                src="/logo1.png"
+                src="/logo.png"
                 alt="Limpiador de Carpetas"
                 className="w-96 h-96 drop-shadow-lg"
               />
