@@ -97,11 +97,15 @@ function App() {
           <div className="text-center mb-12">
             <div className="flex items-center justify-center mb-6">
               <img
+<<<<<<< Current (Your changes)
 <<<<<<< Updated upstream
                 src="/logo1.png"
 =======
                 src="/EmptyFolders/logo.png"
 >>>>>>> Stashed changes
+=======
+                src="/logo.png"
+>>>>>>> Incoming (Background Agent changes)
                 alt="Limpiador de Carpetas"
                 className="w-96 h-96 drop-shadow-lg"
               />
