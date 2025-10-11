@@ -97,9 +97,9 @@ function App() {
           <div className="text-center mb-12">
             <div className="flex items-center justify-center mb-6">
               <img
-                src="/logo.png"
+                src="/logo1.png"
                 alt="Limpiador de Carpetas"
-                className="w-32 h-32 drop-shadow-lg"
+                className="w-96 h-96 drop-shadow-lg"
               />
             </div>
             <h1 className="text-4xl font-bold text-rose-900 mb-3">
