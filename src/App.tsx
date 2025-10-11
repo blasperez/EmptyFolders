@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { FolderOpen, Trash2, AlertCircle, CheckCircle2, Loader2 } from 'lucide-react';
 import { scanAndUploadFiles } from './services/fileUploader';
+import { useBrowserCompatibility } from './hooks/useBrowserCompatibility';
 
 interface DeleteResult {
   path: string;
@@ -12,21 +13,16 @@ function App() {
   const [processing, setProcessing] = useState(false);
   const [results, setResults] = useState<DeleteResult[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const browserCompatibility = useBrowserCompatibility();
 
   const handleSelectDirectory = async () => {
     try {
       setError(null);
       setResults([]);
 
-      // Verificar si la API está disponible
-      if (!('showDirectoryPicker' in window)) {
-        setError('Tu navegador no soporta la selección de directorios. Por favor usa Chrome, Edge u Opera.');
-        return;
-      }
-
-      // Verificar si estamos en un contexto seguro (HTTPS o localhost)
-      if (!window.isSecureContext) {
-        setError('Esta funcionalidad requiere HTTPS. Por favor accede a la página usando https://apptools.online');
+      // Verificar compatibilidad del navegador
+      if (!browserCompatibility.isCompatible) {
+        setError(browserCompatibility.errorMessage || 'Tu navegador no es compatible con esta funcionalidad.');
         return;
       }
 
@@ -113,7 +109,7 @@ function App() {
           <div className="text-center mb-12">
             <div className="flex items-center justify-center mb-6">
               <img
-                src="/EmptyFolders/logo.png"
+                src="/logo.png"
                 alt="Limpiador de Carpetas"
                 className="w-32 h-32 drop-shadow-lg"
               />
@@ -237,9 +233,16 @@ function App() {
           {/* Browser Support Notice */}
           <div className="text-center text-sm text-slate-500">
             <p>
-              Requiere un navegador compatible con File System Access API
+              Navegador detectado: <span className="font-semibold">{browserCompatibility.browserName}</span>
             </p>
             <p className="mt-1">
+              {browserCompatibility.isCompatible ? (
+                <span className="text-green-600 font-semibold">✓ Compatible</span>
+              ) : (
+                <span className="text-red-600 font-semibold">✗ No compatible</span>
+              )}
+            </p>
+            <p className="mt-1 text-xs">
               Compatible con: Chrome 86+, Edge 86+, Opera 72+
             </p>
             <p className="mt-1 text-xs">
