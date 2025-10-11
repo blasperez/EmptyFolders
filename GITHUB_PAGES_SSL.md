@@ -12,11 +12,12 @@
 
 En la sección de Pages, verifica:
 
-1. **Source**: Deploy from a branch
-2. **Branch**: main / root
-3. **Custom domain**: 
+1. **Source**: GitHub Actions (IMPORTANTE: NO uses "Deploy from a branch")
+2. **Custom domain**: 
    - Si no está, escribe: `apptools.online`
    - Click en "Save"
+   
+**NOTA IMPORTANTE**: Este proyecto USA React + TypeScript + Vite, por lo que NECESITA GitHub Actions para compilar el código. Si usas "Deploy from a branch" NO funcionará porque serviría archivos .tsx sin compilar.
 
 ### 3. Proceso de Verificación DNS:
 
