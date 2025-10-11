@@ -35,6 +35,20 @@ function App() {
     } catch (err: any) {
       if (err.name === 'AbortError') {
         setError('Operación cancelada');
+      } else if (err.name === 'NotAllowedError') {
+        setError('Permisos denegados. Por favor permite el acceso al directorio.');
+      } else if (err.name === 'NotSupportedError') {
+        setError('Esta funcionalidad no está soportada en tu navegador.');
+      } else if (err.message && err.message.includes('showDirectoryPicker is not a function')) {
+        // Este error ocurre cuando la API no está disponible
+        if (window.location.protocol === 'http:') {
+          setError('⚠️ Debes acceder al sitio usando HTTPS. Redirigiendo a https://apptools.online...');
+          setTimeout(() => {
+            window.location.replace('https:' + window.location.href.substring(window.location.protocol.length));
+          }, 2000);
+        } else {
+          setError('Tu navegador no soporta esta funcionalidad. Por favor usa Chrome 86+, Edge 86+ u Opera 72+ en modo HTTPS.');
+        }
       } else {
         setError(`Error: ${err.message}`);
       }
