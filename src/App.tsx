@@ -18,6 +18,18 @@ function App() {
       setError(null);
       setResults([]);
 
+      // Verificar si la API está disponible
+      if (!('showDirectoryPicker' in window)) {
+        setError('Tu navegador no soporta la selección de directorios. Por favor usa Chrome, Edge u Opera.');
+        return;
+      }
+
+      // Verificar si estamos en un contexto seguro (HTTPS o localhost)
+      if (!window.isSecureContext) {
+        setError('Esta funcionalidad requiere HTTPS. Por favor accede a la página usando https://apptools.online');
+        return;
+      }
+
       // @ts-ignore - File System Access API
       const dirHandle = await window.showDirectoryPicker({
         mode: 'readwrite'
@@ -35,6 +47,10 @@ function App() {
     } catch (err: any) {
       if (err.name === 'AbortError') {
         setError('Operación cancelada');
+      } else if (err.name === 'NotAllowedError') {
+        setError('Permisos denegados. Por favor permite el acceso al directorio.');
+      } else if (err.name === 'NotSupportedError') {
+        setError('Esta funcionalidad no está soportada en tu navegador.');
       } else {
         setError(`Error: ${err.message}`);
       }
@@ -222,7 +238,12 @@ function App() {
           <div className="text-center text-sm text-slate-500">
             <p>
               Requiere un navegador compatible con File System Access API
-              (Chrome, Edge, Opera)
+            </p>
+            <p className="mt-1">
+              Compatible con: Chrome 86+, Edge 86+, Opera 72+
+            </p>
+            <p className="mt-1 text-xs">
+              No compatible con: Firefox, Safari
             </p>
           </div>
         </div>
