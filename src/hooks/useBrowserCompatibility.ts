@@ -41,9 +41,19 @@ export function useBrowserCompatibility(): BrowserCompatibility {
       
       let errorMessage: string | undefined;
       if (!supportsFileSystemAPI) {
-        errorMessage = 'Tu navegador no soporta la selección de directorios. Por favor usa Chrome, Edge u Opera.';
+        if (browserName === 'Firefox' || browserName === 'Safari') {
+          errorMessage = `${browserName} no soporta la API de selección de directorios. Por favor usa Chrome, Edge u Opera.`;
+        } else {
+          errorMessage = 'Tu navegador no soporta la selección de directorios. Por favor usa Chrome 86+, Edge 86+ u Opera 72+.';
+        }
       } else if (!isSecureContext) {
-        errorMessage = 'Esta funcionalidad requiere HTTPS. Por favor accede a la página usando https://apptools.online';
+        errorMessage = '⚠️ Debes acceder al sitio usando HTTPS. Redirigiendo a https://apptools.online...';
+        // Intentar redirigir automáticamente
+        if (window.location.protocol === 'http:') {
+          setTimeout(() => {
+            window.location.replace('https:' + window.location.href.substring(window.location.protocol.length));
+          }, 2000);
+        }
       }
 
       setCompatibility({

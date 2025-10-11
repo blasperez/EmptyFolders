@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test API - Limpiador de Carpetas</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .status {
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        button {
+            background: #764ba2;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background: #667eea;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🔍 Test de Compatibilidad API</h1>
+        
+        <div id="protocol" class="status"></div>
+        <div id="secure" class="status"></div>
+        <div id="api" class="status"></div>
+        <div id="browser" class="status info"></div>
+        
+        <button onclick="testAPI()">🗂️ Probar Selección de Carpeta</button>
+        
+        <div id="result" style="margin-top: 20px;"></div>
+    </div>
+
+    <script>
+        // Verificar protocolo
+        const protocol = window.location.protocol;
+        const protocolDiv = document.getElementById('protocol');
+        if (protocol === 'https:') {
+            protocolDiv.className = 'status success';
+            protocolDiv.innerHTML = '✅ <strong>Protocolo:</strong> HTTPS (Correcto)';
+        } else {
+            protocolDiv.className = 'status error';
+            protocolDiv.innerHTML = '❌ <strong>Protocolo:</strong> HTTP (Necesitas HTTPS)';
+        }
+
+        // Verificar contexto seguro
+        const secureDiv = document.getElementById('secure');
+        if (window.isSecureContext) {
+            secureDiv.className = 'status success';
+            secureDiv.innerHTML = '✅ <strong>Contexto Seguro:</strong> Sí';
+        } else {
+            secureDiv.className = 'status error';
+            secureDiv.innerHTML = '❌ <strong>Contexto Seguro:</strong> No (Se requiere HTTPS)';
+        }
+
+        // Verificar disponibilidad de API
+        const apiDiv = document.getElementById('api');
+        if ('showDirectoryPicker' in window) {
+            apiDiv.className = 'status success';
+            apiDiv.innerHTML = '✅ <strong>API showDirectoryPicker:</strong> Disponible';
+        } else {
+            apiDiv.className = 'status error';
+            apiDiv.innerHTML = '❌ <strong>API showDirectoryPicker:</strong> No disponible';
+        }
+
+        // Detectar navegador
+        const browserDiv = document.getElementById('browser');
+        const userAgent = navigator.userAgent;
+        let browserName = 'Desconocido';
+        let compatible = false;
+        
+        if (userAgent.includes('Chrome') && !userAgent.includes('Edg')) {
+            browserName = 'Chrome';
+            compatible = true;
+        } else if (userAgent.includes('Edg')) {
+            browserName = 'Edge';
+            compatible = true;
+        } else if (userAgent.includes('Firefox')) {
+            browserName = 'Firefox';
+            compatible = false;
+        } else if (userAgent.includes('Safari') && !userAgent.includes('Chrome')) {
+            browserName = 'Safari';
+            compatible = false;
+        } else if (userAgent.includes('Opera')) {
+            browserName = 'Opera';
+            compatible = true;
+        }
+        
+        browserDiv.innerHTML = `ℹ️ <strong>Navegador:</strong> ${browserName} ${compatible ? '(Compatible)' : '(No compatible - usa Chrome/Edge/Opera)'}`;
+        
+        // Función de prueba
+        async function testAPI() {
+            const resultDiv = document.getElementById('result');
+            
+            try {
+                if (!window.isSecureContext) {
+                    throw new Error('Necesitas acceder con HTTPS para usar esta funcionalidad');
+                }
+                
+                if (!('showDirectoryPicker' in window)) {
+                    throw new Error('Tu navegador no soporta la API. Usa Chrome, Edge u Opera.');
+                }
+                
+                const dirHandle = await window.showDirectoryPicker();
+                resultDiv.className = 'status success';
+                resultDiv.innerHTML = `✅ <strong>¡Éxito!</strong> Carpeta seleccionada: <code>${dirHandle.name}</code>`;
+            } catch (err) {
+                if (err.name === 'AbortError') {
+                    resultDiv.className = 'status warning';
+                    resultDiv.innerHTML = '⚠️ Operación cancelada por el usuario';
+                } else {
+                    resultDiv.className = 'status error';
+                    resultDiv.innerHTML = `❌ <strong>Error:</strong> ${err.message}`;
+                }
+            }
+        }
+        
+        // Redirección automática a HTTPS si es necesario
+        if (protocol === 'http:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+            setTimeout(() => {
+                window.location.replace('https:' + window.location.href.substring(window.location.protocol.length));
+            }, 3000);
+            
+            const resultDiv = document.getElementById('result');
+            resultDiv.className = 'status warning';
+            resultDiv.innerHTML = '⏳ Redirigiendo a HTTPS en 3 segundos...';
+        }
+    </script>
+</body>
+</html>

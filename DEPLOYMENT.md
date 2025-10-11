@@ -33,10 +33,24 @@ Tu aplicación está configurada para funcionar con el dominio personalizado `ap
 ### Verificación Post-Deployment
 
 Una vez desplegado, verifica que:
-- ✅ La página carga correctamente en `http://apptools.online`
+- ✅ La página carga correctamente en `https://apptools.online` (IMPORTANTE: usar HTTPS)
 - ✅ Los assets se cargan desde `/assets/` (no desde `/EmptyFolders/assets/`)
 - ✅ El favicon se muestra correctamente
 - ✅ No hay errores 404 en la consola del navegador
+- ✅ La funcionalidad de selección de carpetas funciona correctamente
+
+### ⚠️ IMPORTANTE: Requisito HTTPS
+
+La aplicación **REQUIERE HTTPS** para funcionar correctamente. La API `showDirectoryPicker` solo funciona en contextos seguros:
+- ✅ `https://apptools.online` - FUNCIONARÁ
+- ❌ `http://apptools.online` - NO FUNCIONARÁ (se redirigirá automáticamente a HTTPS)
+
+#### Configuración HTTPS en GitHub Pages
+
+1. Ve a Settings > Pages en tu repositorio
+2. En la sección "Custom domain", verifica que esté configurado `apptools.online`
+3. **Marca la casilla "Enforce HTTPS"** - esto es CRÍTICO
+4. Espera que GitHub genere el certificado SSL (puede tardar hasta 24 horas)
 
 ### Solución de Problemas
 
