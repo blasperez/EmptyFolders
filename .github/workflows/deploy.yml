@@ -32,6 +32,14 @@ jobs:
 
       - name: Build
         run: npm run build
+        
+      - name: Verify CNAME file
+        run: |
+          if [ ! -f "dist/CNAME" ]; then
+            echo "Error: CNAME file not found in dist directory"
+            exit 1
+          fi
+          echo "CNAME file found: $(cat dist/CNAME)"
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
