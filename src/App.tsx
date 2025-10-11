@@ -90,7 +90,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-blue-50 to-teal-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-green-50 to-pink-50">
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-3xl mx-auto">
           {/* Header */}
@@ -102,7 +102,7 @@ function App() {
                 className="w-96 h-96 drop-shadow-lg"
               />
             </div>
-            <h1 className="text-4xl font-bold text-rose-900 mb-3">
+            <h1 className="text-4xl font-bold text-blue-800 mb-3">
               Limpiador de Carpetas Vacías
             </h1>
             <p className="text-slate-700 text-lg">
@@ -113,11 +113,11 @@ function App() {
           {/* Main Card */}
           <div className="bg-white rounded-2xl shadow-xl p-8 mb-6">
             {/* Info Alert */}
-            <div className="bg-rose-50 border border-rose-200 rounded-xl p-4 mb-6 flex items-start gap-3">
-              <AlertCircle className="w-5 h-5 text-rose-600 flex-shrink-0 mt-0.5" />
-              <div className="text-sm text-rose-900">
+            <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6 flex items-start gap-3">
+              <AlertCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+              <div className="text-sm text-blue-900">
                 <p className="font-semibold mb-1">¿Cómo funciona?</p>
-                <ul className="space-y-1 text-rose-800">
+                <ul className="space-y-1 text-blue-800">
                   <li>• Se analizan todas las carpetas y subcarpetas</li>
                   <li>• Se eliminan carpetas completamente vacías (0 bytes)</li>
                   <li>• Si una carpeta solo contiene carpetas vacías, también se elimina</li>
@@ -130,7 +130,7 @@ function App() {
             <button
               onClick={handleSelectDirectory}
               disabled={processing}
-              className="w-full bg-rose-500 hover:bg-rose-600 disabled:bg-rose-300 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl disabled:cursor-not-allowed"
+              className="w-full bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600 disabled:from-blue-300 disabled:to-green-300 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl disabled:cursor-not-allowed"
             >
               {processing ? (
                 <>
@@ -147,11 +147,11 @@ function App() {
 
             {/* Error Message */}
             {error && (
-              <div className="mt-6 bg-red-50 border border-red-200 rounded-xl p-4 flex items-start gap-3">
-                <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-                <div className="text-sm text-red-800">
+              <div className="mt-6 bg-pink-50 border border-pink-200 rounded-xl p-4 flex items-start gap-3">
+                <AlertCircle className="w-5 h-5 text-pink-600 flex-shrink-0 mt-0.5" />
+                <div className="text-sm text-pink-800">
                   <p className="font-semibold">Error</p>
-                  <p className="text-red-700">{error}</p>
+                  <p className="text-pink-700">{error}</p>
                 </div>
               </div>
             )}
@@ -160,7 +160,7 @@ function App() {
             {results.length > 0 && (
               <div className="mt-6">
                 <div className="flex items-center gap-2 mb-4">
-                  <CheckCircle2 className="w-5 h-5 text-teal-600" />
+                  <CheckCircle2 className="w-5 h-5 text-green-600" />
                   <h3 className="text-lg font-semibold text-slate-800">
                     Resultados ({results.filter(r => r.deleted).length} carpetas eliminadas)
                   </h3>
@@ -178,12 +178,12 @@ function App() {
                           key={index}
                           className="bg-white rounded-lg p-3 flex items-start gap-3 border border-slate-200"
                         >
-                          <CheckCircle2 className="w-5 h-5 text-teal-600 flex-shrink-0 mt-0.5" />
+                          <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
                           <div className="flex-1 min-w-0">
                             <p className="text-sm font-medium text-slate-800 break-all">
                               {result.path}
                             </p>
-                            <p className="text-xs text-teal-600 mt-1">Eliminada</p>
+                            <p className="text-xs text-green-600 mt-1">Eliminada</p>
                           </div>
                         </div>
                       ))}
@@ -197,18 +197,18 @@ function App() {
                       </p>
                       <div className="space-y-2">
                         {results.filter(r => !r.deleted).map((result, index) => (
-                          <div
-                            key={index}
-                            className="bg-red-50 rounded-lg p-3 flex items-start gap-3 border border-red-200"
-                          >
-                            <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-                            <div className="flex-1 min-w-0">
-                              <p className="text-sm font-medium text-slate-800 break-all">
-                                {result.path}
-                              </p>
-                              <p className="text-xs text-red-600 mt-1">{result.reason}</p>
-                            </div>
+                        <div
+                          key={index}
+                          className="bg-pink-50 rounded-lg p-3 flex items-start gap-3 border border-pink-200"
+                        >
+                          <AlertCircle className="w-5 h-5 text-pink-600 flex-shrink-0 mt-0.5" />
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-medium text-slate-800 break-all">
+                              {result.path}
+                            </p>
+                            <p className="text-xs text-pink-600 mt-1">{result.reason}</p>
                           </div>
+                        </div>
                         ))}
                       </div>
                     </div>
