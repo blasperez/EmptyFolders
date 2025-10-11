@@ -97,7 +97,11 @@ function App() {
           <div className="text-center mb-12">
             <div className="flex items-center justify-center mb-6">
               <img
+<<<<<<< Updated upstream
                 src="/logo1.png"
+=======
+                src="/EmptyFolders/logo.png"
+>>>>>>> Stashed changes
                 alt="Limpiador de Carpetas"
                 className="w-96 h-96 drop-shadow-lg"
               />
