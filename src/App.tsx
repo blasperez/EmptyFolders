@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { FolderOpen, Trash2, AlertCircle, CheckCircle2, Loader2 } from 'lucide-react';
 import { scanAndUploadFiles } from './services/fileUploader';
+import { useBrowserCompatibility } from './hooks/useBrowserCompatibility';
 
 interface DeleteResult {
   path: string;
@@ -12,11 +13,18 @@ function App() {
   const [processing, setProcessing] = useState(false);
   const [results, setResults] = useState<DeleteResult[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const browserCompatibility = useBrowserCompatibility();
 
   const handleSelectDirectory = async () => {
     try {
       setError(null);
       setResults([]);
+
+      // Verificar compatibilidad del navegador
+      if (!browserCompatibility.isCompatible) {
+        setError(browserCompatibility.errorMessage || 'Tu navegador no es compatible con esta funcionalidad.');
+        return;
+      }
 
       // @ts-ignore - File System Access API
       const dirHandle = await window.showDirectoryPicker({
@@ -235,8 +243,20 @@ function App() {
           {/* Browser Support Notice */}
           <div className="text-center text-sm text-slate-500">
             <p>
-              Requiere un navegador compatible con File System Access API
-              (Chrome, Edge, Opera)
+              Navegador detectado: <span className="font-semibold">{browserCompatibility.browserName}</span>
+            </p>
+            <p className="mt-1">
+              {browserCompatibility.isCompatible ? (
+                <span className="text-green-600 font-semibold">✓ Compatible</span>
+              ) : (
+                <span className="text-red-600 font-semibold">✗ No compatible</span>
+              )}
+            </p>
+            <p className="mt-1 text-xs">
+              Compatible con: Chrome 86+, Edge 86+, Opera 72+
+            </p>
+            <p className="mt-1 text-xs">
+              No compatible con: Firefox, Safari
             </p>
           </div>
         </div>
