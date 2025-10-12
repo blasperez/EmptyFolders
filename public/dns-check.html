@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificador DNS - apptools.online</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #ec008c, #fc6767);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .dns-status {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .dns-record {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .dns-record:last-child {
+            border-bottom: none;
+        }
+        .correct {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .incorrect {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        .warning {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .success {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .error {
+            background: #f8d7da;
+            border: 2px solid #dc3545;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        .button {
+            background: #fc6767;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        .button:hover {
+            background: #ec008c;
+        }
+        .loader {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #fc6767;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+        .ip-list {
+            font-family: monospace;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>🔍 Verificador de Configuración DNS</h1>
+            <p class="subtitle">Verificando la configuración DNS de apptools.online</p>
+            
+            <div id="loading" class="loader"></div>
+            <div id="results" style="display: none;">
+                <div id="current-dns" class="dns-status">
+                    <h3>📡 DNS Actuales</h3>
+                    <div id="dns-records"></div>
+                </div>
+
+                <div id="analysis"></div>
+
+                <div class="card" style="background: #f8f9fa;">
+                    <h3>✅ Configuración DNS Correcta Requerida</h3>
+                    <p style="margin: 15px 0;">Para que GitHub Pages pueda generar el certificado SSL, necesitas estos 4 registros A:</p>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Nombre/Host</th>
+                                <th>Valor/Points To</th>
+                                <th>TTL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>A</code></td>
+                                <td><code>@</code></td>
+                                <td class="ip-list">185.199.108.153</td>
+                                <td>600</td>
+                            </tr>
+                            <tr>
+                                <td><code>A</code></td>
+                                <td><code>@</code></td>
+                                <td class="ip-list">185.199.109.153</td>
+                                <td>600</td>
+                            </tr>
+                            <tr>
+                                <td><code>A</code></td>
+                                <td><code>@</code></td>
+                                <td class="ip-list">185.199.110.153</td>
+                                <td>600</td>
+                            </tr>
+                            <tr>
+                                <td><code>A</code></td>
+                                <td><code>@</code></td>
+                                <td class="ip-list">185.199.111.153</td>
+                                <td>600</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="warning" style="margin-top: 20px;">
+                        <strong>⚠️ IMPORTANTE en GoDaddy:</strong>
+                        <ul style="margin-top: 10px; margin-left: 20px;">
+                            <li>En "Nombre" usa solo <code>@</code> (no pongas el dominio completo)</li>
+                            <li>ELIMINA todos los registros A antiguos primero</li>
+                            <li>NO uses registros CNAME para el dominio raíz</li>
+                            <li>Si tienes un registro de "Parking" o "Forwarding", elimínalo</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="background: #e8f4fd;">
+                    <h3>📋 Pasos para Corregir en GoDaddy</h3>
+                    <ol style="margin-left: 20px; line-height: 1.8;">
+                        <li>Inicia sesión en GoDaddy</li>
+                        <li>Ve a "Mis productos" → "DNS" de apptools.online</li>
+                        <li><strong>ELIMINA</strong> todos los registros tipo A existentes</li>
+                        <li><strong>ELIMINA</strong> cualquier registro de "Parking" o redirección</li>
+                        <li><strong>AGREGA</strong> los 4 registros A mostrados arriba</li>
+                        <li>Guarda los cambios</li>
+                        <li>Espera 15-60 minutos para la propagación</li>
+                        <li>Vuelve a GitHub Pages y la opción "Enforce HTTPS" debería estar disponible</li>
+                    </ol>
+                </div>
+
+                <button class="button" onclick="checkDNS()">🔄 Volver a Verificar</button>
+                <button class="button" onclick="window.open('https://dnschecker.org/#A/apptools.online', '_blank')">🌐 Ver Propagación Global</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const GITHUB_IPS = [
+            '185.199.108.153',
+            '185.199.109.153',
+            '185.199.110.153',
+            '185.199.111.153'
+        ];
+
+        async function checkDNS() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('results').style.display = 'none';
+
+            try {
+                // Verificar DNS usando API pública
+                const response = await fetch('https://dns.google/resolve?name=apptools.online&type=A');
+                const data = await response.json();
+                
+                let dnsRecords = '';
+                let currentIPs = [];
+                
+                if (data.Answer) {
+                    data.Answer.forEach(record => {
+                        if (record.type === 1) { // Type A record
+                            currentIPs.push(record.data);
+                            const isCorrect = GITHUB_IPS.includes(record.data);
+                            dnsRecords += `
+                                <div class="dns-record">
+                                    <span>A Record: <code>${record.data}</code></span>
+                                    <span class="${isCorrect ? 'correct' : 'incorrect'}">
+                                        ${isCorrect ? '✅ Correcto' : '❌ Incorrecto'}
+                                    </span>
+                                </div>
+                            `;
+                        }
+                    });
+                } else {
+                    dnsRecords = '<p>❌ No se encontraron registros A</p>';
+                }
+                
+                document.getElementById('dns-records').innerHTML = dnsRecords || '<p>No se pudieron obtener los registros DNS</p>';
+                
+                // Análisis
+                let analysis = '';
+                const hasAllCorrectIPs = GITHUB_IPS.every(ip => currentIPs.includes(ip));
+                const hasOnlyCorrectIPs = currentIPs.every(ip => GITHUB_IPS.includes(ip));
+                
+                if (hasAllCorrectIPs && hasOnlyCorrectIPs) {
+                    analysis = `
+                        <div class="success">
+                            <strong>✅ ¡Configuración Correcta!</strong><br>
+                            Los DNS están configurados correctamente. Si "Enforce HTTPS" aún no está disponible:
+                            <ul style="margin-top: 10px; margin-left: 20px;">
+                                <li>Espera unos minutos más para la propagación completa</li>
+                                <li>Refresca la página de GitHub Pages Settings</li>
+                                <li>El certificado puede tardar hasta 24 horas en generarse</li>
+                            </ul>
+                        </div>
+                    `;
+                } else {
+                    analysis = `
+                        <div class="error">
+                            <strong>❌ Configuración Incorrecta</strong><br>
+                            Los registros DNS actuales no son correctos para HTTPS en GitHub Pages.
+                            <ul style="margin-top: 10px; margin-left: 20px;">
+                                <li>IPs encontradas: ${currentIPs.join(', ') || 'Ninguna'}</li>
+                                <li>IPs requeridas: ${GITHUB_IPS.join(', ')}</li>
+                            </ul>
+                            Por favor, sigue las instrucciones abajo para corregirlo.
+                        </div>
+                    `;
+                }
+                
+                document.getElementById('analysis').innerHTML = analysis;
+                
+            } catch (error) {
+                document.getElementById('dns-records').innerHTML = `
+                    <p>Error al verificar DNS: ${error.message}</p>
+                    <p style="margin-top: 10px;">Puedes verificar manualmente en: 
+                        <a href="https://dnschecker.org/#A/apptools.online" target="_blank">dnschecker.org</a>
+                    </p>
+                `;
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('results').style.display = 'block';
+            }
+        }
+
+        // Verificar automáticamente al cargar
+        checkDNS();
+    </script>
+</body>
+</html>

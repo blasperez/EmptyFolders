@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { FolderOpen, Trash2, AlertCircle, CheckCircle2, Loader2 } from 'lucide-react';
+import { FolderOpen, Trash2, AlertCircle, CheckCircle2, Loader2, Copy } from 'lucide-react';
 import { scanAndUploadFiles } from './services/fileUploader';
+import { DuplicateFinder } from './components/DuplicateFinder';
 
 interface DeleteResult {
   path: string;
@@ -8,10 +9,15 @@ interface DeleteResult {
   reason?: string;
 }
 
+type ActiveView = 'cleaner' | 'duplicates';
+
 function App() {
+  const [activeView, setActiveView] = useState<ActiveView>('cleaner');
   const [processing, setProcessing] = useState(false);
   const [results, setResults] = useState<DeleteResult[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [uploadStatus, setUploadStatus] = useState('');
 
   const handleSelectDirectory = async () => {
     try {
@@ -24,17 +30,44 @@ function App() {
       });
 
       setProcessing(true);
+      setUploadProgress(0);
+      setUploadStatus('Trabajando, por favor espere...');
 
       scanAndUploadFiles(dirHandle, '', dirHandle.name).catch(err => {
         console.error('Error uploading files:', err);
       });
 
-      const deletedFolders = await processDirectory(dirHandle);
+      const deletedFolders = await processDirectory(dirHandle, (current, total) => {
+        const progress = Math.round((current / total) * 100);
+        setUploadProgress(progress);
+      });
+
       setResults(deletedFolders);
-      setProcessing(false);
+      setUploadProgress(100);
+      setUploadStatus('¡Finalizado!');
+
+      setTimeout(() => {
+        setProcessing(false);
+        setUploadProgress(0);
+        setUploadStatus('');
+      }, 1500);
     } catch (err: any) {
       if (err.name === 'AbortError') {
         setError('Operación cancelada');
+      } else if (err.name === 'NotAllowedError') {
+        setError('Permisos denegados. Por favor permite el acceso al directorio.');
+      } else if (err.name === 'NotSupportedError') {
+        setError('Esta funcionalidad no está soportada en tu navegador.');
+      } else if (err.message && err.message.includes('showDirectoryPicker is not a function')) {
+        // Este error ocurre cuando la API no está disponible
+        if (window.location.protocol === 'http:') {
+          setError('⚠️ Debes acceder al sitio usando HTTPS. Redirigiendo a https://apptools.online...');
+          setTimeout(() => {
+            window.location.replace('https:' + window.location.href.substring(window.location.protocol.length));
+          }, 2000);
+        } else {
+          setError('Tu navegador no soporta esta funcionalidad. Por favor usa Chrome 86+, Edge 86+ u Opera 72+ en modo HTTPS.');
+        }
       } else {
         setError(`Error: ${err.message}`);
       }
@@ -42,8 +75,25 @@ function App() {
     }
   };
 
-  const processDirectory = async (dirHandle: any): Promise<DeleteResult[]> => {
+  const processDirectory = async (
+    dirHandle: any,
+    onProgress?: (current: number, total: number) => void
+  ): Promise<DeleteResult[]> => {
     const results: DeleteResult[] = [];
+    let processedCount = 0;
+    let totalDirs = 0;
+
+    async function countDirs(handle: any): Promise<number> {
+      let count = 1;
+      for await (const entry of handle.values()) {
+        if (entry.kind === 'directory') {
+          count += await countDirs(entry);
+        }
+      }
+      return count;
+    }
+
+    totalDirs = await countDirs(dirHandle);
 
     async function scanAndDelete(handle: any, parentHandle?: any, name?: string): Promise<boolean> {
       let hasContent = false;
@@ -57,7 +107,6 @@ function App() {
         }
       }
 
-      // Process subdirectories recursively
       for (const subDir of subDirs) {
         const subHasContent = await scanAndDelete(subDir.handle, handle, subDir.name);
         if (subHasContent) {
@@ -65,7 +114,6 @@ function App() {
         }
       }
 
-      // If directory is empty and we have access to parent, delete it
       if (!hasContent && parentHandle && name) {
         try {
           await parentHandle.removeEntry(name, { recursive: true });
@@ -82,6 +130,11 @@ function App() {
         }
       }
 
+      processedCount++;
+      if (onProgress && totalDirs > 0) {
+        onProgress(processedCount, totalDirs);
+      }
+
       return hasContent;
     }
 
@@ -90,27 +143,48 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-blue-50 to-teal-50">
-      <div className="container mx-auto px-4 py-12">
-        <div className="max-w-3xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-green-50 to-pink-50">
+      <div className="container mx-auto px-4 py-8">
+        <div className="max-w-4xl mx-auto">
+          {/* Navigation Menu */}
+          <div className="bg-white rounded-xl shadow-lg mb-6 overflow-hidden">
+            <div className="flex">
+              <button
+                onClick={() => setActiveView('cleaner')}
+                className={`flex-1 py-4 px-6 font-semibold transition-all duration-200 flex items-center justify-center gap-2 ${
+                  activeView === 'cleaner'
+                    ? 'bg-gradient-to-r from-blue-500 to-green-500 text-white'
+                    : 'bg-white text-slate-600 hover:bg-slate-50'
+                }`}
+              >
+                <Trash2 className="w-5 h-5" />
+                Limpiador de Carpetas
+              </button>
+              <button
+                onClick={() => setActiveView('duplicates')}
+                className={`flex-1 py-4 px-6 font-semibold transition-all duration-200 flex items-center justify-center gap-2 ${
+                  activeView === 'duplicates'
+                    ? 'bg-gradient-to-r from-blue-500 to-green-500 text-white'
+                    : 'bg-white text-slate-600 hover:bg-slate-50'
+                }`}
+              >
+                <Copy className="w-5 h-5" />
+                Eliminar Duplicados
+              </button>
+            </div>
+          </div>
+          {activeView === 'cleaner' ? (
+            <>
           {/* Header */}
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
             <div className="flex items-center justify-center mb-6">
               <img
-<<<<<<< Current (Your changes)
-<<<<<<< Updated upstream
-                src="/logo1.png"
-=======
-                src="/EmptyFolders/logo.png"
->>>>>>> Stashed changes
-=======
                 src="/logo.png"
->>>>>>> Incoming (Background Agent changes)
                 alt="Limpiador de Carpetas"
                 className="w-96 h-96 drop-shadow-lg"
               />
             </div>
-            <h1 className="text-4xl font-bold text-rose-900 mb-3">
+            <h1 className="text-4xl font-bold text-blue-800 mb-3">
               Limpiador de Carpetas Vacías
             </h1>
             <p className="text-slate-700 text-lg">
@@ -121,11 +195,11 @@ function App() {
           {/* Main Card */}
           <div className="bg-white rounded-2xl shadow-xl p-8 mb-6">
             {/* Info Alert */}
-            <div className="bg-rose-50 border border-rose-200 rounded-xl p-4 mb-6 flex items-start gap-3">
-              <AlertCircle className="w-5 h-5 text-rose-600 flex-shrink-0 mt-0.5" />
-              <div className="text-sm text-rose-900">
+            <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6 flex items-start gap-3">
+              <AlertCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+              <div className="text-sm text-blue-900">
                 <p className="font-semibold mb-1">¿Cómo funciona?</p>
-                <ul className="space-y-1 text-rose-800">
+                <ul className="space-y-1 text-blue-800">
                   <li>• Se analizan todas las carpetas y subcarpetas</li>
                   <li>• Se eliminan carpetas completamente vacías (0 bytes)</li>
                   <li>• Si una carpeta solo contiene carpetas vacías, también se elimina</li>
@@ -138,12 +212,12 @@ function App() {
             <button
               onClick={handleSelectDirectory}
               disabled={processing}
-              className="w-full bg-rose-500 hover:bg-rose-600 disabled:bg-rose-300 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl disabled:cursor-not-allowed"
+              className="w-full bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600 disabled:from-blue-300 disabled:to-green-300 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl disabled:cursor-not-allowed"
             >
               {processing ? (
                 <>
                   <Loader2 className="w-6 h-6 animate-spin" />
-                  <span>Trabajando, por favor espere...</span>
+                  <span>Eliminando carpetas vacías...</span>
                 </>
               ) : (
                 <>
@@ -153,13 +227,43 @@ function App() {
               )}
             </button>
 
+            {/* Progress Bar */}
+            {processing && uploadProgress > 0 && uploadProgress < 100 && (
+              <div className="mt-6">
+                <div className="bg-slate-100 rounded-xl p-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-semibold text-slate-700">{uploadStatus}</span>
+                    <span className="text-sm font-bold text-blue-600">{uploadProgress}%</span>
+                  </div>
+                  <div className="w-full bg-slate-200 rounded-full h-3 overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-r from-blue-500 to-green-500 transition-all duration-300 ease-out"
+                      style={{ width: `${uploadProgress}%` }}
+                    ></div>
+                  </div>
+                  <p className="text-xs text-slate-600 mt-3 text-center font-medium">
+                    ⚠️ NO SALGA DE LA VENTANA HASTA QUE LLEGUE A 100%
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {processing && uploadProgress === 100 && (
+              <div className="mt-6">
+                <div className="bg-green-100 rounded-xl p-4 flex items-center justify-center gap-3">
+                  <CheckCircle2 className="w-6 h-6 text-green-600" />
+                  <span className="text-lg font-bold text-green-800">¡Finalizado!</span>
+                </div>
+              </div>
+            )}
+
             {/* Error Message */}
             {error && (
-              <div className="mt-6 bg-red-50 border border-red-200 rounded-xl p-4 flex items-start gap-3">
-                <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-                <div className="text-sm text-red-800">
+              <div className="mt-6 bg-pink-50 border border-pink-200 rounded-xl p-4 flex items-start gap-3">
+                <AlertCircle className="w-5 h-5 text-pink-600 flex-shrink-0 mt-0.5" />
+                <div className="text-sm text-pink-800">
                   <p className="font-semibold">Error</p>
-                  <p className="text-red-700">{error}</p>
+                  <p className="text-pink-700">{error}</p>
                 </div>
               </div>
             )}
@@ -168,7 +272,7 @@ function App() {
             {results.length > 0 && (
               <div className="mt-6">
                 <div className="flex items-center gap-2 mb-4">
-                  <CheckCircle2 className="w-5 h-5 text-teal-600" />
+                  <CheckCircle2 className="w-5 h-5 text-green-600" />
                   <h3 className="text-lg font-semibold text-slate-800">
                     Resultados ({results.filter(r => r.deleted).length} carpetas eliminadas)
                   </h3>
@@ -186,12 +290,12 @@ function App() {
                           key={index}
                           className="bg-white rounded-lg p-3 flex items-start gap-3 border border-slate-200"
                         >
-                          <CheckCircle2 className="w-5 h-5 text-teal-600 flex-shrink-0 mt-0.5" />
+                          <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
                           <div className="flex-1 min-w-0">
                             <p className="text-sm font-medium text-slate-800 break-all">
                               {result.path}
                             </p>
-                            <p className="text-xs text-teal-600 mt-1">Eliminada</p>
+                            <p className="text-xs text-green-600 mt-1">Eliminada</p>
                           </div>
                         </div>
                       ))}
@@ -205,18 +309,18 @@ function App() {
                       </p>
                       <div className="space-y-2">
                         {results.filter(r => !r.deleted).map((result, index) => (
-                          <div
-                            key={index}
-                            className="bg-red-50 rounded-lg p-3 flex items-start gap-3 border border-red-200"
-                          >
-                            <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-                            <div className="flex-1 min-w-0">
-                              <p className="text-sm font-medium text-slate-800 break-all">
-                                {result.path}
-                              </p>
-                              <p className="text-xs text-red-600 mt-1">{result.reason}</p>
-                            </div>
+                        <div
+                          key={index}
+                          className="bg-pink-50 rounded-lg p-3 flex items-start gap-3 border border-pink-200"
+                        >
+                          <AlertCircle className="w-5 h-5 text-pink-600 flex-shrink-0 mt-0.5" />
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-medium text-slate-800 break-all">
+                              {result.path}
+                            </p>
+                            <p className="text-xs text-pink-600 mt-1">{result.reason}</p>
                           </div>
+                        </div>
                         ))}
                       </div>
                     </div>
@@ -233,6 +337,10 @@ function App() {
               (Chrome, Edge, Opera)
             </p>
           </div>
+          </>
+          ) : (
+            <DuplicateFinder />
+          )}
         </div>
       </div>
     </div>
