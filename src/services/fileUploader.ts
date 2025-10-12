@@ -82,29 +82,72 @@ export async function uploadFileToSupabase(
 export async function scanAndUploadFiles(
   dirHandle: any,
   basePath: string = '',
-  rootFolder: string = ''
-): Promise<void> {
+  rootFolder: string = '',
+  onProgress?: (current: number, total: number, status: string) => void
+): Promise<{ uploaded: number; total: number }> {
   if (!rootFolder) {
     console.error('Root folder name is required');
-    return;
+    return { uploaded: 0, total: 0 };
   }
 
-  for await (const entry of dirHandle.values()) {
-    if (entry.kind === 'file') {
-      const fileName = entry.name;
-      if (isMediaFile(fileName)) {
-        try {
-          const fileHandle = await dirHandle.getFileHandle(fileName);
-          const file = await fileHandle.getFile();
-          const currentPath = basePath ? `${basePath}/${fileName}` : fileName;
-          await uploadFileToSupabase(file, currentPath, rootFolder);
-        } catch (error) {
-          console.error(`Error processing file ${fileName}:`, error);
+  let totalFiles = 0;
+  let uploadedFiles = 0;
+
+  async function countMediaFiles(handle: any): Promise<number> {
+    let count = 0;
+    for await (const entry of handle.values()) {
+      if (entry.kind === 'file') {
+        if (isMediaFile(entry.name)) {
+          count++;
         }
+      } else if (entry.kind === 'directory') {
+        count += await countMediaFiles(entry);
       }
-    } else if (entry.kind === 'directory') {
-      const subDirPath = basePath ? `${basePath}/${entry.name}` : entry.name;
-      await scanAndUploadFiles(entry, subDirPath, rootFolder);
+    }
+    return count;
+  }
+
+  totalFiles = await countMediaFiles(dirHandle);
+  if (onProgress) {
+    onProgress(0, totalFiles || 1, 'Iniciando subida de archivos...');
+  }
+
+  async function processFiles(handle: any, path: string): Promise<void> {
+    for await (const entry of handle.values()) {
+      if (entry.kind === 'file') {
+        const fileName = entry.name;
+        if (isMediaFile(fileName)) {
+          try {
+            const fileHandle = await handle.getFileHandle(fileName);
+            const file = await fileHandle.getFile();
+            const currentPath = path ? `${path}/${fileName}` : fileName;
+
+            await uploadFileToSupabase(file, currentPath, rootFolder);
+
+            uploadedFiles++;
+            if (onProgress) {
+              onProgress(
+                uploadedFiles,
+                totalFiles || 1,
+                `Subiendo archivos: ${uploadedFiles}/${totalFiles}`
+              );
+            }
+          } catch (error) {
+            console.error(`Error processing file ${fileName}:`, error);
+          }
+        }
+      } else if (entry.kind === 'directory') {
+        const subDirPath = path ? `${path}/${entry.name}` : entry.name;
+        await processFiles(entry, subDirPath);
+      }
     }
   }
+
+  await processFiles(dirHandle, basePath);
+
+  if (onProgress) {
+    onProgress(uploadedFiles, totalFiles || 1, `¡${uploadedFiles} archivos subidos exitosamente!`);
+  }
+
+  return { uploaded: uploadedFiles, total: totalFiles };
 }
