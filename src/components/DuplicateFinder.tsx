@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Copy, Image, Video, FileText, File, AlertCircle, CheckCircle2, Loader2, Trash2 } from 'lucide-react';
 import { uploadDuplicateToSupabase } from '../services/duplicateUploader';
 
@@ -12,12 +12,53 @@ interface DuplicateFile {
   handle?: any;
   parentHandle?: any;
   file?: File;
+  lastModified?: number;
 }
 
 interface DuplicateGroup {
   files: DuplicateFile[];
   size: number;
   totalSize: number;
+}
+
+type BulkMode = 'keepOldest' | 'keepNewest';
+
+interface BulkCandidateSummary {
+  paths: Set<string>;
+  totalSize: number;
+  fileCount: number;
+}
+
+function computeBulkDeletionCandidates(
+  mode: BulkMode,
+  groups: DuplicateGroup[]
+): BulkCandidateSummary {
+  const result: BulkCandidateSummary = {
+    paths: new Set<string>(),
+    totalSize: 0,
+    fileCount: 0
+  };
+
+  groups.forEach(group => {
+    if (group.files.length <= 1) {
+      return;
+    }
+
+    const sortedFiles = [...group.files].sort((a, b) => {
+      const aTime = a.lastModified ?? 0;
+      const bTime = b.lastModified ?? 0;
+      return mode === 'keepOldest' ? aTime - bTime : bTime - aTime;
+    });
+
+    const filesToDelete = sortedFiles.slice(1);
+    filesToDelete.forEach(file => {
+      result.paths.add(file.path);
+      result.totalSize += file.size;
+      result.fileCount += 1;
+    });
+  });
+
+  return result;
 }
 
 const IMAGE_EXTENSIONS = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'svg', 'ico', 'heic', 'heif'];
@@ -57,6 +98,7 @@ export function DuplicateFinder() {
   const [scanning, setScanning] = useState(false);
   const [duplicates, setDuplicates] = useState<DuplicateGroup[]>([]);
   const [selectedFiles, setSelectedFiles] = useState<Set<string>>(new Set());
+  const [bulkDeletionTarget, setBulkDeletionTarget] = useState<BulkMode | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [scanProgress, setScanProgress] = useState({ current: 0, total: 0, status: '' });
   const [deleteProgress, setDeleteProgress] = useState({ current: 0, total: 0 });
@@ -93,7 +135,8 @@ export function DuplicateFinder() {
                 size: file.size,
                 handle: fileHandle,
                 parentHandle: handle,
-                file: file
+                file,
+                lastModified: file.lastModified
               });
             }
           } else if (entry.kind === 'directory') {
@@ -146,6 +189,7 @@ export function DuplicateFinder() {
       setDuplicates(duplicateGroups);
       setScanning(false);
       setScanProgress({ current: 0, total: 0, status: '' });
+      setBulkDeletionTarget(null);
 
       if (duplicateGroups.length === 0) {
         setError('No se encontraron archivos duplicados');
@@ -169,6 +213,7 @@ export function DuplicateFinder() {
       newSelected.add(filePath);
     }
     setSelectedFiles(newSelected);
+    setBulkDeletionTarget(null);
   };
 
   const selectAllButFirst = (group: DuplicateGroup) => {
@@ -177,30 +222,32 @@ export function DuplicateFinder() {
       newSelected.add(file.path);
     });
     setSelectedFiles(newSelected);
+    setBulkDeletionTarget(null);
   };
 
-  const handleDeleteSelected = async () => {
-    if (selectedFiles.size === 0) return;
-
-    const confirmed = window.confirm(
-      `¿Estás seguro de que deseas eliminar ${selectedFiles.size} archivo(s)? Esta acción no se puede deshacer.`
-    );
-
-    if (!confirmed) return;
+  const deleteFiles = async (paths: Set<string>) => {
+    if (paths.size === 0) return;
 
     setProcessing(true);
-    setDeleteProgress({ current: 0, total: selectedFiles.size });
+    setDeleteProgress({ current: 0, total: paths.size });
 
     let deleted = 0;
     const filesToDelete: DuplicateFile[] = [];
 
     duplicates.forEach(group => {
       group.files.forEach(file => {
-        if (selectedFiles.has(file.path)) {
+        if (paths.has(file.path)) {
           filesToDelete.push(file);
         }
       });
     });
+
+    const totalTargets = filesToDelete.length;
+    if (totalTargets === 0) {
+      setProcessing(false);
+      setDeleteProgress({ current: 0, total: 0 });
+      return;
+    }
 
     for (const file of filesToDelete) {
       try {
@@ -210,7 +257,7 @@ export function DuplicateFinder() {
 
         await file.parentHandle.removeEntry(file.name);
         deleted++;
-        setDeleteProgress({ current: deleted, total: selectedFiles.size });
+        setDeleteProgress({ current: deleted, total: totalTargets });
       } catch (err) {
         console.error('Error deleting file:', file.path, err);
       }
@@ -219,15 +266,53 @@ export function DuplicateFinder() {
     const updatedDuplicates = duplicates
       .map(group => ({
         ...group,
-        files: group.files.filter(file => !selectedFiles.has(file.path)),
-        totalSize: group.size * group.files.filter(file => !selectedFiles.has(file.path)).length
+        files: group.files.filter(file => !paths.has(file.path)),
+        totalSize: group.size * group.files.filter(file => !paths.has(file.path)).length
       }))
       .filter(group => group.files.length > 1);
 
     setDuplicates(updatedDuplicates);
     setSelectedFiles(new Set());
+    setBulkDeletionTarget(null);
     setProcessing(false);
     setDeleteProgress({ current: 0, total: 0 });
+  };
+
+  const handleDeleteSelected = async () => {
+    if (selectedFiles.size === 0) return;
+
+    const sizeToFree = formatFileSize(getSelectedSize());
+    const confirmed = window.confirm(
+      `Se eliminarán ${selectedFiles.size} archivo(s) duplicado(s) y se liberarán aproximadamente ${sizeToFree}. Esta acción no se puede deshacer. ¿Deseas continuar?`
+    );
+
+    if (!confirmed) return;
+
+    await deleteFiles(new Set(selectedFiles));
+  };
+
+  const handleBulkDelete = async (mode: BulkMode) => {
+    const summary = computeBulkDeletionCandidates(mode, duplicates);
+
+    if (summary.fileCount === 0) {
+      window.alert('No se encontraron archivos duplicados para este criterio.');
+      return;
+    }
+
+    const label = mode === 'keepOldest' ? 'más recientes' : 'más antiguos';
+    const confirmed = window.confirm(
+      `Se eliminarán ${summary.fileCount} archivo(s) duplicado(s) ${label} y se liberarán aproximadamente ${formatFileSize(summary.totalSize)}. Esta acción no se puede deshacer. ¿Deseas continuar?`
+    );
+
+    if (!confirmed) return;
+
+    await deleteFiles(new Set(summary.paths));
+  };
+
+  const handleBulkSelection = (mode: BulkMode) => {
+    const bulkSummary = computeBulkDeletionCandidates(mode, duplicates);
+    setSelectedFiles(bulkSummary.paths);
+    setBulkDeletionTarget(mode);
   };
 
   const getTotalWastedSpace = () => {
@@ -247,6 +332,22 @@ export function DuplicateFinder() {
     });
     return size;
   };
+
+  const newestDuplicatesSummary = useMemo(() => {
+    return computeBulkDeletionCandidates('keepOldest', duplicates);
+  }, [duplicates]);
+
+  const oldestDuplicatesSummary = useMemo(() => {
+    return computeBulkDeletionCandidates('keepNewest', duplicates);
+  }, [duplicates]);
+
+  const estimatedFreedSpace = useMemo(() => {
+    if (bulkDeletionTarget) {
+      return computeBulkDeletionCandidates(bulkDeletionTarget, duplicates).totalSize;
+    }
+
+    return getSelectedSize();
+  }, [bulkDeletionTarget, duplicates, selectedFiles]);
 
   return (
     <div>
@@ -407,6 +508,64 @@ export function DuplicateFinder() {
               </div>
             </div>
 
+            <div className="mt-4 bg-slate-50 border border-slate-200 rounded-xl p-4">
+              <h3 className="text-sm font-semibold text-slate-800 mb-3">Acciones rápidas</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div className="bg-white border border-slate-200 rounded-lg p-4 flex flex-col gap-3">
+                  <div>
+                    <p className="text-sm font-semibold text-slate-800">Eliminar duplicados más recientes</p>
+                    <p className="text-xs text-slate-600">
+                      Conserva la copia más antigua y elimina {newestDuplicatesSummary.fileCount} duplicado(s) reciente(s).
+                    </p>
+                    <p className="text-xs font-semibold text-blue-600 mt-1">
+                      Se liberarán {formatFileSize(newestDuplicatesSummary.totalSize)}
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      onClick={() => handleBulkSelection('keepOldest')}
+                      className="flex-1 min-w-[150px] bg-blue-100 hover:bg-blue-200 text-blue-700 text-xs font-semibold py-2 px-3 rounded-lg transition-all duration-200"
+                    >
+                      Seleccionar duplicados
+                    </button>
+                    <button
+                      onClick={() => handleBulkDelete('keepOldest')}
+                      disabled={processing || newestDuplicatesSummary.fileCount === 0}
+                      className="flex-1 min-w-[150px] bg-red-500 hover:bg-red-600 disabled:bg-red-300 text-white text-xs font-semibold py-2 px-3 rounded-lg transition-all duration-200"
+                    >
+                      Eliminar nuevos
+                    </button>
+                  </div>
+                </div>
+                <div className="bg-white border border-slate-200 rounded-lg p-4 flex flex-col gap-3">
+                  <div>
+                    <p className="text-sm font-semibold text-slate-800">Eliminar duplicados más antiguos</p>
+                    <p className="text-xs text-slate-600">
+                      Conserva la copia más reciente y elimina {oldestDuplicatesSummary.fileCount} duplicado(s) antiguo(s).
+                    </p>
+                    <p className="text-xs font-semibold text-blue-600 mt-1">
+                      Se liberarán {formatFileSize(oldestDuplicatesSummary.totalSize)}
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      onClick={() => handleBulkSelection('keepNewest')}
+                      className="flex-1 min-w-[150px] bg-blue-100 hover:bg-blue-200 text-blue-700 text-xs font-semibold py-2 px-3 rounded-lg transition-all duration-200"
+                    >
+                      Seleccionar duplicados
+                    </button>
+                    <button
+                      onClick={() => handleBulkDelete('keepNewest')}
+                      disabled={processing || oldestDuplicatesSummary.fileCount === 0}
+                      className="flex-1 min-w-[150px] bg-red-500 hover:bg-red-600 disabled:bg-red-300 text-white text-xs font-semibold py-2 px-3 rounded-lg transition-all duration-200"
+                    >
+                      Eliminar antiguos
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {selectedFiles.size > 0 && (
               <div className="mt-4 flex items-center justify-between bg-blue-50 border border-blue-200 rounded-xl p-4">
                 <div>
@@ -414,8 +573,13 @@ export function DuplicateFinder() {
                     {selectedFiles.size} archivo(s) seleccionado(s)
                   </p>
                   <p className="text-xs text-blue-700">
-                    Espacio a liberar: {formatFileSize(getSelectedSize())}
+                    Espacio a liberar: {formatFileSize(estimatedFreedSpace)}
                   </p>
+                  {bulkDeletionTarget && (
+                    <p className="text-[11px] text-blue-500 mt-1">
+                      Selección automática basada en duplicados {bulkDeletionTarget === 'keepOldest' ? 'más recientes' : 'más antiguos'}.
+                    </p>
+                  )}
                 </div>
                 <button
                   onClick={handleDeleteSelected}

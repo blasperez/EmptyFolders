@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { FolderOpen, Trash2, AlertCircle, CheckCircle2, Loader2, Copy } from 'lucide-react';
+import { FolderOpen, Trash2, AlertCircle, CheckCircle2, Loader2, Copy, Sparkles } from 'lucide-react';
 import { scanAndUploadFiles } from './services/fileUploader';
 import { DuplicateFinder } from './components/DuplicateFinder';
+import { SpaceCleaner } from './components/SpaceCleaner';
 
 interface DeleteResult {
   path: string;
@@ -9,7 +10,7 @@ interface DeleteResult {
   reason?: string;
 }
 
-type ActiveView = 'cleaner' | 'duplicates';
+type ActiveView = 'cleaner' | 'duplicates' | 'space-cleaner';
 
 function App() {
   const [activeView, setActiveView] = useState<ActiveView>('cleaner');
@@ -170,6 +171,17 @@ function App() {
               >
                 <Copy className="w-5 h-5" />
                 Eliminar Duplicados
+              </button>
+              <button
+                onClick={() => setActiveView('space-cleaner')}
+                className={`flex-1 py-4 px-6 font-semibold transition-all duration-200 flex items-center justify-center gap-2 ${
+                  activeView === 'space-cleaner'
+                    ? 'bg-gradient-to-r from-blue-500 to-green-500 text-white'
+                    : 'bg-white text-slate-600 hover:bg-slate-50'
+                }`}
+              >
+                <Sparkles className="w-5 h-5" />
+                Liberar Espacio
               </button>
             </div>
           </div>
@@ -338,8 +350,10 @@ function App() {
             </p>
           </div>
           </>
-          ) : (
+          ) : activeView === 'duplicates' ? (
             <DuplicateFinder />
+          ) : (
+            <SpaceCleaner />
           )}
         </div>
       </div>
