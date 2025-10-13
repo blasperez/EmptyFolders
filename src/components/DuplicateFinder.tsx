@@ -353,7 +353,11 @@ export function DuplicateFinder() {
     <div>
       <div className="text-center mb-8">
         <div className="flex items-center justify-center mb-6">
-          <Copy className="w-24 h-24 text-blue-600" />
+          <img
+            src="/duplicados_logo.png"
+            alt="Eliminar archivos duplicados"
+            className="w-96 h-96 drop-shadow-lg object-contain"
+          />
         </div>
         <h1 className="text-4xl font-bold text-blue-800 mb-3">
           Eliminar Archivos Duplicados
