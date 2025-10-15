@@ -1,8 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm run typecheck)",
-      "Bash(git add .)"
+      "Bash(git push origin main)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nfeat: actualizar slots de AdSense con valores reales\n\n- Reemplazar slots de ejemplo con slot real: 2467513756\n- Cambiar formato de ''horizontal'' a ''auto'' para mejor responsividad\n- Configurar data-full-width-responsive en ambos bloques de anuncios\n\nLos anuncios ahora están configurados con el slot real de la cuenta\nde AdSense del usuario, listos para mostrar publicidad real.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
     ],
     "deny": [],
     "ask": []

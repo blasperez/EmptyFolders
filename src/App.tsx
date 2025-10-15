@@ -207,7 +207,7 @@ function App() {
           </div>
 
           {/* AdSense Ad - Top Banner */}
-          <AdSenseAd slot="1234567890" format="horizontal" />
+          <AdSenseAd slot="2467513756" format="auto" />
 
           {/* Main Card */}
           <div className="bg-white rounded-2xl shadow-xl p-8 mb-6">
@@ -359,7 +359,7 @@ function App() {
           <ContentSection />
 
           {/* AdSense Ad - Bottom Banner */}
-          <AdSenseAd slot="9876543210" format="horizontal" />
+          <AdSenseAd slot="2467513756" format="auto" />
 
           {/* Footer with links */}
           <div className="text-center mt-8 pb-4">
