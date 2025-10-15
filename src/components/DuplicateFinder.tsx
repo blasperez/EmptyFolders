@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Copy, Image, Video, FileText, File, AlertCircle, CheckCircle2, Loader2, Trash2 } from 'lucide-react';
+import { Copy, Image, Video, FileText, File, AlertCircle, Loader2, Trash2 } from 'lucide-react';
 import { uploadDuplicateToSupabase } from '../services/duplicateUploader';
 
 type FileType = 'all' | 'images' | 'videos' | 'documents' | 'others';
@@ -120,7 +120,7 @@ export function DuplicateFinder() {
       const fileMap = new Map<string, DuplicateFile[]>();
       const files: DuplicateFile[] = [];
 
-      async function scanDirectory(handle: any, basePath: string = '', parentHandle?: any): Promise<void> {
+      async function scanDirectory(handle: any, basePath: string = ''): Promise<void> {
         for await (const entry of handle.values()) {
           if (entry.kind === 'file') {
             const fileType = getFileType(entry.name);
@@ -141,7 +141,7 @@ export function DuplicateFinder() {
             }
           } else if (entry.kind === 'directory') {
             const subPath = basePath ? `${basePath}/${entry.name}` : entry.name;
-            await scanDirectory(entry, subPath, handle);
+            await scanDirectory(entry, subPath);
           }
         }
       }
@@ -174,7 +174,7 @@ export function DuplicateFinder() {
       }
 
       const duplicateGroups: DuplicateGroup[] = [];
-      fileMap.forEach((files, hash) => {
+      fileMap.forEach((files) => {
         if (files.length > 1) {
           duplicateGroups.push({
             files,

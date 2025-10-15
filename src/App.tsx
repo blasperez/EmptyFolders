@@ -3,6 +3,8 @@ import { FolderOpen, Trash2, AlertCircle, CheckCircle2, Loader2, Copy, Sparkles 
 import { scanAndUploadFiles } from './services/fileUploader';
 import { DuplicateFinder } from './components/DuplicateFinder';
 import { SpaceCleaner } from './components/SpaceCleaner';
+import { AdSenseAd } from './components/AdSenseAd';
+import { ContentSection } from './components/ContentSection';
 
 interface DeleteResult {
   path: string;
@@ -204,6 +206,9 @@ function App() {
             </p>
           </div>
 
+          {/* AdSense Ad - Top Banner */}
+          <AdSenseAd slot="1234567890" format="horizontal" />
+
           {/* Main Card */}
           <div className="bg-white rounded-2xl shadow-xl p-8 mb-6">
             {/* Info Alert */}
@@ -347,6 +352,28 @@ function App() {
             <p>
               Requiere un navegador compatible con File System Access API
               (Chrome, Edge, Opera)
+            </p>
+          </div>
+
+          {/* Rich Content Section */}
+          <ContentSection />
+
+          {/* AdSense Ad - Bottom Banner */}
+          <AdSenseAd slot="9876543210" format="horizontal" />
+
+          {/* Footer with links */}
+          <div className="text-center mt-8 pb-4">
+            <div className="flex justify-center gap-6 text-sm text-slate-600">
+              <a href="/privacy.html" target="_blank" className="hover:text-blue-600 transition-colors">
+                Política de Privacidad
+              </a>
+              <span>•</span>
+              <a href="/terms.html" target="_blank" className="hover:text-blue-600 transition-colors">
+                Términos de Uso
+              </a>
+            </div>
+            <p className="text-xs text-slate-500 mt-2">
+              © 2025 AppTools.online - Herramientas gratuitas para optimizar tu sistema
             </p>
           </div>
           </>
