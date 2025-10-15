@@ -76,12 +76,19 @@ export function ContentSection() {
 
             <details className="bg-slate-50 rounded-lg p-4 border border-slate-200">
               <summary className="font-semibold text-slate-800 cursor-pointer">
-                ¿Qué navegadores son compatibles?
+                ¿Qué navegadores y sistemas operativos son compatibles?
               </summary>
               <p className="text-sm text-slate-700 mt-2">
-                Esta herramienta requiere navegadores compatibles con File System Access API, incluyendo:
-                Google Chrome 86+, Microsoft Edge 86+, Opera 72+ o cualquier navegador basado en Chromium.
-                El sitio debe accederse mediante HTTPS.
+                <strong>Compatible con sistemas de escritorio:</strong>
+              </p>
+              <ul className="text-sm text-slate-700 mt-2 ml-4 list-disc">
+                <li><strong>Windows:</strong> Chrome 86+, Edge 86+, Opera 72+</li>
+                <li><strong>macOS:</strong> Chrome 86+, Edge 86+, Opera 72+</li>
+                <li><strong>Linux:</strong> Chrome 86+, Opera 72+</li>
+              </ul>
+              <p className="text-sm text-slate-700 mt-2">
+                <strong>⚠️ No compatible con dispositivos móviles</strong> (Android, iOS) ya que la File System Access API
+                no está disponible en navegadores móviles por razones de seguridad. El sitio debe accederse mediante HTTPS.
               </p>
             </details>
 

@@ -348,10 +348,12 @@ function App() {
           </div>
 
           {/* Browser Support Notice */}
-          <div className="text-center text-sm text-slate-500">
-            <p>
-              Requiere un navegador compatible con File System Access API
-              (Chrome, Edge, Opera)
+          <div className="text-center text-sm text-slate-500 mb-4">
+            <p className="font-medium">
+              Compatible con sistemas de escritorio (Windows, macOS, Linux)
+            </p>
+            <p className="text-xs mt-1">
+              Requiere Chrome 86+, Edge 86+, u Opera 72+ • No disponible en dispositivos móviles
             </p>
           </div>
 

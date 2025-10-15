@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(git push origin main)",
-      "Bash(git commit -m \"$(cat <<''EOF''\nfeat: actualizar slots de AdSense con valores reales\n\n- Reemplazar slots de ejemplo con slot real: 2467513756\n- Cambiar formato de ''horizontal'' a ''auto'' para mejor responsividad\n- Configurar data-full-width-responsive en ambos bloques de anuncios\n\nLos anuncios ahora están configurados con el slot real de la cuenta\nde AdSense del usuario, listos para mostrar publicidad real.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
+      "Bash(git commit -m \"$(cat <<''EOF''\nfeat: actualizar slots de AdSense con valores reales\n\n- Reemplazar slots de ejemplo con slot real: 2467513756\n- Cambiar formato de ''horizontal'' a ''auto'' para mejor responsividad\n- Configurar data-full-width-responsive en ambos bloques de anuncios\n\nLos anuncios ahora están configurados con el slot real de la cuenta\nde AdSense del usuario, listos para mostrar publicidad real.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(npm run build)",
+      "Bash(git commit -m \"$(cat <<''EOF''\ndocs: aclarar compatibilidad de sistemas operativos\n\n- Actualizar FAQ con información detallada de compatibilidad\n  * ✅ Windows: Chrome 86+, Edge 86+, Opera 72+\n  * ✅ macOS: Chrome 86+, Edge 86+, Opera 72+\n  * ✅ Linux: Chrome 86+, Opera 72+\n  * ❌ Android e iOS: No compatible (API no soportada)\n\n- Mejorar mensaje de compatibilidad en App.tsx\n  * Especificar que funciona en sistemas de escritorio\n  * Aclarar que NO funciona en dispositivos móviles\n\nFile System Access API no está disponible en navegadores móviles\npor razones de seguridad del sistema operativo.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
     ],
     "deny": [],
     "ask": []
