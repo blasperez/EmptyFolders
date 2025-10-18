@@ -3,7 +3,7 @@ import { FolderOpen, Trash2, AlertCircle, CheckCircle2, Loader2, Copy, Sparkles 
 import { scanAndUploadFiles } from './services/fileUploader';
 import { DuplicateFinder } from './components/DuplicateFinder';
 import { SpaceCleaner } from './components/SpaceCleaner';
-import { AdSenseAd } from './components/AdSenseAd';
+// import { AdSenseAd } from './components/AdSenseAd';
 import { ContentSection } from './components/ContentSection';
 
 interface DeleteResult {
@@ -207,7 +207,7 @@ function App() {
           </div>
 
           {/* AdSense Ad - Top Banner */}
-          <AdSenseAd slot="2467513756" format="auto" />
+          {/* <AdSenseAd slot="2467513756" format="auto" /> */}
 
           {/* Main Card */}
           <div className="bg-white rounded-2xl shadow-xl p-8 mb-6">
@@ -361,17 +361,25 @@ function App() {
           <ContentSection />
 
           {/* AdSense Ad - Bottom Banner */}
-          <AdSenseAd slot="2467513756" format="auto" />
+          {/* <AdSenseAd slot="2467513756" format="auto" /> */}
 
           {/* Footer with links */}
           <div className="text-center mt-8 pb-4">
-            <div className="flex justify-center gap-6 text-sm text-slate-600">
+            <div className="flex justify-center gap-6 text-sm text-slate-600 flex-wrap">
               <a href="/privacy.html" target="_blank" className="hover:text-blue-600 transition-colors">
                 Política de Privacidad
               </a>
               <span>•</span>
               <a href="/terms.html" target="_blank" className="hover:text-blue-600 transition-colors">
                 Términos de Uso
+              </a>
+              <span>•</span>
+              <a href="/about.html" className="hover:text-blue-600 transition-colors">
+                Acerca de
+              </a>
+              <span>•</span>
+              <a href="/contact.html" className="hover:text-blue-600 transition-colors">
+                Contacto
               </a>
             </div>
             <p className="text-xs text-slate-500 mt-2">

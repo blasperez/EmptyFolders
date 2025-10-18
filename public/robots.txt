@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Bloquear páginas utilitarias
+Disallow: /check-ssl.html
+Disallow: /dns-check.html
+Disallow: /test-api.html
+
+Sitemap: https://apptools.online/sitemap.xml

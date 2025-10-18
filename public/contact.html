@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - AppTools.online</title>
+    <meta name="description" content="Contacto de AppTools.online para soporte y sugerencias.">
+    <meta name="google-adsense-account" content="ca-pub-4040158245592837" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <style>
+        body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height: 1.6; margin: 0; padding: 0; background: #f8fafc; }
+        .container { max-width: 900px; margin: 0 auto; padding: 32px 20px; }
+        .card { background: #fff; border-radius: 16px; padding: 32px; box-shadow: 0 10px 30px rgba(15,23,42,0.08); }
+        h1 { color: #0f172a; margin-top: 0; margin-bottom: 8px; }
+        .lead { color: #334155; margin-top: 0; }
+        label { display: block; font-weight: 600; margin: 14px 0 6px; color: #0f172a; }
+        input, textarea { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #e2e8f0; background: #f8fafc; }
+        textarea { min-height: 140px; }
+        .hint { font-size: 13px; color: #64748b; }
+        .meta { margin-top: 18px; color: #475569; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a class="back" href="/" style="color:#2563eb; text-decoration:none; font-weight:600;">← Volver a AppTools.online</a>
+        <div class="card">
+            <h1>Contacto</h1>
+            <p class="lead">¿Tienes dudas, sugerencias o detectaste un problema? Escríbenos.</p>
+
+            <form action="mailto:support@apptools.online" method="post" enctype="text/plain">
+                <label>Nombre</label>
+                <input type="text" name="name" placeholder="Tu nombre" required>
+
+                <label>Correo electrónico</label>
+                <input type="email" name="email" placeholder="tu@correo.com" required>
+
+                <label>Mensaje</label>
+                <textarea name="message" placeholder="Cuéntanos en qué podemos ayudarte" required></textarea>
+
+                <div class="hint">Al enviar, se abrirá tu cliente de correo con el mensaje.</div>
+                <div class="meta">También puedes escribirnos directamente a <strong>support@apptools.online</strong>.</div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
