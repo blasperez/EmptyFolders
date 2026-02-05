@@ -3,7 +3,7 @@ import { FolderOpen, Trash2, AlertCircle, CheckCircle2, Loader2, Copy, Sparkles 
 import { scanAndUploadFiles } from './services/fileUploader';
 import { DuplicateFinder } from './components/DuplicateFinder';
 import { SpaceCleaner } from './components/SpaceCleaner';
-// import { AdSenseAd } from './components/AdSenseAd';
+import { AdSenseAd } from './components/AdSenseAd';
 import { ContentSection } from './components/ContentSection';
 
 interface DeleteResult {

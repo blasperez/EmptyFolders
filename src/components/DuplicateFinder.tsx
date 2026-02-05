@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Copy, Image, Video, FileText, File, AlertCircle, Loader2, Trash2 } from 'lucide-react';
+import { Copy, Image, Video, FileText, File, AlertCircle, Loader2, Trash2, FolderX, X, Plus } from 'lucide-react';
 import { uploadDuplicateToSupabase } from '../services/duplicateUploader';
 
 type FileType = 'all' | 'images' | 'videos' | 'documents' | 'others';
@@ -102,6 +102,9 @@ export function DuplicateFinder() {
   const [error, setError] = useState<string | null>(null);
   const [scanProgress, setScanProgress] = useState({ current: 0, total: 0, status: '' });
   const [deleteProgress, setDeleteProgress] = useState({ current: 0, total: 0 });
+  const [excludedFolders, setExcludedFolders] = useState<string[]>([]);
+  const [newExcludedFolder, setNewExcludedFolder] = useState('');
+  const [excludedCount, setExcludedCount] = useState(0);
 
   const handleScanDirectory = async () => {
     try {
@@ -116,9 +119,18 @@ export function DuplicateFinder() {
 
       setScanning(true);
       setScanProgress({ current: 0, total: 0, status: 'Analizando archivos...' });
+      setExcludedCount(0);
+      let excludedDirCount = 0;
 
       const fileMap = new Map<string, DuplicateFile[]>();
       const files: DuplicateFile[] = [];
+
+      // Función para verificar si una carpeta debe ser excluida
+      const shouldExcludeFolder = (folderName: string): boolean => {
+        return excludedFolders.some(excluded =>
+          folderName.toLowerCase() === excluded.toLowerCase()
+        );
+      };
 
       async function scanDirectory(handle: any, basePath: string = ''): Promise<void> {
         for await (const entry of handle.values()) {
@@ -140,6 +152,12 @@ export function DuplicateFinder() {
               });
             }
           } else if (entry.kind === 'directory') {
+            // Verificar si la carpeta debe ser excluida
+            if (shouldExcludeFolder(entry.name)) {
+              excludedDirCount++;
+              setExcludedCount(excludedDirCount);
+              continue;
+            }
             const subPath = basePath ? `${basePath}/${entry.name}` : entry.name;
             await scanDirectory(entry, subPath);
           }
@@ -375,60 +393,115 @@ export function DuplicateFinder() {
           <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
             <button
               onClick={() => setSelectedType('all')}
-              className={`py-3 px-4 rounded-lg font-medium transition-all duration-200 flex items-center justify-center gap-2 ${
-                selectedType === 'all'
-                  ? 'bg-blue-500 text-white shadow-lg'
-                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-              }`}
+              className={`py-3 px-4 rounded-lg font-medium transition-all duration-200 flex items-center justify-center gap-2 ${selectedType === 'all'
+                ? 'bg-blue-500 text-white shadow-lg'
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                }`}
             >
               <File className="w-5 h-5" />
               Todos
             </button>
             <button
               onClick={() => setSelectedType('images')}
-              className={`py-3 px-4 rounded-lg font-medium transition-all duration-200 flex items-center justify-center gap-2 ${
-                selectedType === 'images'
-                  ? 'bg-blue-500 text-white shadow-lg'
-                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-              }`}
+              className={`py-3 px-4 rounded-lg font-medium transition-all duration-200 flex items-center justify-center gap-2 ${selectedType === 'images'
+                ? 'bg-blue-500 text-white shadow-lg'
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                }`}
             >
               <Image className="w-5 h-5" />
               Fotos
             </button>
             <button
               onClick={() => setSelectedType('videos')}
-              className={`py-3 px-4 rounded-lg font-medium transition-all duration-200 flex items-center justify-center gap-2 ${
-                selectedType === 'videos'
-                  ? 'bg-blue-500 text-white shadow-lg'
-                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-              }`}
+              className={`py-3 px-4 rounded-lg font-medium transition-all duration-200 flex items-center justify-center gap-2 ${selectedType === 'videos'
+                ? 'bg-blue-500 text-white shadow-lg'
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                }`}
             >
               <Video className="w-5 h-5" />
               Videos
             </button>
             <button
               onClick={() => setSelectedType('documents')}
-              className={`py-3 px-4 rounded-lg font-medium transition-all duration-200 flex items-center justify-center gap-2 ${
-                selectedType === 'documents'
-                  ? 'bg-blue-500 text-white shadow-lg'
-                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-              }`}
+              className={`py-3 px-4 rounded-lg font-medium transition-all duration-200 flex items-center justify-center gap-2 ${selectedType === 'documents'
+                ? 'bg-blue-500 text-white shadow-lg'
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                }`}
             >
               <FileText className="w-5 h-5" />
               Documentos
             </button>
             <button
               onClick={() => setSelectedType('others')}
-              className={`py-3 px-4 rounded-lg font-medium transition-all duration-200 flex items-center justify-center gap-2 ${
-                selectedType === 'others'
-                  ? 'bg-blue-500 text-white shadow-lg'
-                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-              }`}
+              className={`py-3 px-4 rounded-lg font-medium transition-all duration-200 flex items-center justify-center gap-2 ${selectedType === 'others'
+                ? 'bg-blue-500 text-white shadow-lg'
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                }`}
             >
               <File className="w-5 h-5" />
               Otros
             </button>
           </div>
+        </div>
+
+        {/* Excluir carpetas */}
+        <div className="mt-6">
+          <label className="block text-sm font-semibold text-slate-700 mb-3 flex items-center gap-2">
+            <FolderX className="w-5 h-5 text-orange-500" />
+            Excluir carpetas del análisis:
+          </label>
+          <div className="flex gap-2 mb-3">
+            <input
+              type="text"
+              value={newExcludedFolder}
+              onChange={(e) => setNewExcludedFolder(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && newExcludedFolder.trim()) {
+                  e.preventDefault();
+                  if (!excludedFolders.includes(newExcludedFolder.trim())) {
+                    setExcludedFolders([...excludedFolders, newExcludedFolder.trim()]);
+                  }
+                  setNewExcludedFolder('');
+                }
+              }}
+              placeholder="Nombre de carpeta a excluir (ej: node_modules)"
+              className="flex-1 px-4 py-3 rounded-lg border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all duration-200 text-slate-700"
+            />
+            <button
+              onClick={() => {
+                if (newExcludedFolder.trim() && !excludedFolders.includes(newExcludedFolder.trim())) {
+                  setExcludedFolders([...excludedFolders, newExcludedFolder.trim()]);
+                  setNewExcludedFolder('');
+                }
+              }}
+              className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 flex items-center gap-2"
+            >
+              <Plus className="w-5 h-5" />
+              Agregar
+            </button>
+          </div>
+          {excludedFolders.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              {excludedFolders.map((folder, index) => (
+                <div
+                  key={index}
+                  className="bg-orange-100 text-orange-800 px-3 py-2 rounded-lg flex items-center gap-2 text-sm font-medium"
+                >
+                  <FolderX className="w-4 h-4" />
+                  {folder}
+                  <button
+                    onClick={() => setExcludedFolders(excludedFolders.filter((_, i) => i !== index))}
+                    className="hover:bg-orange-200 rounded-full p-0.5 transition-colors"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+          <p className="text-xs text-slate-500 mt-2">
+            Las carpetas con estos nombres serán ignoradas durante el escaneo
+          </p>
         </div>
 
         <button
@@ -465,6 +538,14 @@ export function DuplicateFinder() {
                 }}
               ></div>
             </div>
+            {excludedCount > 0 && (
+              <div className="mt-3 flex items-center gap-2 text-orange-600">
+                <FolderX className="w-4 h-4" />
+                <span className="text-sm font-medium">
+                  {excludedCount} {excludedCount === 1 ? 'directorio excluido' : 'directorios excluidos'}
+                </span>
+              </div>
+            )}
           </div>
         )}
 
@@ -621,11 +702,10 @@ export function DuplicateFinder() {
                     {group.files.map((file, fileIndex) => (
                       <div
                         key={fileIndex}
-                        className={`flex items-center gap-3 p-3 rounded-lg transition-all duration-200 ${
-                          selectedFiles.has(file.path)
-                            ? 'bg-blue-100 border-2 border-blue-400'
-                            : 'bg-white border border-slate-200 hover:border-slate-300'
-                        }`}
+                        className={`flex items-center gap-3 p-3 rounded-lg transition-all duration-200 ${selectedFiles.has(file.path)
+                          ? 'bg-blue-100 border-2 border-blue-400'
+                          : 'bg-white border border-slate-200 hover:border-slate-300'
+                          }`}
                       >
                         <input
                           type="checkbox"
