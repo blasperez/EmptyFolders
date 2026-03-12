@@ -112,8 +112,8 @@ button { font: inherit; }
   width: clamp(96px, 10vw, 130px);
   height: auto;
   filter:
-    drop-shadow(-12px 14px 0 rgba(6, 6, 6, 0.34))
-    drop-shadow(-16px 20px 6px rgba(6, 6, 6, 0.22));
+    drop-shadow(-6px 7px 10px rgba(6, 6, 6, 0.26))
+    drop-shadow(-10px 12px 22px rgba(6, 6, 6, 0.16));
 }
 .executive-nav {
   display: flex;
@@ -827,8 +827,8 @@ body.show-back-to-top .back-to-top {
   width: 84px;
   height: auto;
   filter:
-    drop-shadow(-10px 12px 0 rgba(6, 6, 6, 0.34))
-    drop-shadow(-14px 18px 6px rgba(6, 6, 6, 0.22));
+    drop-shadow(-5px 6px 8px rgba(6, 6, 6, 0.26))
+    drop-shadow(-8px 10px 18px rgba(6, 6, 6, 0.16));
 }
 .executive-footer__brand strong {
   display: block;
