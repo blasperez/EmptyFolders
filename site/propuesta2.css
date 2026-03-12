@@ -141,9 +141,8 @@ button { font: inherit; }
 .executive-brand img {
   width: clamp(100px, 10vw, 136px);
   height: auto;
-  filter:
-    drop-shadow(-6px 7px 10px rgba(7, 7, 7, 0.28))
-    drop-shadow(-10px 12px 22px rgba(7, 7, 7, 0.18));
+  -webkit-filter: drop-shadow(5px 5px 5px #222);
+  filter: drop-shadow(5px 5px 5px #222);
 }
 .executive-nav {
   display: flex;
@@ -961,9 +960,8 @@ body.show-back-to-top .back-to-top {
 .executive-footer__brand img {
   width: 84px;
   height: auto;
-  filter:
-    drop-shadow(-5px 6px 8px rgba(7, 7, 7, 0.28))
-    drop-shadow(-8px 10px 18px rgba(7, 7, 7, 0.18));
+  -webkit-filter: drop-shadow(5px 5px 5px #222);
+  filter: drop-shadow(5px 5px 5px #222);
 }
 .executive-footer__brand strong {
   display: block;
