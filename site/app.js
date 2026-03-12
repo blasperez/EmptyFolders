@@ -13,28 +13,56 @@ const statusNode = document.querySelector("[data-form-status]");
 const fileInput = document.querySelector('input[name="supportingDocument"]');
 const fileNameNode = document.querySelector("[data-file-name]");
 const currentLanguage = document.documentElement.lang.startsWith("es") ? "es" : "en";
-const initialServiceFromQuery = new URLSearchParams(window.location.search).get("service");
+const urlParams = new URLSearchParams(window.location.search);
+const initialServiceFromQuery = urlParams.get("service");
 const defaultHomeTarget = currentLanguage === "es" ? "propuesta1-es" : "propuesta1";
-const homeTarget = new URLSearchParams(window.location.search).get("home") || defaultHomeTarget;
+const homeTarget = urlParams.get("home") || defaultHomeTarget;
 const isStaticPreview =
   window.location.protocol === "file:" ||
   window.location.hostname.endsWith("github.io") ||
   !window.location.hostname ||
   window.location.pathname.includes("/proyectoMJ/");
 
+function rewriteLinks(prefixes, nextBase) {
+  document.querySelectorAll("a[href]").forEach((link) => {
+    const href = link.getAttribute("href") || "";
+    const matchedPrefix = prefixes.find((prefix) => href.startsWith(prefix));
+    if (!matchedPrefix) {
+      return;
+    }
+
+    link.setAttribute("href", `${nextBase}${href.slice(matchedPrefix.length)}`);
+  });
+}
+
+function getLocalizedHomeTarget(language) {
+  if (language === "es") {
+    return homeTarget.endsWith("-es") ? homeTarget : `${homeTarget}-es`;
+  }
+
+  return homeTarget.endsWith("-es") ? homeTarget.slice(0, -3) : homeTarget;
+}
+
 if (homeTarget) {
   const homeBase = `./${homeTarget}.html`;
-  document
-    .querySelectorAll('a[href^="./propuesta5.html#"], a[href^="./propuesta5-es.html#"]')
-    .forEach((link) => {
+  const localizedPrefixes =
+    currentLanguage === "es"
+      ? ["./minimal-es.html", "./propuesta1-es.html", "./propuesta5-es.html"]
+      : ["./minimal.html", "./propuesta1.html", "./propuesta5.html"];
+
+  rewriteLinks(localizedPrefixes, homeBase);
+
+  if (window.location.pathname.endsWith("/minimal-services.html") || window.location.pathname.endsWith("/minimal-services-es.html")) {
+    document.querySelectorAll(".language-switch__link").forEach((link) => {
       const href = link.getAttribute("href") || "";
-      const hashIndex = href.indexOf("#");
-      if (hashIndex === -1) {
-        return;
+      if (href.includes("minimal-services-es.html")) {
+        link.setAttribute("href", `./minimal-services-es.html?home=${getLocalizedHomeTarget("es")}`);
       }
-      const hash = href.slice(hashIndex);
-      link.setAttribute("href", `${homeBase}${hash}`);
+      if (href.includes("minimal-services.html") && !href.includes("minimal-services-es.html")) {
+        link.setAttribute("href", `./minimal-services.html?home=${getLocalizedHomeTarget("en")}`);
+      }
     });
+  }
 }
 
 const uiText = {
