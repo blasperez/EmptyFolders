@@ -109,10 +109,15 @@ button { font: inherit; }
   min-height: 110px;
 }
 .executive-brand img {
-  width: clamp(96px, 10vw, 130px);
-  height: auto;
-  -webkit-filter: drop-shadow(5px 5px 5px #222);
-  filter: drop-shadow(5px 5px 5px #222);
+  width: 200px;
+  height: 50px;
+  object-fit: contain;
+  -webkit-filter:
+    drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.4))
+    drop-shadow(0px 7px 13px rgba(0, 0, 0, 0.3));
+  filter:
+    drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.4))
+    drop-shadow(0px 7px 13px rgba(0, 0, 0, 0.3));
 }
 .executive-nav {
   display: flex;
@@ -253,6 +258,8 @@ button { font: inherit; }
   color: var(--obsidian);
   clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
   box-shadow: var(--shadow-soft);
+  -webkit-filter: drop-shadow(5px 5px 5px #222);
+  filter: drop-shadow(5px 5px 5px #222);
   opacity: 0;
   visibility: hidden;
   transform: translateY(12px);
@@ -836,10 +843,15 @@ body.show-back-to-top .back-to-top {
   gap: 16px;
 }
 .executive-footer__brand img {
-  width: 84px;
-  height: auto;
-  -webkit-filter: drop-shadow(5px 5px 5px #222);
-  filter: drop-shadow(5px 5px 5px #222);
+  width: 200px;
+  height: 50px;
+  object-fit: contain;
+  -webkit-filter:
+    drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.4))
+    drop-shadow(0px 7px 13px rgba(0, 0, 0, 0.3));
+  filter:
+    drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.4))
+    drop-shadow(0px 7px 13px rgba(0, 0, 0, 0.3));
 }
 .executive-footer__brand strong {
   display: block;

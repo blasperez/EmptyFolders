@@ -271,6 +271,8 @@ body.menu-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotat
   color: var(--graphite-950);
   clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
   box-shadow: var(--shadow-md);
+  -webkit-filter: drop-shadow(5px 5px 5px #222);
+  filter: drop-shadow(5px 5px 5px #222);
   opacity: 0;
   visibility: hidden;
   transform: translateY(12px);
