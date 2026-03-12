@@ -111,6 +111,9 @@ button { font: inherit; }
 .executive-brand img {
   width: clamp(96px, 10vw, 130px);
   height: auto;
+  filter:
+    drop-shadow(0 6px 10px rgba(0, 0, 0, 0.18))
+    drop-shadow(0 14px 22px rgba(183, 146, 63, 0.18));
 }
 .executive-nav {
   display: flex;
@@ -801,7 +804,13 @@ body.show-back-to-top .back-to-top {
   align-items: center;
   gap: 16px;
 }
-.executive-footer__brand img { width: 84px; height: auto; }
+.executive-footer__brand img {
+  width: 84px;
+  height: auto;
+  filter:
+    drop-shadow(0 6px 10px rgba(0, 0, 0, 0.18))
+    drop-shadow(0 14px 22px rgba(183, 146, 63, 0.18));
+}
 .executive-footer__brand strong {
   display: block;
   color: var(--white);

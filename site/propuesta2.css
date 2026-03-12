@@ -141,6 +141,9 @@ button { font: inherit; }
 .executive-brand img {
   width: clamp(100px, 10vw, 136px);
   height: auto;
+  filter:
+    drop-shadow(0 6px 10px rgba(0, 0, 0, 0.2))
+    drop-shadow(0 14px 24px rgba(182, 123, 36, 0.22));
 }
 .executive-nav {
   display: flex;
@@ -923,7 +926,13 @@ body.show-back-to-top .back-to-top {
   align-items: center;
   gap: 16px;
 }
-.executive-footer__brand img { width: 84px; height: auto; }
+.executive-footer__brand img {
+  width: 84px;
+  height: auto;
+  filter:
+    drop-shadow(0 6px 10px rgba(0, 0, 0, 0.2))
+    drop-shadow(0 14px 24px rgba(182, 123, 36, 0.22));
+}
 .executive-footer__brand strong {
   display: block;
   color: var(--black);
