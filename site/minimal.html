@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Movil Jaguar USA delivers cross-border freight coordination with a corporate-grade website, animated navigation and a live quote form."
+    />
+    <title>Movil Jaguar USA | Minimal Corporate Home</title>
+    <link rel="stylesheet" href="./minimal.css" />
+    <script defer src="./app.js"></script>
+  </head>
+  <body>
+    <div class="ambient ambient--gold" aria-hidden="true"></div>
+    <div class="ambient ambient--emerald" aria-hidden="true"></div>
+
+    <div class="topbar">
+      <div class="container topbar__inner">
+        <p>
+          <strong>Dispatch & Control Tower:</strong>
+          <a href="tel:+13055550148">+1 (305) 555-0148</a>
+        </p>
+        <div class="topbar__tools">
+          <p>Mexico | USA | Canada cross-border freight lanes.</p>
+          <div class="language-switch" aria-label="Language switch">
+            <span class="language-switch__label">Language</span>
+            <a class="language-switch__link is-active" href="./minimal.html">EN</a>
+            <a class="language-switch__link" href="./minimal-es.html">ES</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <header class="site-header" data-header>
+      <div class="container site-header__inner">
+        <a class="brand" href="#home" aria-label="Movil Jaguar USA home">
+          <span class="brand__mark">MJ</span>
+          <span class="brand__copy">
+            <strong>Movil Jaguar</strong>
+            <span>USA</span>
+            <small>Mexico | USA | Canada</small>
+          </span>
+        </a>
+
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="primary-navigation"
+          data-nav-toggle
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav class="primary-nav" id="primary-navigation" data-nav>
+          <ul class="primary-nav__list">
+            <li><a href="#home">Home</a></li>
+            <li class="primary-nav__item primary-nav__item--panel" data-panel-parent>
+              <button class="nav-panel-toggle" type="button" aria-expanded="false" data-panel-toggle>
+                Services
+              </button>
+              <div class="mega-panel" data-panel>
+                <a href="#services" data-service-select="ftl">Full Truckload</a>
+                <a href="#services" data-service-select="ltl">Less Than Truckload</a>
+                <a href="#services" data-service-select="drayage">Drayage</a>
+                <a href="#services" data-service-select="courier">Courier</a>
+                <a href="#services" data-service-select="insurance">Cargo Insurance</a>
+                <a href="./minimal-services.html">All Services</a>
+              </div>
+            </li>
+            <li><a href="#coverage">Coverage</a></li>
+            <li><a href="#support">Support</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+
+          <a class="button button--solid nav-cta" href="#quote">Get a quote</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <div class="hero__backdrop"></div>
+        <div class="container hero__grid">
+          <div class="hero__copy" data-reveal>
+            <p class="eyebrow">International Freight Services</p>
+            <h1>
+              Cross-border freight execution for
+              <span>Mexico, USA and Canada.</span>
+            </h1>
+            <p class="hero__lede">
+              Dedicated equipment, responsive dispatch and freight coordination for shippers moving
+              cargo across North America with one serious operating partner.
+            </p>
+            <div class="hero__actions">
+              <a class="button button--solid" href="#quote">Request a quote</a>
+              <a class="button button--ghost" href="#services">Explore services</a>
+            </div>
+            <div class="lane-pills">
+              <span>Dry Van Capacity</span>
+              <span>Cross-Border Lanes</span>
+              <span>Time-Critical Moves</span>
+              <span>Customs Support</span>
+            </div>
+          </div>
+
+          <div class="hero__visual" data-reveal data-reveal-delay="120">
+            <div class="hero-card hero-card--metric">
+              <p>Primary corridor</p>
+              <strong>U.S. / MX / CA</strong>
+              <span>One connected operating model</span>
+            </div>
+
+            <div class="hero-card hero-card--logo">
+              <img src="./assets/images/brand-logo.png" alt="Movil Jaguar USA logo" />
+            </div>
+
+            <figure class="hero__image-shell">
+              <img src="./assets/images/brand-truck-green.jpg" alt="Movil Jaguar USA green truck" />
+            </figure>
+
+            <div class="hero-metric-strip">
+              <article>
+                <strong data-count="24">24</strong>
+                <span>Hour dispatch availability</span>
+              </article>
+              <article>
+                <strong data-count="3">3</strong>
+                <span>Country reach across North America</span>
+              </article>
+              <article>
+                <strong data-count="100">100</strong>
+                <span>Percent brand-aligned presentation</span>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="capability-band" aria-label="Capability band">
+        <div class="capability-track">
+          <span>Dedicated Dry Van</span>
+          <span>Cross-Border Coordination</span>
+          <span>Expedited Response</span>
+          <span>Warehouse to Dock</span>
+          <span>Quote Turnaround</span>
+          <span>Insurance Intake</span>
+        </div>
+        <div class="capability-track" aria-hidden="true">
+          <span>Dedicated Dry Van</span>
+          <span>Cross-Border Coordination</span>
+          <span>Expedited Response</span>
+          <span>Warehouse to Dock</span>
+          <span>Quote Turnaround</span>
+          <span>Insurance Intake</span>
+        </div>
+      </section>
+
+      <section class="section section--services" id="services">
+        <div class="container">
+          <div class="section-heading" data-reveal>
+            <p class="eyebrow">Service architecture</p>
+            <h2>Freight services built for active cross-border execution.</h2>
+            <p>
+              Movil Jaguar USA supports dedicated truckload, partial shipments, drayage, expedited
+              courier and value-added logistics support for freight moving between Mexico, the
+              United States and Canada.
+            </p>
+            <div class="section-actions">
+              <a class="button button--solid" href="./minimal-services.html">View All Services</a>
+              <a class="section-link" href="#quote">Request a Quote</a>
+            </div>
+          </div>
+
+          <div class="services-grid">
+            <article class="service-card" data-reveal>
+              <img src="./assets/images/service-ftl.jpg" alt="Full truckload service" />
+              <div class="service-card__content">
+                <p>01</p>
+                <h3>Full Truckload</h3>
+                <p>Dedicated units for exclusive freight moves with the right equipment for each lane.</p>
+                <button class="text-link" type="button" data-service-select="ftl">
+                  Quote FTL
+                </button>
+              </div>
+            </article>
+
+            <article class="service-card" data-reveal data-reveal-delay="70">
+              <img src="./assets/images/service-ltl.jpg" alt="LTL service" />
+              <div class="service-card__content">
+                <p>02</p>
+                <h3>Less Than Truckload</h3>
+                <p>Flexible LTL solutions for palletized freight, special handling and time-critical delivery windows.</p>
+                <button class="text-link" type="button" data-service-select="ltl">
+                  Quote LTL
+                </button>
+              </div>
+            </article>
+
+            <article class="service-card" data-reveal data-reveal-delay="140">
+              <img src="./assets/images/service-drayage.jpg" alt="Drayage service" />
+              <div class="service-card__content">
+                <p>03</p>
+                <h3>Drayage</h3>
+                <p>Short-haul container moves between ports, rail ramps, warehouses and customer facilities.</p>
+                <button class="text-link" type="button" data-service-select="drayage">
+                  Quote Drayage
+                </button>
+              </div>
+            </article>
+
+            <article class="service-card" data-reveal data-reveal-delay="210">
+              <img src="./assets/images/service-courier.jpg" alt="Courier service" />
+              <div class="service-card__content">
+                <p>04</p>
+                <h3>Courier & Expedited</h3>
+                <p>Specialized courier, sprinter and urgent delivery options for smaller and faster moves.</p>
+                <button class="text-link" type="button" data-service-select="courier">
+                  Quote Courier
+                </button>
+              </div>
+            </article>
+
+            <article class="service-card service-card--wide" data-reveal data-reveal-delay="280">
+              <img src="./assets/images/brand-fleet.jpg" alt="Movil Jaguar USA fleet" />
+              <div class="service-card__content">
+                <p>05</p>
+                <h3>Additional logistics support</h3>
+                <p>
+                  Cargo insurance, 24/7 tracking and customs assistance reinforce each shipment
+                  before, during and after the move.
+                </p>
+                <a class="text-link" href="./minimal-services.html#additional">View support services</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--coverage" id="coverage">
+        <div class="container coverage-grid">
+          <div class="coverage__media" data-reveal>
+            <video src="./assets/videos/brand-road.mp4" autoplay muted loop playsinline preload="metadata" poster="./assets/images/brand-road.jpg" aria-label="Movil Jaguar USA truck on the road"></video>
+          </div>
+
+          <div class="coverage__copy" data-reveal data-reveal-delay="100">
+            <p class="eyebrow">North American coverage</p>
+            <h2>One operating model for Mexico, USA and Canada freight lanes.</h2>
+            <p>
+              From dispatch planning to border coordination and final delivery follow-up, the team
+              is positioned to support customers that need consistent communication across the three
+              North American markets.
+            </p>
+
+            <div class="advantage-grid">
+              <article>
+                <strong>Dedicated dispatch</strong>
+                <p>Operational follow-up for pickups, in-transit milestones, delays and escalation handling.</p>
+              </article>
+              <article>
+                <strong>Border coordination</strong>
+                <p>Support for documentation flow, crossing requirements and customs-related communication.</p>
+              </article>
+              <article>
+                <strong>Shipment visibility</strong>
+                <p>Real-time shipment monitoring and updates aligned with customer and consignee expectations.</p>
+              </article>
+              <article>
+                <strong>Commercial responsiveness</strong>
+                <p>Quote intake designed to move quickly from request to lane review and next-step follow-up.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--support" id="support">
+        <div class="container">
+          <div class="section-heading section-heading--center" data-reveal>
+            <p class="eyebrow">Operational support</p>
+            <h2>More than linehaul capacity: support layers that keep freight under control.</h2>
+            <p>
+              The operation is not limited to moving the trailer. Additional services help reduce
+              risk, improve communication and keep international freight moving without avoidable
+              friction.
+            </p>
+          </div>
+
+          <div class="support-grid">
+            <article class="support-card" data-reveal>
+              <span>01</span>
+              <strong>Cargo insurance</strong>
+              <p>Protection options for higher-value shipments and additional support during claims documentation.</p>
+            </article>
+            <article class="support-card" data-reveal data-reveal-delay="80">
+              <span>02</span>
+              <strong>24/7 tracking</strong>
+              <p>Shipment visibility and status updates built around active dispatch communication.</p>
+            </article>
+            <article class="support-card" data-reveal data-reveal-delay="160">
+              <span>03</span>
+              <strong>Customs assistance</strong>
+              <p>Support for border documentation flow and communication between origin, customs and destination.</p>
+            </article>
+            <article class="support-card" data-reveal data-reveal-delay="240">
+              <span>04</span>
+              <strong>Critical response</strong>
+              <p>Escalation management for urgent freight, time-sensitive lanes and special handling requests.</p>
+            </article>
+          </div>
+
+          <div class="section-actions section-actions--center" data-reveal data-reveal-delay="320">
+            <a class="button button--solid" href="./minimal-services.html">Open Full Service Catalog</a>
+            <a class="button button--ghost" href="#quote">Request a Quote</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--quote" id="quote">
+        <div class="container quote-layout">
+          <div class="quote-intro" data-reveal>
+            <p class="eyebrow">Get a quote</p>
+            <h2>One quote form, five service paths, direct email delivery.</h2>
+            <p>
+              This mirrors the operational logic of the reference site, but with cleaner spacing,
+              stronger CTA hierarchy, better animation and direct SMTP delivery support.
+            </p>
+
+            <div class="quote-steps">
+              <article>
+                <span>01</span>
+                <div>
+                  <strong>Select the mode</strong>
+                  <p>FTL, LTL, Drayage, Courier or Cargo Insurance.</p>
+                </div>
+              </article>
+              <article>
+                <span>02</span>
+                <div>
+                  <strong>Complete only the relevant fields</strong>
+                  <p>The form adapts so the request stays sharp and sales-ready.</p>
+                </div>
+              </article>
+              <article>
+                <span>03</span>
+                <div>
+                  <strong>Deliver to the inbox</strong>
+                  <p>The website sends the submission through the backend email endpoint.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <form class="quote-form" id="quoteForm" data-reveal data-reveal-delay="100" novalidate>
+            <input type="hidden" name="serviceType" value="ftl" />
+            <input class="company-trap" type="text" name="companyTrap" tabindex="-1" autocomplete="off" />
+
+            <div class="service-switch" role="tablist" aria-label="Service type">
+              <button class="service-switch__button is-active" type="button" data-service-select="ftl">Full Truckload</button>
+              <button class="service-switch__button" type="button" data-service-select="ltl">LTL</button>
+              <button class="service-switch__button" type="button" data-service-select="drayage">Drayage</button>
+              <button class="service-switch__button" type="button" data-service-select="courier">Courier</button>
+              <button class="service-switch__button" type="button" data-service-select="insurance">Insurance</button>
+            </div>
+
+            <div class="form-grid">
+              <label><span>Pickup location</span><input type="text" name="pickupLocation" placeholder="City, state or ZIP" required /></label>
+              <label>
+                <span>Pickup country</span>
+                <select name="pickupCountry" required>
+                  <option value="">Select</option>
+                  <option value="United States">United States</option>
+                  <option value="Mexico">Mexico</option>
+                  <option value="Canada">Canada</option>
+                </select>
+              </label>
+              <label><span>Delivery location</span><input type="text" name="deliveryLocation" placeholder="City, state or ZIP" required /></label>
+              <label>
+                <span>Delivery country</span>
+                <select name="deliveryCountry" required>
+                  <option value="">Select</option>
+                  <option value="United States">United States</option>
+                  <option value="Mexico">Mexico</option>
+                  <option value="Canada">Canada</option>
+                </select>
+              </label>
+              <label><span>Full name</span><input type="text" name="fullName" placeholder="Contact name" required /></label>
+              <label><span>Company</span><input type="text" name="companyName" placeholder="Business name" required /></label>
+              <label><span>Business email</span><input type="email" name="email" placeholder="name@company.com" required /></label>
+              <label><span>Phone</span><input type="tel" name="phone" placeholder="+1 305 555 0148" required /></label>
+              <label>
+                <span>Preferred contact</span>
+                <select name="preferredContact">
+                  <option value="Email">Email</option>
+                  <option value="Phone">Phone</option>
+                  <option value="WhatsApp">WhatsApp</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="service-panels">
+              <section class="service-panel is-active" data-service-panel="ftl">
+                <div class="form-grid form-grid--service">
+                  <label>
+                    <span>Equipment type</span>
+                    <select name="equipmentType">
+                      <option value="">Select equipment</option>
+                      <option value="Flatbed">Flatbed</option>
+                      <option value="Dry Van">Dry Van</option>
+                      <option value="Reefer">Reefer</option>
+                      <option value="Power Only">Power Only</option>
+                      <option value="Hot Shot">Hot Shot</option>
+                      <option value="Sprinter Van">Sprinter Van</option>
+                      <option value="Box Truck">Box Truck</option>
+                      <option value="Hazmat">Hazmat</option>
+                    </select>
+                  </label>
+                  <label>
+                    <span>Shipping frequency</span>
+                    <select name="shippingFrequency">
+                      <option value="">Select frequency</option>
+                      <option value="One time">One time</option>
+                      <option value="Daily">Daily</option>
+                      <option value="Weekly">Weekly</option>
+                      <option value="Monthly">Monthly</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </label>
+                </div>
+                <label>
+                  <span>Cargo details</span>
+                  <textarea name="cargoDetails" rows="5" placeholder="Describe commodity, handling instructions or lane details"></textarea>
+                </label>
+              </section>
+
+              <section class="service-panel" data-service-panel="ltl" hidden>
+                <div class="form-grid form-grid--service">
+                  <label><span>Number of pallets</span><input type="number" min="1" name="palletCount" placeholder="8" /></label>
+                  <label><span>Weight</span><input type="number" min="1" step="0.01" name="weight" placeholder="1800" /></label>
+                  <label><span>Weight unit</span><select name="weightUnit"><option value="">Select unit</option><option value="KG">KG</option><option value="LBS">LBS</option></select></label>
+                  <label><span>Dimensions</span><input type="text" name="dimensions" placeholder="48 x 40 x 60" /></label>
+                  <label><span>Measure unit</span><select name="measurementUnit"><option value="">Select unit</option><option value="MTS">MTS</option><option value="FT">FT</option><option value="CMTS">CMTS</option><option value="INCHES">INCHES</option></select></label>
+                  <label><span>Service level</span><select name="ltlServiceLevel"><option value="">Select level</option><option value="Standard">Standard</option><option value="Guaranteed">Guaranteed</option><option value="Time-Critical">Time-Critical</option></select></label>
+                  <label><span>Shipping frequency</span><select name="shippingFrequency"><option value="">Select frequency</option><option value="One time">One time</option><option value="Daily">Daily</option><option value="Weekly">Weekly</option><option value="Monthly">Monthly</option><option value="Other">Other</option></select></label>
+                </div>
+                <label><span>Commodity description</span><textarea name="commodityDescription" rows="5" placeholder="Describe the freight, packaging and special instructions"></textarea></label>
+              </section>
+
+              <section class="service-panel" data-service-panel="drayage" hidden>
+                <div class="form-grid form-grid--service">
+                  <label><span>Weight</span><input type="number" min="1" step="0.01" name="weight" placeholder="21000" /></label>
+                  <label><span>Weight unit</span><select name="weightUnit"><option value="">Select unit</option><option value="KG">KG</option><option value="LBS">LBS</option></select></label>
+                  <label><span>Container type</span><select name="containerType"><option value="">Select container</option><option value="Standard">Standard</option><option value="Open Top">Open Top</option><option value="Flat Rack">Flat Rack</option><option value="Reefer">Reefer</option></select></label>
+                  <label><span>Shipping frequency</span><select name="shippingFrequency"><option value="">Select frequency</option><option value="One time">One time</option><option value="Daily">Daily</option><option value="Weekly">Weekly</option><option value="Monthly">Monthly</option><option value="Other">Other</option></select></label>
+                </div>
+                <label><span>Cargo details</span><textarea name="cargoDetails" rows="5" placeholder="Port pair, ready date, chassis, customs or handling notes"></textarea></label>
+              </section>
+
+              <section class="service-panel" data-service-panel="courier" hidden>
+                <div class="form-grid form-grid--service">
+                  <label><span>Number of packages</span><input type="number" min="1" name="packageCount" placeholder="14" /></label>
+                  <label><span>Weight</span><input type="number" min="1" step="0.01" name="weight" placeholder="240" /></label>
+                  <label><span>Weight unit</span><select name="weightUnit"><option value="">Select unit</option><option value="KG">KG</option><option value="LBS">LBS</option></select></label>
+                  <label><span>Dimensions</span><input type="text" name="dimensions" placeholder="18 x 20 x 14" /></label>
+                  <label><span>Measure unit</span><select name="measurementUnit"><option value="">Select unit</option><option value="MTS">MTS</option><option value="FT">FT</option><option value="CMTS">CMTS</option><option value="INCHES">INCHES</option></select></label>
+                  <label><span>Service level</span><select name="courierServiceLevel"><option value="">Select level</option><option value="Express">Express</option><option value="Overnight">Overnight</option></select></label>
+                  <label><span>Shipping frequency</span><select name="shippingFrequency"><option value="">Select frequency</option><option value="One time">One time</option><option value="Daily">Daily</option><option value="Weekly">Weekly</option><option value="Monthly">Monthly</option><option value="Other">Other</option></select></label>
+                </div>
+                <label><span>Commodity description</span><textarea name="commodityDescription" rows="5" placeholder="Describe package type, urgency and handling restrictions"></textarea></label>
+              </section>
+
+              <section class="service-panel" data-service-panel="insurance" hidden>
+                <div class="form-grid form-grid--service">
+                  <label><span>Weight</span><input type="number" min="1" step="0.01" name="weight" placeholder="5000" /></label>
+                  <label><span>Weight unit</span><select name="weightUnit"><option value="">Select unit</option><option value="KG">KG</option><option value="LBS">LBS</option></select></label>
+                  <label><span>Estimated cargo value</span><input type="text" name="estimatedValue" placeholder="USD 95,000" /></label>
+                </div>
+                <label><span>Cargo details</span><textarea name="cargoDetails" rows="5" placeholder="Describe the commodity, declared value and support context"></textarea></label>
+                <label class="file-input"><span>Supporting document</span><input type="file" name="supportingDocument" accept=".pdf,.jpg,.jpeg,.png,.webp" /><small data-file-name>No file selected</small></label>
+              </section>
+            </div>
+
+            <label class="checkbox">
+              <input type="checkbox" name="termsAccepted" required />
+              <span>I authorize Movil Jaguar USA to contact me regarding this quote request and accept the privacy policy terms.</span>
+            </label>
+            <label class="checkbox checkbox--optional">
+              <input type="checkbox" name="communicationsAccepted" />
+              <span>I want to receive follow-up updates and service-related communications.</span>
+            </label>
+
+            <div class="form-actions">
+              <button class="button button--solid button--wide" type="submit">Send quote request</button>
+              <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="section section--faq" id="faq">
+        <div class="container faq-layout">
+          <div class="section-heading" data-reveal>
+            <p class="eyebrow">Operational FAQ</p>
+            <h2>Answers for the first commercial and operational questions.</h2>
+            <p>
+              These are the questions most shippers ask before requesting a lane review or quote.
+            </p>
+          </div>
+
+          <div class="accordion" data-reveal data-reveal-delay="100">
+            <article class="accordion__item is-open">
+              <button class="accordion__trigger" type="button" data-accordion-trigger aria-expanded="true">
+                Do you support freight between Mexico, USA and Canada?
+              </button>
+              <div class="accordion__panel">
+                <p>
+                  Yes. Movil Jaguar USA is positioned around cross-border freight lanes connecting
+                  Mexico, the United States and Canada with one commercial contact point.
+                </p>
+              </div>
+            </article>
+
+            <article class="accordion__item">
+              <button class="accordion__trigger" type="button" data-accordion-trigger aria-expanded="false">
+                Can I request FTL, LTL, drayage and courier through the same team?
+              </button>
+              <div class="accordion__panel" hidden>
+                <p>
+                  Yes. The service portfolio covers dedicated truckload, consolidated freight,
+                  drayage, expedited courier and additional support services under one operation.
+                </p>
+              </div>
+            </article>
+
+            <article class="accordion__item">
+              <button class="accordion__trigger" type="button" data-accordion-trigger aria-expanded="false">
+                Can you support urgent or special-handling shipments?
+              </button>
+              <div class="accordion__panel" hidden>
+                <p>
+                  Yes. Depending on the mode, the operation can support hot shot, reefer, hazmat,
+                  oversized, airport-related and other time-sensitive or restricted freight needs.
+                </p>
+              </div>
+            </article>
+
+            <article class="accordion__item">
+              <button class="accordion__trigger" type="button" data-accordion-trigger aria-expanded="false">
+                How are quote requests delivered?
+              </button>
+              <div class="accordion__panel" hidden>
+                <p>
+                  The quote form posts to the backend and can deliver requests directly by email once
+                  SMTP credentials are connected. Until then, it remains available in preview mode.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__media">
+        <video src="./assets/videos/brand-road.mp4" autoplay muted loop playsinline preload="metadata" poster="./assets/images/brand-road.jpg" aria-hidden="true"></video>
+      </div>
+      <div class="container site-footer__inner">
+        <div>
+          <a class="brand brand--footer" href="#home">
+            <span class="brand__mark">MJ</span>
+            <span class="brand__copy">
+              <strong>Movil Jaguar</strong>
+              <span>USA</span>
+            </span>
+          </a>
+          <p>
+            Cross-border freight coordination with dedicated capacity, responsive dispatch and
+            support services designed for Mexico, USA and Canada lanes.
+          </p>
+        </div>
+
+        <div>
+          <strong>Quick links</strong>
+          <ul class="footer-links">
+            <li><a href="#services">Services</a></li>
+            <li><a href="./minimal-services.html">All Services</a></li>
+            <li><a href="#coverage">Coverage</a></li>
+            <li><a href="#support">Support</a></li>
+            <li><a href="#quote">Quote</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <strong>Contact</strong>
+          <ul class="footer-links">
+            <li><a href="tel:+13055550148">+1 (305) 555-0148</a></li>
+            <li><a href="mailto:hello@moviljaguarusa.com">hello@moviljaguarusa.com</a></li>
+            <li>U.S. - Mexico - Canada</li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
+

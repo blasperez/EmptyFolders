@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Movil Jaguar USA presenta coordinacion de carga internacional con un sitio corporativo, navegacion animada y formulario de cotizacion activo."
+    />
+    <title>Movil Jaguar USA | Logistica Internacional</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script defer src="./app.js"></script>
+  </head>
+  <body>
+    <div class="ambient ambient--gold" aria-hidden="true"></div>
+    <div class="ambient ambient--emerald" aria-hidden="true"></div>
+
+    <div class="topbar">
+      <div class="container topbar__inner">
+        <p>
+          <strong>Despacho y Control Tower:</strong>
+          <a href="tel:+13055550148">+1 (305) 555-0148</a>
+        </p>
+        <div class="topbar__tools">
+          <p>Mexico | USA | Canada en operaciones cross-border.</p>
+          <div class="language-switch" aria-label="Language switch">
+            <span class="language-switch__label">Idioma</span>
+            <a class="language-switch__link" href="./index.html">EN</a>
+            <a class="language-switch__link is-active" href="./es.html">ES</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <header class="site-header" data-header>
+      <div class="container site-header__inner">
+        <a class="brand" href="#home" aria-label="Movil Jaguar USA inicio">
+          <span class="brand__mark">MJ</span>
+          <span class="brand__copy">
+            <strong>Movil Jaguar</strong>
+            <span>USA</span>
+            <small>Mexico | USA | Canada</small>
+          </span>
+        </a>
+
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="primary-navigation"
+          data-nav-toggle
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav class="primary-nav" id="primary-navigation" data-nav>
+          <ul class="primary-nav__list">
+            <li><a href="#home">Inicio</a></li>
+            <li class="primary-nav__item primary-nav__item--panel" data-panel-parent>
+              <button class="nav-panel-toggle" type="button" aria-expanded="false" data-panel-toggle>
+                Servicios
+              </button>
+              <div class="mega-panel" data-panel>
+                <a href="#services" data-service-select="ftl">Full Truckload</a>
+                <a href="#services" data-service-select="ltl">Carga Consolidada</a>
+                <a href="#services" data-service-select="drayage">Drayage</a>
+                <a href="#services" data-service-select="courier">Courier</a>
+                <a href="#services" data-service-select="insurance">Seguro de Carga</a>
+                <a href="./services-es.html">Todos los servicios</a>
+              </div>
+            </li>
+            <li><a href="#coverage">Cobertura</a></li>
+            <li><a href="#support">Soporte</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+
+          <a class="button button--solid nav-cta" href="#quote">Cotizar</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <div class="hero__backdrop"></div>
+        <div class="container hero__grid">
+          <div class="hero__copy" data-reveal>
+            <p class="eyebrow">Servicios Internacionales de Carga</p>
+            <h1>
+              Ejecucion de carga internacional para
+              <span>Mexico, USA y Canada.</span>
+            </h1>
+            <p class="hero__lede">
+              Equipo dedicado, despacho responsivo y coordinacion de carga para clientes que mueven
+              mercancia en Norteamerica con un solo socio operativo serio.
+            </p>
+            <div class="hero__actions">
+              <a class="button button--solid" href="#quote">Solicitar cotizacion</a>
+              <a class="button button--ghost" href="#services">Ver servicios</a>
+            </div>
+            <div class="lane-pills">
+              <span>Capacidad Dry Van</span>
+              <span>Rutas Cross-Border</span>
+              <span>Movimientos Urgentes</span>
+              <span>Soporte Aduanal</span>
+            </div>
+          </div>
+
+          <div class="hero__visual" data-reveal data-reveal-delay="120">
+            <div class="hero-card hero-card--metric">
+              <p>Corredor principal</p>
+              <strong>U.S. / MX / CA</strong>
+              <span>Un modelo operativo conectado</span>
+            </div>
+
+            <div class="hero-card hero-card--logo">
+              <img src="./assets/images/brand-logo.png" alt="Movil Jaguar USA logo" />
+            </div>
+
+            <figure class="hero__image-shell">
+              <img src="./assets/images/brand-truck-green.jpg" alt="Movil Jaguar USA green truck" />
+            </figure>
+
+            <div class="hero-metric-strip">
+              <article>
+                <strong data-count="24">24</strong>
+                <span>Horas de disponibilidad operativa</span>
+              </article>
+              <article>
+                <strong data-count="3">3</strong>
+                <span>Paises en cobertura comercial</span>
+              </article>
+              <article>
+                <strong data-count="100">100</strong>
+                <span>Por ciento alineado a la marca</span>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="capability-band" aria-label="Capability band">
+        <div class="capability-track">
+          <span>Dry Van Dedicado</span>
+          <span>Coordinacion Cross-Border</span>
+          <span>Respuesta Expedited</span>
+          <span>Warehouse to Dock</span>
+          <span>Tiempo de Cotizacion</span>
+          <span>Ingreso de Seguros</span>
+        </div>
+        <div class="capability-track" aria-hidden="true">
+          <span>Dry Van Dedicado</span>
+          <span>Coordinacion Cross-Border</span>
+          <span>Respuesta Expedited</span>
+          <span>Warehouse to Dock</span>
+          <span>Tiempo de Cotizacion</span>
+          <span>Ingreso de Seguros</span>
+        </div>
+      </section>
+
+      <section class="section section--services" id="services">
+        <div class="container">
+          <div class="section-heading" data-reveal>
+            <p class="eyebrow">Arquitectura de servicios</p>
+            <h2>Servicios de freight construidos para una ejecucion cross-border activa.</h2>
+            <p>
+              Movil Jaguar USA atiende carga completa, carga consolidada, drayage, courier
+              expedited y soporte logistico de valor agregado para embarques entre Mexico, Estados
+              Unidos y Canada.
+            </p>
+            <div class="section-actions">
+              <a class="button button--solid" href="./services-es.html">Ver Todos los Servicios</a>
+              <a class="section-link" href="#quote">Solicitar Cotizacion</a>
+            </div>
+          </div>
+
+          <div class="services-grid">
+            <article class="service-card" data-reveal>
+              <img src="./assets/images/service-ftl.jpg" alt="Full truckload service" />
+              <div class="service-card__content">
+                <p>01</p>
+                <h3>Full Truckload</h3>
+                <p>Unidades dedicadas para movimientos exclusivos con el equipo correcto para cada ruta.</p>
+                <button class="text-link" type="button" data-service-select="ftl">
+                  Cotizar FTL
+                </button>
+              </div>
+            </article>
+
+            <article class="service-card" data-reveal data-reveal-delay="70">
+              <img src="./assets/images/service-ltl.jpg" alt="LTL service" />
+              <div class="service-card__content">
+                <p>02</p>
+                <h3>Carga Consolidada</h3>
+                <p>Soluciones LTL para carga palletizada, manejo especial y ventanas criticas de entrega.</p>
+                <button class="text-link" type="button" data-service-select="ltl">
+                  Cotizar LTL
+                </button>
+              </div>
+            </article>
+
+            <article class="service-card" data-reveal data-reveal-delay="140">
+              <img src="./assets/images/service-drayage.jpg" alt="Drayage service" />
+              <div class="service-card__content">
+                <p>03</p>
+                <h3>Drayage</h3>
+                <p>Movimientos cortos de contenedor entre puertos, terminales ferroviarias, almacenes y destino.</p>
+                <button class="text-link" type="button" data-service-select="drayage">
+                  Cotizar Drayage
+                </button>
+              </div>
+            </article>
+
+            <article class="service-card" data-reveal data-reveal-delay="210">
+              <img src="./assets/images/service-courier.jpg" alt="Courier service" />
+              <div class="service-card__content">
+                <p>04</p>
+                <h3>Courier y Expedited</h3>
+                <p>Courier especializado, sprinter y opciones urgentes para movimientos pequenos y rapidos.</p>
+                <button class="text-link" type="button" data-service-select="courier">
+                  Cotizar Courier
+                </button>
+              </div>
+            </article>
+
+            <article class="service-card service-card--wide" data-reveal data-reveal-delay="280">
+              <img src="./assets/images/brand-fleet.jpg" alt="Movil Jaguar USA fleet" />
+              <div class="service-card__content">
+                <p>05</p>
+                <h3>Soporte logistico adicional</h3>
+                <p>
+                  Seguro de carga, rastreo 24/7 y asistencia aduanal refuerzan cada embarque antes,
+                  durante y despues del movimiento.
+                </p>
+                <a class="text-link" href="./services-es.html#additional">Ver servicios de soporte</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--coverage" id="coverage">
+        <div class="container coverage-grid">
+          <div class="coverage__media" data-reveal>
+            <video src="./assets/videos/brand-road.mp4" autoplay muted loop playsinline preload="metadata" poster="./assets/images/brand-road.jpg" aria-label="Movil Jaguar USA truck on the road"></video>
+          </div>
+
+          <div class="coverage__copy" data-reveal data-reveal-delay="100">
+            <p class="eyebrow">Cobertura en Norteamerica</p>
+            <h2>Un solo modelo operativo para rutas entre Mexico, USA y Canada.</h2>
+            <p>
+              Desde la planeacion del embarque hasta la coordinacion fronteriza y el seguimiento a
+              entrega, el equipo esta orientado a clientes que necesitan comunicacion consistente en
+              los tres mercados de Norteamerica.
+            </p>
+
+            <div class="advantage-grid">
+              <article>
+                <strong>Despacho dedicado</strong>
+                <p>Seguimiento operativo para recolecciones, hitos en transito, retrasos y escalaciones.</p>
+              </article>
+              <article>
+                <strong>Coordinacion fronteriza</strong>
+                <p>Soporte para flujo documental, requisitos de cruce y comunicacion relacionada con aduanas.</p>
+              </article>
+              <article>
+                <strong>Visibilidad del embarque</strong>
+                <p>Monitoreo y actualizaciones alineadas con lo que esperan cliente, consignatario y operador.</p>
+              </article>
+              <article>
+                <strong>Respuesta comercial</strong>
+                <p>La captura de cotizaciones esta pensada para mover rapido la solicitud hacia revision y seguimiento.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--support" id="support">
+        <div class="container">
+          <div class="section-heading section-heading--center" data-reveal>
+            <p class="eyebrow">Soporte operativo</p>
+            <h2>Mas que capacidad linehaul: capas de soporte para mantener la carga bajo control.</h2>
+            <p>
+              La operacion no termina cuando sale el trailer. Los servicios adicionales ayudan a
+              reducir riesgo, mejorar comunicacion y mantener la carga internacional en movimiento.
+            </p>
+          </div>
+
+          <div class="support-grid">
+            <article class="support-card" data-reveal>
+              <span>01</span>
+              <strong>Seguro de carga</strong>
+              <p>Opciones de proteccion para embarques de mayor valor y apoyo adicional en documentacion de reclamos.</p>
+            </article>
+            <article class="support-card" data-reveal data-reveal-delay="80">
+              <span>02</span>
+              <strong>Rastreo 24/7</strong>
+              <p>Visibilidad del embarque y actualizaciones de estado respaldadas por comunicacion activa de despacho.</p>
+            </article>
+            <article class="support-card" data-reveal data-reveal-delay="160">
+              <span>03</span>
+              <strong>Asistencia aduanal</strong>
+              <p>Soporte para flujo documental en frontera y comunicacion entre origen, aduana y destino.</p>
+            </article>
+            <article class="support-card" data-reveal data-reveal-delay="240">
+              <span>04</span>
+              <strong>Respuesta critica</strong>
+              <p>Gestion de escalaciones para carga urgente, rutas sensibles y requerimientos especiales de manejo.</p>
+            </article>
+          </div>
+
+          <div class="section-actions section-actions--center" data-reveal data-reveal-delay="320">
+            <a class="button button--solid" href="./services-es.html">Abrir Catalogo Completo</a>
+            <a class="button button--ghost" href="#quote">Solicitar Cotizacion</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--quote" id="quote">
+        <div class="container quote-layout">
+          <div class="quote-intro" data-reveal>
+            <p class="eyebrow">Solicita una cotizacion</p>
+            <h2>Un formulario, cinco caminos de servicio y entrega directa al correo.</h2>
+            <p>
+              Esto replica la logica operativa del sitio de referencia, pero con mejor espaciado,
+              una jerarquia comercial mas fuerte, mejor animacion y soporte directo para SMTP.
+            </p>
+
+            <div class="quote-steps">
+              <article>
+                <span>01</span>
+                <div>
+                  <strong>Selecciona el modo</strong>
+                  <p>FTL, LTL, Drayage, Courier o Seguro de Carga.</p>
+                </div>
+              </article>
+              <article>
+                <span>02</span>
+                <div>
+                  <strong>Completa solo los campos relevantes</strong>
+                  <p>El formulario se adapta para que la solicitud llegue clara y lista para ventas.</p>
+                </div>
+              </article>
+              <article>
+                <span>03</span>
+                <div>
+                  <strong>Entrega directa al inbox</strong>
+                  <p>El sitio envia la solicitud por medio del endpoint del backend.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <form class="quote-form" id="quoteForm" data-reveal data-reveal-delay="100" novalidate>
+            <input type="hidden" name="serviceType" value="ftl" />
+            <input class="company-trap" type="text" name="companyTrap" tabindex="-1" autocomplete="off" />
+
+            <div class="service-switch" role="tablist" aria-label="Tipo de servicio">
+              <button class="service-switch__button is-active" type="button" data-service-select="ftl">Full Truckload</button>
+              <button class="service-switch__button" type="button" data-service-select="ltl">LTL</button>
+              <button class="service-switch__button" type="button" data-service-select="drayage">Drayage</button>
+              <button class="service-switch__button" type="button" data-service-select="courier">Courier</button>
+              <button class="service-switch__button" type="button" data-service-select="insurance">Seguro</button>
+            </div>
+
+            <div class="form-grid">
+              <label><span>Origen</span><input type="text" name="pickupLocation" placeholder="Ciudad, estado o codigo postal" required /></label>
+              <label>
+                <span>Pais de origen</span>
+                <select name="pickupCountry" required>
+                  <option value="">Selecciona</option>
+                  <option value="United States">United States</option>
+                  <option value="Mexico">Mexico</option>
+                  <option value="Canada">Canada</option>
+                </select>
+              </label>
+              <label><span>Destino</span><input type="text" name="deliveryLocation" placeholder="Ciudad, estado o codigo postal" required /></label>
+              <label>
+                <span>Pais de destino</span>
+                <select name="deliveryCountry" required>
+                  <option value="">Selecciona</option>
+                  <option value="United States">United States</option>
+                  <option value="Mexico">Mexico</option>
+                  <option value="Canada">Canada</option>
+                </select>
+              </label>
+              <label><span>Nombre completo</span><input type="text" name="fullName" placeholder="Nombre de contacto" required /></label>
+              <label><span>Empresa</span><input type="text" name="companyName" placeholder="Nombre comercial" required /></label>
+              <label><span>Correo empresarial</span><input type="email" name="email" placeholder="nombre@empresa.com" required /></label>
+              <label><span>Telefono</span><input type="tel" name="phone" placeholder="+1 305 555 0148" required /></label>
+              <label>
+                <span>Contacto preferido</span>
+                <select name="preferredContact">
+                  <option value="Email">Correo</option>
+                  <option value="Phone">Telefono</option>
+                  <option value="WhatsApp">WhatsApp</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="service-panels">
+              <section class="service-panel is-active" data-service-panel="ftl">
+                <div class="form-grid form-grid--service">
+                  <label>
+                    <span>Tipo de equipo</span>
+                    <select name="equipmentType">
+                      <option value="">Selecciona equipo</option>
+                      <option value="Flatbed">Flatbed</option>
+                      <option value="Dry Van">Dry Van</option>
+                      <option value="Reefer">Reefer</option>
+                      <option value="Power Only">Power Only</option>
+                      <option value="Hot Shot">Hot Shot</option>
+                      <option value="Sprinter Van">Sprinter Van</option>
+                      <option value="Box Truck">Box Truck</option>
+                      <option value="Hazmat">Hazmat</option>
+                    </select>
+                  </label>
+                  <label>
+                    <span>Frecuencia de embarque</span>
+                    <select name="shippingFrequency">
+                      <option value="">Selecciona frecuencia</option>
+                      <option value="One time">Una sola vez</option>
+                      <option value="Daily">Diario</option>
+                      <option value="Weekly">Semanal</option>
+                      <option value="Monthly">Mensual</option>
+                      <option value="Other">Otro</option>
+                    </select>
+                  </label>
+                </div>
+                <label>
+                  <span>Detalles de carga</span>
+                  <textarea name="cargoDetails" rows="5" placeholder="Describe mercancia, manejo especial o detalles de la ruta"></textarea>
+                </label>
+              </section>
+
+              <section class="service-panel" data-service-panel="ltl" hidden>
+                <div class="form-grid form-grid--service">
+                  <label><span>Numero de pallets</span><input type="number" min="1" name="palletCount" placeholder="8" /></label>
+                  <label><span>Peso</span><input type="number" min="1" step="0.01" name="weight" placeholder="1800" /></label>
+                  <label><span>Unidad de peso</span><select name="weightUnit"><option value="">Selecciona unidad</option><option value="KG">KG</option><option value="LBS">LBS</option></select></label>
+                  <label><span>Dimensiones</span><input type="text" name="dimensions" placeholder="48 x 40 x 60" /></label>
+                  <label><span>Unidad de medida</span><select name="measurementUnit"><option value="">Selecciona unidad</option><option value="MTS">MTS</option><option value="FT">FT</option><option value="CMTS">CMTS</option><option value="INCHES">INCHES</option></select></label>
+                  <label><span>Nivel de servicio</span><select name="ltlServiceLevel"><option value="">Selecciona nivel</option><option value="Standard">Estandar</option><option value="Guaranteed">Garantizado</option><option value="Time-Critical">Critico</option></select></label>
+                  <label><span>Frecuencia de embarque</span><select name="shippingFrequency"><option value="">Selecciona frecuencia</option><option value="One time">Una sola vez</option><option value="Daily">Diario</option><option value="Weekly">Semanal</option><option value="Monthly">Mensual</option><option value="Other">Otro</option></select></label>
+                </div>
+                <label><span>Descripcion de la mercancia</span><textarea name="commodityDescription" rows="5" placeholder="Describe la carga, el empaque y las instrucciones especiales"></textarea></label>
+              </section>
+
+              <section class="service-panel" data-service-panel="drayage" hidden>
+                <div class="form-grid form-grid--service">
+                  <label><span>Peso</span><input type="number" min="1" step="0.01" name="weight" placeholder="21000" /></label>
+                  <label><span>Unidad de peso</span><select name="weightUnit"><option value="">Selecciona unidad</option><option value="KG">KG</option><option value="LBS">LBS</option></select></label>
+                  <label><span>Tipo de contenedor</span><select name="containerType"><option value="">Selecciona contenedor</option><option value="Standard">Standard</option><option value="Open Top">Open Top</option><option value="Flat Rack">Flat Rack</option><option value="Reefer">Reefer</option></select></label>
+                  <label><span>Frecuencia de embarque</span><select name="shippingFrequency"><option value="">Selecciona frecuencia</option><option value="One time">Una sola vez</option><option value="Daily">Diario</option><option value="Weekly">Semanal</option><option value="Monthly">Mensual</option><option value="Other">Otro</option></select></label>
+                </div>
+                <label><span>Detalles de carga</span><textarea name="cargoDetails" rows="5" placeholder="Par de puertos, fecha disponible, chassis, aduana o notas operativas"></textarea></label>
+              </section>
+
+              <section class="service-panel" data-service-panel="courier" hidden>
+                <div class="form-grid form-grid--service">
+                  <label><span>Numero de paquetes</span><input type="number" min="1" name="packageCount" placeholder="14" /></label>
+                  <label><span>Peso</span><input type="number" min="1" step="0.01" name="weight" placeholder="240" /></label>
+                  <label><span>Unidad de peso</span><select name="weightUnit"><option value="">Selecciona unidad</option><option value="KG">KG</option><option value="LBS">LBS</option></select></label>
+                  <label><span>Dimensiones</span><input type="text" name="dimensions" placeholder="18 x 20 x 14" /></label>
+                  <label><span>Unidad de medida</span><select name="measurementUnit"><option value="">Selecciona unidad</option><option value="MTS">MTS</option><option value="FT">FT</option><option value="CMTS">CMTS</option><option value="INCHES">INCHES</option></select></label>
+                  <label><span>Nivel de servicio</span><select name="courierServiceLevel"><option value="">Selecciona nivel</option><option value="Express">Express</option><option value="Overnight">Overnight</option></select></label>
+                  <label><span>Frecuencia de embarque</span><select name="shippingFrequency"><option value="">Selecciona frecuencia</option><option value="One time">Una sola vez</option><option value="Daily">Diario</option><option value="Weekly">Semanal</option><option value="Monthly">Mensual</option><option value="Other">Otro</option></select></label>
+                </div>
+                <label><span>Descripcion de la mercancia</span><textarea name="commodityDescription" rows="5" placeholder="Describe el tipo de paquete, urgencia y restricciones de manejo"></textarea></label>
+              </section>
+
+              <section class="service-panel" data-service-panel="insurance" hidden>
+                <div class="form-grid form-grid--service">
+                  <label><span>Peso</span><input type="number" min="1" step="0.01" name="weight" placeholder="5000" /></label>
+                  <label><span>Unidad de peso</span><select name="weightUnit"><option value="">Selecciona unidad</option><option value="KG">KG</option><option value="LBS">LBS</option></select></label>
+                  <label><span>Valor estimado de la carga</span><input type="text" name="estimatedValue" placeholder="USD 95,000" /></label>
+                </div>
+                <label><span>Detalles de carga</span><textarea name="cargoDetails" rows="5" placeholder="Describe la mercancia, el valor declarado y el contexto del soporte"></textarea></label>
+                <label class="file-input"><span>Documento de soporte</span><input type="file" name="supportingDocument" accept=".pdf,.jpg,.jpeg,.png,.webp" /><small data-file-name>Ningun archivo seleccionado</small></label>
+              </section>
+            </div>
+
+            <label class="checkbox">
+              <input type="checkbox" name="termsAccepted" required />
+              <span>Autorizo a Movil Jaguar USA a contactarme sobre esta solicitud y acepto los terminos de privacidad.</span>
+            </label>
+            <label class="checkbox checkbox--optional">
+              <input type="checkbox" name="communicationsAccepted" />
+              <span>Quiero recibir seguimiento comercial y comunicaciones relacionadas con el servicio.</span>
+            </label>
+
+            <div class="form-actions">
+              <button class="button button--solid button--wide" type="submit">Enviar cotizacion</button>
+              <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="section section--faq" id="faq">
+        <div class="container faq-layout">
+          <div class="section-heading" data-reveal>
+            <p class="eyebrow">FAQ Operativo</p>
+            <h2>Respuestas para las primeras preguntas comerciales y operativas.</h2>
+            <p>
+              Estas son las preguntas que mas aparecen antes de solicitar revision de ruta o cotizacion.
+            </p>
+          </div>
+
+          <div class="accordion" data-reveal data-reveal-delay="100">
+            <article class="accordion__item is-open">
+              <button class="accordion__trigger" type="button" data-accordion-trigger aria-expanded="true">
+                Atienden carga entre Mexico, USA y Canada?
+              </button>
+              <div class="accordion__panel">
+                <p>
+                  Si. Movil Jaguar USA esta orientado a rutas cross-border conectando Mexico,
+                  Estados Unidos y Canada con un solo punto de contacto comercial.
+                </p>
+              </div>
+            </article>
+
+            <article class="accordion__item">
+              <button class="accordion__trigger" type="button" data-accordion-trigger aria-expanded="false">
+                Puedo solicitar FTL, LTL, drayage y courier con el mismo equipo?
+              </button>
+              <div class="accordion__panel" hidden>
+                <p>
+                  Si. El portafolio cubre carga dedicada, carga consolidada, drayage, courier
+                  expedited y servicios adicionales dentro de una misma operacion.
+                </p>
+              </div>
+            </article>
+
+            <article class="accordion__item">
+              <button class="accordion__trigger" type="button" data-accordion-trigger aria-expanded="false">
+                Pueden apoyar embarques urgentes o con manejo especial?
+              </button>
+              <div class="accordion__panel" hidden>
+                <p>
+                  Si. Dependiendo del modo, la operacion puede apoyar hot shot, reefer, hazmat,
+                  carga sobredimensionada, servicios criticos y otras necesidades especiales.
+                </p>
+              </div>
+            </article>
+
+            <article class="accordion__item">
+              <button class="accordion__trigger" type="button" data-accordion-trigger aria-expanded="false">
+                Como se entregan las solicitudes de cotizacion?
+              </button>
+              <div class="accordion__panel" hidden>
+                <p>
+                  El formulario se envia al backend y puede entregar solicitudes directo por correo
+                  en cuanto se conecten las credenciales SMTP. Mientras tanto funciona en modo preview.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__media">
+        <video src="./assets/videos/brand-road.mp4" autoplay muted loop playsinline preload="metadata" poster="./assets/images/brand-road.jpg" aria-hidden="true"></video>
+      </div>
+      <div class="container site-footer__inner">
+        <div>
+          <a class="brand brand--footer" href="#home">
+            <span class="brand__mark">MJ</span>
+            <span class="brand__copy">
+              <strong>Movil Jaguar</strong>
+              <span>USA</span>
+            </span>
+          </a>
+          <p>
+            Coordinacion de carga internacional con capacidad dedicada, despacho responsivo y
+            servicios de soporte pensados para rutas entre Mexico, USA y Canada.
+          </p>
+        </div>
+
+        <div>
+          <strong>Accesos rapidos</strong>
+          <ul class="footer-links">
+            <li><a href="#services">Servicios</a></li>
+            <li><a href="./services-es.html">Todos los servicios</a></li>
+            <li><a href="#coverage">Cobertura</a></li>
+            <li><a href="#support">Soporte</a></li>
+            <li><a href="#quote">Cotizacion</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <strong>Contacto</strong>
+          <ul class="footer-links">
+            <li><a href="tel:+13055550148">+1 (305) 555-0148</a></li>
+            <li><a href="mailto:hello@moviljaguarusa.com">hello@moviljaguarusa.com</a></li>
+            <li>Mexico - USA - Canada</li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
+

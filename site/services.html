@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Detailed freight service catalog for Movil Jaguar USA including FTL, LTL, drayage, courier and cross-border support services."
+    />
+    <title>Movil Jaguar USA | Service Catalog</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script defer src="./app.js"></script>
+  </head>
+  <body>
+    <div class="ambient ambient--gold" aria-hidden="true"></div>
+    <div class="ambient ambient--emerald" aria-hidden="true"></div>
+
+    <div class="topbar">
+      <div class="container topbar__inner">
+        <p>
+          <strong>Dispatch & Control Tower:</strong>
+          <a href="tel:+13055550148">+1 (305) 555-0148</a>
+        </p>
+        <div class="topbar__tools">
+          <p>Mexico | USA | Canada cross-border freight lanes.</p>
+          <div class="language-switch" aria-label="Language switch">
+            <span class="language-switch__label">Language</span>
+            <a class="language-switch__link is-active" href="./services.html">EN</a>
+            <a class="language-switch__link" href="./services-es.html">ES</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <header class="site-header" data-header>
+      <div class="container site-header__inner">
+        <a class="brand" href="./index.html#home" aria-label="Movil Jaguar USA home">
+          <span class="brand__mark">MJ</span>
+          <span class="brand__copy">
+            <strong>Movil Jaguar</strong>
+            <span>USA</span>
+            <small>Mexico | USA | Canada</small>
+          </span>
+        </a>
+
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="primary-navigation"
+          data-nav-toggle
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav class="primary-nav" id="primary-navigation" data-nav>
+          <ul class="primary-nav__list">
+            <li><a href="./index.html#home">Home</a></li>
+            <li class="primary-nav__item primary-nav__item--panel" data-panel-parent>
+              <button class="nav-panel-toggle" type="button" aria-expanded="false" data-panel-toggle>
+                Services
+              </button>
+              <div class="mega-panel" data-panel>
+                <a href="#ftl">Full Truckload</a>
+                <a href="#ltl">Less Than Truckload</a>
+                <a href="#drayage">Drayage</a>
+                <a href="#courier">Courier</a>
+                <a href="#additional">Additional Services</a>
+              </div>
+            </li>
+            <li><a href="./index.html#coverage">Coverage</a></li>
+            <li><a href="./index.html#support">Support</a></li>
+            <li><a href="./index.html#faq">FAQ</a></li>
+          </ul>
+
+          <a class="button button--solid nav-cta" href="./index.html#quote">Get a quote</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-hero">
+        <div class="page-hero__backdrop" aria-hidden="true"><video src="./assets/videos/brand-road.mp4" autoplay muted loop playsinline preload="metadata" poster="./assets/images/brand-road.jpg"></video></div>
+        <div class="container page-hero__grid">
+          <div class="page-hero__copy" data-reveal>
+            <p class="eyebrow">Service catalog</p>
+            <h1>
+              Freight services configured for
+              <span>Mexico, USA and Canada lanes.</span>
+            </h1>
+            <p class="hero__lede">
+              Movil Jaguar USA supports dedicated truckload, consolidated freight, drayage,
+              specialized courier and operational support services for customers that need clean
+              communication and serious execution across North America.
+            </p>
+            <div class="hero__actions">
+              <a class="button button--solid" href="./index.html#quote">Request a quote</a>
+              <a class="button button--ghost" href="./index.html#services">Return home</a>
+            </div>
+          </div>
+
+          <div class="page-hero__panel" data-reveal data-reveal-delay="100">
+            <article>
+              <strong>Cross-border scope</strong>
+              <p>Coordinated freight support for Mexico, the United States and Canada.</p>
+            </article>
+            <article>
+              <strong>Core service model</strong>
+              <p>FTL, LTL, drayage, courier and support services aligned under one team.</p>
+            </article>
+            <article>
+              <strong>Commercial follow-up</strong>
+              <p>Structured quote intake designed to move quickly into lane review and response.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--catalog">
+        <div class="container">
+          <div class="section-heading" data-reveal>
+            <p class="eyebrow">Overview</p>
+            <h2>Five service lines, one commercial contact point.</h2>
+            <p>
+              The catalog below summarizes the operating scope and the equipment or support layers
+              attached to each service.
+            </p>
+          </div>
+
+          <div class="service-catalog">
+            <a class="service-summary-card" href="#ftl" data-reveal>
+              <span>01</span>
+              <strong>Full Truckload</strong>
+              <p>Dedicated equipment for exclusive freight moves, including specialized truck types.</p>
+            </a>
+            <a class="service-summary-card" href="#ltl" data-reveal data-reveal-delay="60">
+              <span>02</span>
+              <strong>Less Than Truckload</strong>
+              <p>Flexible consolidated freight for standard, refrigerated, hazmat and time-critical shipments.</p>
+            </a>
+            <a class="service-summary-card" href="#drayage" data-reveal data-reveal-delay="120">
+              <span>03</span>
+              <strong>Drayage</strong>
+              <p>Short-haul container support between ports, rail terminals, yards and warehouses.</p>
+            </a>
+            <a class="service-summary-card" href="#courier" data-reveal data-reveal-delay="180">
+              <span>04</span>
+              <strong>Courier</strong>
+              <p>Fast delivery for documents, parcels and urgent smaller-scale freight needs.</p>
+            </a>
+            <a class="service-summary-card" href="#additional" data-reveal data-reveal-delay="240">
+              <span>05</span>
+              <strong>Additional Services</strong>
+              <p>Cargo insurance, 24/7 tracking and customs assistance around the linehaul move.</p>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section service-detail" id="ftl">
+        <div class="container service-detail__grid">
+          <aside class="service-detail__side" data-reveal>
+            <small>01. Full Truckload</small>
+            <h2>Dedicated equipment for exclusive freight moves.</h2>
+            <p>
+              FTL service is built for customers that need a full unit assigned to one shipment,
+              with equipment chosen around commodity type, urgency and route profile.
+            </p>
+            <div class="service-chip-row">
+              <span>Dedicated capacity</span>
+              <span>Oversize support</span>
+              <span>Hazmat</span>
+              <span>Reefer</span>
+            </div>
+            <a class="button button--solid" href="./index.html?service=ftl#quote">Request FTL quote</a>
+          </aside>
+
+          <div class="service-detail__body" data-reveal data-reveal-delay="80">
+            <div class="service-mini-grid">
+              <article class="service-mini-card">
+                <strong>Dry Van</strong>
+                <p>For general cargo, furniture, electronics and other dry freight requiring enclosed equipment.</p>
+              </article>
+              <article class="service-mini-card">
+                <strong>Flatbed</strong>
+                <p>For machinery, lumber, steel and oversized pieces that require top or side loading.</p>
+              </article>
+              <article class="service-mini-card">
+                <strong>Reefer</strong>
+                <p>Temperature-controlled units for food products, perishables and sensitive commodities.</p>
+              </article>
+              <article class="service-mini-card">
+                <strong>Hazmat Trucking</strong>
+                <p>Specialized handling for hazardous materials with operational attention to compliance and routing.</p>
+              </article>
+              <article class="service-mini-card">
+                <strong>Sprinter Vans / Box Trucks</strong>
+                <p>For local delivery needs, smaller shipments and faster urban or regional freight response.</p>
+              </article>
+              <article class="service-mini-card">
+                <strong>Hot Shot Trucking</strong>
+                <p>Expedited transportation for urgent loads that do not require a full-size tractor-trailer.</p>
+              </article>
+              <article class="service-mini-card">
+                <strong>Power Only</strong>
+                <p>Tractor service for customer-owned or third-party trailers and containers.</p>
+              </article>
+              <article class="service-mini-card">
+                <strong>Oversize / Overweight</strong>
+                <p>Permit coordination, escort requirements and special routing for larger or heavier loads.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section service-detail service-detail--alt" id="ltl">
+        <div class="container service-detail__grid">
+          <aside class="service-detail__side" data-reveal>
+            <small>02. Less Than Truckload</small>
+            <h2>LTL options for freight that does not fill a full trailer.</h2>
+            <p>
+              LTL service fits palletized or partial loads that need cost efficiency without losing
+              visibility, timing or special handling options.
+            </p>
+            <div class="service-chip-row">
+              <span>Standard</span>
+              <span>Refrigerated</span>
+              <span>Hazmat</span>
+              <span>Time-Critical</span>
+            </div>
+            <a class="button button--solid" href="./index.html?service=ltl#quote">Request LTL quote</a>
+          </aside>
+
+          <div class="service-detail__body" data-reveal data-reveal-delay="80">
+            <ul class="service-list">
+              <li>
+                <strong>Standard LTL</strong>
+                <p>Ideal for regular partial loads that need reliable transit without paying for a full truck.</p>
+              </li>
+              <li>
+                <strong>Refrigerated or Hazmat LTL</strong>
+                <p>Supports temperature-sensitive or regulated freight requiring controlled handling.</p>
+              </li>
+              <li>
+                <strong>Time-Critical Delivery</strong>
+                <p>Used when the shipment has tighter delivery windows or production-related timing pressure.</p>
+              </li>
+              <li>
+                <strong>Airport and Trade Show Services</strong>
+                <p>Special handling for event freight, terminal-related moves and shipments with stricter timing rules.</p>
+              </li>
+              <li>
+                <strong>Residential and Construction Delivery</strong>
+                <p>Extended service support for sites that need access coordination, scheduling or delivery exceptions.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section service-detail" id="drayage">
+        <div class="container service-detail__grid">
+          <aside class="service-detail__side" data-reveal>
+            <small>03. Drayage</small>
+            <h2>Container drayage between ports, rail terminals and warehouses.</h2>
+            <p>
+              Drayage covers the short-distance portion of container logistics and requires precise
+              coordination between port availability, chassis access and inland delivery timing.
+            </p>
+            <div class="service-chip-row">
+              <span>Import</span>
+              <span>Export</span>
+              <span>Overweight</span>
+              <span>Hazmat</span>
+            </div>
+            <a class="button button--solid" href="./index.html?service=drayage#quote">Request drayage quote</a>
+          </aside>
+
+          <div class="service-detail__body" data-reveal data-reveal-delay="80">
+            <ul class="service-list">
+              <li>
+                <strong>Import and Export Containers</strong>
+                <p>Support for container pickups and deliveries between marine terminals, rail ramps and customer facilities.</p>
+              </li>
+              <li>
+                <strong>Overweight and Hazmat Containers</strong>
+                <p>Operational coordination for containers requiring special routing, compliance attention or weight management.</p>
+              </li>
+              <li>
+                <strong>Port-to-Warehouse Transfers</strong>
+                <p>Short-haul moves linking ports or terminals with distribution centers, storage yards and final delivery points.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section service-detail service-detail--alt" id="courier">
+        <div class="container service-detail__grid">
+          <aside class="service-detail__side" data-reveal>
+            <small>04. Courier</small>
+            <h2>Specialized courier support for fast and smaller shipments.</h2>
+            <p>
+              Courier and expedited service is designed for smaller packages, documents and urgent
+              freight that needs faster handling than standard truckload service.
+            </p>
+            <div class="service-chip-row">
+              <span>Documents</span>
+              <span>Parcels</span>
+              <span>Expedited</span>
+              <span>Local response</span>
+            </div>
+            <a class="button button--solid" href="./index.html?service=courier#quote">Request courier quote</a>
+          </aside>
+
+          <div class="service-detail__body" data-reveal data-reveal-delay="80">
+            <ul class="service-list">
+              <li>
+                <strong>Documents and Small Packages</strong>
+                <p>Fast movement for documents, parcels and smaller urgent commercial shipments.</p>
+              </li>
+              <li>
+                <strong>Specialized Expedited Deliveries</strong>
+                <p>Supports critical deadlines where smaller freight must move immediately with cleaner communication.</p>
+              </li>
+              <li>
+                <strong>Regional and Last-Mile Response</strong>
+                <p>Useful for local deliveries, small cargo handoffs and faster service windows.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section service-detail" id="additional">
+        <div class="container service-detail__grid">
+          <aside class="service-detail__side" data-reveal>
+            <small>05. Additional Services</small>
+            <h2>Support services that strengthen each freight movement.</h2>
+            <p>
+              These services complement the primary transportation move and help reduce risk while
+              improving visibility and border execution.
+            </p>
+            <div class="service-chip-row">
+              <span>Insurance</span>
+              <span>24/7 tracking</span>
+              <span>Customs support</span>
+            </div>
+            <a class="button button--solid" href="./index.html?service=insurance#quote">Request support quote</a>
+          </aside>
+
+          <div class="service-detail__body" data-reveal data-reveal-delay="80">
+            <ul class="service-list">
+              <li>
+                <strong>Cargo Insurance</strong>
+                <p>Protection for freight in transit, especially useful for higher-value commodities and added commercial peace of mind.</p>
+              </li>
+              <li>
+                <strong>24/7 Tracking</strong>
+                <p>Real-time shipment monitoring and status visibility throughout pickup, transit and delivery milestones.</p>
+              </li>
+              <li>
+                <strong>Customs Assistance</strong>
+                <p>Support for cross-border documentation flow and operational coordination across the United States, Mexico and Canada.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="cta-band" data-reveal>
+            <div>
+              <p class="eyebrow">Next step</p>
+              <h2>Send the lane details and move the quote into review.</h2>
+              <p>
+                Use the quote form to share origin, destination, service mode and shipment details.
+                The team can follow up with the correct next step for the lane.
+              </p>
+            </div>
+            <a class="button button--solid" href="./index.html#quote">Open Quote Form</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__media">
+        <video src="./assets/videos/brand-road.mp4" autoplay muted loop playsinline preload="metadata" poster="./assets/images/brand-road.jpg" aria-hidden="true"></video>
+      </div>
+      <div class="container site-footer__inner">
+        <div>
+          <a class="brand brand--footer" href="./index.html#home">
+            <span class="brand__mark">MJ</span>
+            <span class="brand__copy">
+              <strong>Movil Jaguar</strong>
+              <span>USA</span>
+            </span>
+          </a>
+          <p>
+            Cross-border freight coordination with dedicated capacity, responsive dispatch and
+            support services designed for Mexico, USA and Canada lanes.
+          </p>
+        </div>
+
+        <div>
+          <strong>Quick links</strong>
+          <ul class="footer-links">
+            <li><a href="#ftl">Full Truckload</a></li>
+            <li><a href="#ltl">LTL</a></li>
+            <li><a href="#drayage">Drayage</a></li>
+            <li><a href="#additional">Additional Services</a></li>
+            <li><a href="./index.html#quote">Quote</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <strong>Contact</strong>
+          <ul class="footer-links">
+            <li><a href="tel:+13055550148">+1 (305) 555-0148</a></li>
+            <li><a href="mailto:hello@moviljaguarusa.com">hello@moviljaguarusa.com</a></li>
+            <li>U.S. - Mexico - Canada</li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
+
