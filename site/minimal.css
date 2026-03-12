@@ -170,6 +170,24 @@ code { font-family: Consolas, monospace; }
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
+.nav-panel-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav-panel-toggle::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  flex: 0 0 8px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translateY(-1px);
+  transition: transform 180ms ease;
+}
+.primary-nav__item.is-open .nav-panel-toggle::before {
+  transform: rotate(225deg) translateY(-1px);
+}
 .primary-nav__list a::after,
 .nav-panel-toggle::after {
   content: "";
@@ -226,6 +244,39 @@ code { font-family: Consolas, monospace; }
 body.menu-open .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 body.menu-open .nav-toggle span:nth-child(2) { opacity: 0; }
 body.menu-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.back-to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border: 1px solid var(--graphite-950);
+  background: rgba(255,255,255,0.94);
+  color: var(--graphite-950);
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: opacity 180ms ease, visibility 180ms ease, transform 180ms ease, background-color 180ms ease, color 180ms ease;
+}
+.back-to-top span { font-size: 1.2rem; font-weight: 700; line-height: 1; }
+body.show-back-to-top .back-to-top {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.back-to-top:hover,
+.back-to-top:focus-visible {
+  background: var(--graphite-950);
+  color: #fff;
+}
 
 .button {
   display: inline-flex;
@@ -812,9 +863,18 @@ body.menu-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotat
   body.menu-open .primary-nav { opacity: 1; visibility: visible; transform: translateY(0); }
   .primary-nav { clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px)); }
   .primary-nav__list { width: 100%; flex-direction: column; align-items: stretch; gap: 8px; }
-  .primary-nav__list a, .nav-panel-toggle { display: block; width: 100%; padding: 12px 0; }
+  .primary-nav__item { width: 100%; }
+  .primary-nav__list a,
+  .nav-panel-toggle {
+    display: flex;
+    width: 100%;
+    padding: 12px 0;
+    justify-content: flex-start;
+    text-align: left;
+  }
   .mega-panel { position: static; min-width: 0; padding: 10px 0 0; box-shadow: none; border: 0; border-radius: 0; background: transparent; opacity: 1; visibility: visible; transform: none; display: none; }
   .primary-nav__item.is-open .mega-panel { display: grid; }
+  .mega-panel a { text-align: left; }
   .hero { padding-bottom: 76px; }
   .brand__mark { width: clamp(84px, 26vw, 102px); height: clamp(84px, 26vw, 102px); }
   .brand--footer .brand__mark { width: clamp(128px, 38vw, 156px); height: clamp(128px, 38vw, 156px); }

@@ -31,6 +31,20 @@ const isStaticPreview =
   window.location.hostname.endsWith("github.io") ||
   !window.location.hostname ||
   window.location.pathname.includes("/proyectoMJ/");
+const backToTopButton = document.createElement("button");
+
+backToTopButton.type = "button";
+backToTopButton.className = "back-to-top";
+backToTopButton.setAttribute("aria-label", currentLanguage === "es" ? "Volver arriba" : "Back to top");
+backToTopButton.setAttribute("title", currentLanguage === "es" ? "Volver arriba" : "Back to top");
+backToTopButton.innerHTML = '<span aria-hidden="true">↑</span>';
+document.body.appendChild(backToTopButton);
+
+backToTopButton.addEventListener("click", () => {
+  closeNavigation();
+  closePanels();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
 
 function rewriteLinks(prefixes, nextBase) {
   document.querySelectorAll("a[href]").forEach((link) => {
@@ -136,6 +150,7 @@ function closePanels(exceptParent = null) {
 
 function setHeaderState() {
   header?.classList.toggle("is-condensed", window.scrollY > 18);
+  body.classList.toggle("show-back-to-top", window.scrollY > 320);
 }
 
 function setActiveService(service, options = {}) {
