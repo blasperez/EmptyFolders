@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Catalogo detallado de servicios de Movil Jaguar USA con FTL, LTL, drayage, courier y servicios adicionales para operaciones cross-border."
+    />
+    <title>Movil Jaguar USA | Catalogo Minimalista de Servicios</title>
+    <link rel="stylesheet" href="./minimal.css" />
+    <script defer src="./app.js"></script>
+  </head>
+  <body>
+    <div class="ambient ambient--gold" aria-hidden="true"></div>
+    <div class="ambient ambient--emerald" aria-hidden="true"></div>
+
+    <div class="topbar">
+      <div class="container topbar__inner">
+        <p>
+          <strong>Despacho y Control Tower:</strong>
+          <a href="tel:+13055550148">+1 (305) 555-0148</a>
+        </p>
+        <div class="topbar__tools">
+          <p>Mexico | USA | Canada en operaciones cross-border.</p>
+          <div class="language-switch" aria-label="Language switch">
+            <span class="language-switch__label">Idioma</span>
+            <a class="language-switch__link" href="./propuesta1-services.html">EN</a>
+            <a class="language-switch__link is-active" href="./propuesta1-services-es.html">ES</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <header class="site-header" data-header>
+      <div class="container site-header__inner">
+        <a class="brand" href="./propuesta1-es.html#home" aria-label="Movil Jaguar USA inicio">
+          <span class="brand__mark">MJ</span>
+          <span class="brand__copy">
+            <strong>Movil Jaguar</strong>
+            <span>USA</span>
+            <small>Mexico | USA | Canada</small>
+          </span>
+        </a>
+
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="primary-navigation"
+          data-nav-toggle
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav class="primary-nav" id="primary-navigation" data-nav>
+          <ul class="primary-nav__list">
+            <li><a href="./propuesta1-es.html#home">Inicio</a></li>
+            <li class="primary-nav__item primary-nav__item--panel" data-panel-parent>
+              <button class="nav-panel-toggle" type="button" aria-expanded="false" data-panel-toggle>
+                Servicios
+              </button>
+              <div class="mega-panel" data-panel>
+                <a href="#ftl">Full Truckload</a>
+                <a href="#ltl">Carga Consolidada</a>
+                <a href="#drayage">Drayage</a>
+                <a href="#courier">Courier</a>
+                <a href="#additional">Servicios Adicionales</a>
+              </div>
+            </li>
+            <li><a href="./propuesta1-es.html#coverage">Cobertura</a></li>
+            <li><a href="./propuesta1-es.html#support">Soporte</a></li>
+            <li><a href="./propuesta1-es.html#faq">FAQ</a></li>
+          </ul>
+
+          <a class="button button--solid nav-cta" href="./propuesta1-es.html#quote">Cotizar</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-hero">
+        <div class="page-hero__backdrop" aria-hidden="true"><video src="./assets/videos/brand-road.mp4" autoplay muted loop playsinline preload="metadata" poster="./assets/images/brand-road.jpg"></video></div>
+        <div class="container page-hero__grid">
+          <div class="page-hero__copy" data-reveal>
+            <p class="eyebrow">Catalogo de servicios</p>
+            <h1>
+              Servicios de freight configurados para
+              <span>rutas entre Mexico, USA y Canada.</span>
+            </h1>
+            <p class="hero__lede">
+              Movil Jaguar USA atiende carga dedicada, carga consolidada, drayage, courier
+              especializado y servicios de soporte para clientes que necesitan comunicacion clara y
+              ejecucion seria en Norteamerica.
+            </p>
+            <div class="hero__actions">
+              <a class="button button--solid" href="./propuesta1-es.html#quote">Solicitar cotizacion</a>
+              <a class="button button--ghost" href="./propuesta1-es.html#services">Volver al inicio</a>
+            </div>
+          </div>
+
+          <div class="page-hero__panel" data-reveal data-reveal-delay="100">
+            <article>
+              <strong>Alcance cross-border</strong>
+              <p>Coordinacion de carga para Mexico, Estados Unidos y Canada.</p>
+            </article>
+            <article>
+              <strong>Modelo principal</strong>
+              <p>FTL, LTL, drayage, courier y servicios de soporte alineados bajo un mismo equipo.</p>
+            </article>
+            <article>
+              <strong>Seguimiento comercial</strong>
+              <p>Captura de cotizacion estructurada para pasar rapido a revision de ruta y respuesta.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--catalog">
+        <div class="container">
+          <div class="section-heading" data-reveal>
+            <p class="eyebrow">Resumen</p>
+            <h2>Cinco lineas de servicio, un solo punto de contacto comercial.</h2>
+            <p>
+              El catalogo siguiente resume el alcance operativo y el tipo de equipo o soporte
+              adicional disponible en cada servicio.
+            </p>
+          </div>
+
+          <div class="service-catalog">
+            <a class="service-summary-card" href="#ftl" data-reveal>
+              <span>01</span>
+              <strong>Full Truckload</strong>
+              <p>Equipo dedicado para movimientos exclusivos, incluyendo unidades especializadas.</p>
+            </a>
+            <a class="service-summary-card" href="#ltl" data-reveal data-reveal-delay="60">
+              <span>02</span>
+              <strong>Carga Consolidada</strong>
+              <p>Opciones flexibles para carga estandar, refrigerada, hazmat y tiempos criticos.</p>
+            </a>
+            <a class="service-summary-card" href="#drayage" data-reveal data-reveal-delay="120">
+              <span>03</span>
+              <strong>Drayage</strong>
+              <p>Soporte de contenedores entre puertos, terminales ferroviarias, patios y almacenes.</p>
+            </a>
+            <a class="service-summary-card" href="#courier" data-reveal data-reveal-delay="180">
+              <span>04</span>
+              <strong>Courier</strong>
+              <p>Entrega rapida de documentos, paquetes y necesidades urgentes de menor escala.</p>
+            </a>
+            <a class="service-summary-card" href="#additional" data-reveal data-reveal-delay="240">
+              <span>05</span>
+              <strong>Servicios Adicionales</strong>
+              <p>Seguro de carga, rastreo 24/7 y asistencia aduanal alrededor del movimiento principal.</p>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section service-detail" id="ftl">
+        <div class="container service-detail__grid">
+          <aside class="service-detail__side" data-reveal>
+            <small>01. Full Truckload</small>
+            <h2>Equipo dedicado para movimientos exclusivos de carga.</h2>
+            <p>
+              El servicio FTL esta pensado para clientes que necesitan una unidad asignada a un solo
+              embarque, con equipo elegido segun mercancia, urgencia y tipo de ruta.
+            </p>
+            <div class="service-chip-row">
+              <span>Capacidad dedicada</span>
+              <span>Oversize</span>
+              <span>Hazmat</span>
+              <span>Reefer</span>
+            </div>
+            <a class="button button--solid" href="./propuesta1-es.html?service=ftl#quote">Solicitar cotizacion FTL</a>
+          </aside>
+
+          <div class="service-detail__body" data-reveal data-reveal-delay="80">
+            <div class="service-mini-grid">
+              <article class="service-mini-card">
+                <strong>Dry Van (Caja Seca)</strong>
+                <p>Para carga general, muebles, electronica y otras mercancias secas en equipo cerrado.</p>
+              </article>
+              <article class="service-mini-card">
+                <strong>Flatbed (Plataforma)</strong>
+                <p>Para maquinaria, madera, acero y piezas sobredimensionadas con carga lateral o superior.</p>
+              </article>
+              <article class="service-mini-card">
+                <strong>Reefer (Refrigerado)</strong>
+                <p>Control de temperatura para alimentos, perecederos y productos sensibles.</p>
+              </article>
+              <article class="service-mini-card">
+                <strong>Hazmat Trucking</strong>
+                <p>Manejo especializado para materiales peligrosos con atencion operativa al cumplimiento.</p>
+              </article>
+              <article class="service-mini-card">
+                <strong>Sprinter Vans / Box Trucks</strong>
+                <p>Para entregas locales, cargas pequenas y respuesta mas rapida en rutas urbanas o regionales.</p>
+              </article>
+              <article class="service-mini-card">
+                <strong>Hot Shot Trucking</strong>
+                <p>Transporte expedito para embarques urgentes que no requieren tractocamion completo.</p>
+              </article>
+              <article class="service-mini-card">
+                <strong>Power Only</strong>
+                <p>Servicio de traccion para remolques o contenedores del cliente o de terceros.</p>
+              </article>
+              <article class="service-mini-card">
+                <strong>Carga Sobredimensionada / Overweight</strong>
+                <p>Gestion de permisos, escoltas y ruteo especial para piezas mas grandes o pesadas.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section service-detail service-detail--alt" id="ltl">
+        <div class="container service-detail__grid">
+          <aside class="service-detail__side" data-reveal>
+            <small>02. Carga Consolidada</small>
+            <h2>Opciones LTL para carga que no llena un trailer completo.</h2>
+            <p>
+              El servicio LTL funciona para cargas palletizadas o parciales que necesitan eficiencia
+              de costo sin perder visibilidad, tiempos o manejo especial.
+            </p>
+            <div class="service-chip-row">
+              <span>Estandar</span>
+              <span>Refrigerado</span>
+              <span>Hazmat</span>
+              <span>Critico</span>
+            </div>
+            <a class="button button--solid" href="./propuesta1-es.html?service=ltl#quote">Solicitar cotizacion LTL</a>
+          </aside>
+
+          <div class="service-detail__body" data-reveal data-reveal-delay="80">
+            <ul class="service-list">
+              <li>
+                <strong>Servicio Estandar</strong>
+                <p>Ideal para cargas parciales regulares que no requieren pagar un camion completo.</p>
+              </li>
+              <li>
+                <strong>LTL Refrigerado o Hazmat</strong>
+                <p>Atiende carga sensible a temperatura o mercancia regulada que exige manejo controlado.</p>
+              </li>
+              <li>
+                <strong>Entregas con Tiempo Critico</strong>
+                <p>Util para embarques con ventanas de entrega ajustadas o presion por produccion.</p>
+              </li>
+              <li>
+                <strong>Aeropuertos y Trade Shows</strong>
+                <p>Atencion especial para ferias comerciales, terminales y movimientos con tiempos mas estrictos.</p>
+              </li>
+              <li>
+                <strong>Zonas Residenciales o de Construccion</strong>
+                <p>Soporte adicional para sitios que requieren programacion, coordinacion de acceso o excepciones de entrega.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section service-detail" id="drayage">
+        <div class="container service-detail__grid">
+          <aside class="service-detail__side" data-reveal>
+            <small>03. Drayage</small>
+            <h2>Drayage de contenedores entre puertos, terminales y almacenes.</h2>
+            <p>
+              El drayage cubre la parte corta de la logistica de contenedores y exige coordinacion
+              precisa entre disponibilidad portuaria, chassis y tiempos de entrega inland.
+            </p>
+            <div class="service-chip-row">
+              <span>Importacion</span>
+              <span>Exportacion</span>
+              <span>Overweight</span>
+              <span>Hazmat</span>
+            </div>
+            <a class="button button--solid" href="./propuesta1-es.html?service=drayage#quote">Solicitar cotizacion de drayage</a>
+          </aside>
+
+          <div class="service-detail__body" data-reveal data-reveal-delay="80">
+            <ul class="service-list">
+              <li>
+                <strong>Contenedores de Importacion y Exportacion</strong>
+                <p>Soporte para recolecciones y entregas entre terminales maritimas, ferroviarias y destino final.</p>
+              </li>
+              <li>
+                <strong>Contenedores Overweight o Hazmat</strong>
+                <p>Coordinacion operativa para contenedores que requieren ruteo especial, cumplimiento o manejo de peso.</p>
+              </li>
+              <li>
+                <strong>Transferencias Puerto a Almacen</strong>
+                <p>Movimientos cortos entre puertos, patios, centros de distribucion y puntos de entrega.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section service-detail service-detail--alt" id="courier">
+        <div class="container service-detail__grid">
+          <aside class="service-detail__side" data-reveal>
+            <small>04. Courier</small>
+            <h2>Courier especializado para entregas rapidas y embarques pequenos.</h2>
+            <p>
+              El servicio courier y expedited esta pensado para paquetes, documentos y carga urgente
+              que necesita una respuesta mas rapida que el servicio de trailer tradicional.
+            </p>
+            <div class="service-chip-row">
+              <span>Documentos</span>
+              <span>Paqueteria</span>
+              <span>Expedited</span>
+              <span>Respuesta local</span>
+            </div>
+            <a class="button button--solid" href="./propuesta1-es.html?service=courier#quote">Solicitar cotizacion courier</a>
+          </aside>
+
+          <div class="service-detail__body" data-reveal data-reveal-delay="80">
+            <ul class="service-list">
+              <li>
+                <strong>Documentos y Paquetes Pequenos</strong>
+                <p>Movimiento rapido para documentos, paqueteria y embarques comerciales urgentes de menor tamano.</p>
+              </li>
+              <li>
+                <strong>Entregas Expeditadas Especializadas</strong>
+                <p>Apoya fechas criticas donde la carga pequena debe moverse de inmediato con mejor comunicacion.</p>
+              </li>
+              <li>
+                <strong>Respuesta Regional y Last Mile</strong>
+                <p>Util para entregas locales, traspasos de carga pequena y ventanas de servicio mas rapidas.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section service-detail" id="additional">
+        <div class="container service-detail__grid">
+          <aside class="service-detail__side" data-reveal>
+            <small>05. Servicios Adicionales</small>
+            <h2>Capas de soporte que fortalecen cada movimiento de carga.</h2>
+            <p>
+              Estos servicios complementan el transporte principal y ayudan a reducir riesgo mientras
+              mejoran visibilidad y ejecucion en frontera.
+            </p>
+            <div class="service-chip-row">
+              <span>Seguro</span>
+              <span>Rastreo 24/7</span>
+              <span>Aduanas</span>
+            </div>
+            <a class="button button--solid" href="./propuesta1-es.html?service=insurance#quote">Solicitar cotizacion de soporte</a>
+          </aside>
+
+          <div class="service-detail__body" data-reveal data-reveal-delay="80">
+            <ul class="service-list">
+              <li>
+                <strong>Seguro de Carga</strong>
+                <p>Proteccion para la mercancia en transito, especialmente util para productos de mayor valor.</p>
+              </li>
+              <li>
+                <strong>Rastreo 24/7</strong>
+                <p>Monitoreo en tiempo real y visibilidad de estatus durante recoleccion, transito y entrega.</p>
+              </li>
+              <li>
+                <strong>Asistencia en Aduanas</strong>
+                <p>Soporte para flujo documental y coordinacion operativa entre Estados Unidos, Mexico y Canada.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="cta-band" data-reveal>
+            <div>
+              <p class="eyebrow">Siguiente paso</p>
+              <h2>Comparte la ruta y mueve la cotizacion a revision.</h2>
+              <p>
+                Usa el formulario para enviar origen, destino, servicio y detalles de la carga. El
+                equipo puede responder con el siguiente paso correcto para esa operacion.
+              </p>
+            </div>
+            <a class="button button--solid" href="./propuesta1-es.html#quote">Abrir Formulario</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__media">
+        <video src="./assets/videos/brand-road.mp4" autoplay muted loop playsinline preload="metadata" poster="./assets/images/brand-road.jpg" aria-hidden="true"></video>
+      </div>
+      <div class="container site-footer__inner">
+        <div>
+          <a class="brand brand--footer" href="./propuesta1-es.html#home">
+            <span class="brand__mark">MJ</span>
+            <span class="brand__copy">
+              <strong>Movil Jaguar</strong>
+              <span>USA</span>
+            </span>
+          </a>
+          <p>
+            Coordinacion de carga internacional con capacidad dedicada, despacho responsivo y
+            servicios de soporte pensados para rutas entre Mexico, USA y Canada.
+          </p>
+        </div>
+
+        <div>
+          <strong>Accesos rapidos</strong>
+          <ul class="footer-links">
+            <li><a href="#ftl">Full Truckload</a></li>
+            <li><a href="#ltl">Carga Consolidada</a></li>
+            <li><a href="#drayage">Drayage</a></li>
+            <li><a href="#additional">Servicios Adicionales</a></li>
+            <li><a href="./propuesta1-es.html#quote">Cotizacion</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <strong>Contacto</strong>
+          <ul class="footer-links">
+            <li><a href="tel:+13055550148">+1 (305) 555-0148</a></li>
+            <li><a href="mailto:hello@moviljaguarusa.com">hello@moviljaguarusa.com</a></li>
+            <li>Mexico - USA - Canada</li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
+

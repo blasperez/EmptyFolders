@@ -17,6 +17,15 @@ const urlParams = new URLSearchParams(window.location.search);
 const initialServiceFromQuery = urlParams.get("service");
 const defaultHomeTarget = currentLanguage === "es" ? "propuesta1-es" : "propuesta1";
 const homeTarget = urlParams.get("home") || defaultHomeTarget;
+const currentPage = window.location.pathname.split("/").pop() || "";
+const isContextualServicePage = [
+  "minimal-services.html",
+  "minimal-services-es.html",
+  "services.html",
+  "services-es.html",
+  "propuesta5.html",
+  "propuesta5-es.html",
+].includes(currentPage);
 const isStaticPreview =
   window.location.protocol === "file:" ||
   window.location.hostname.endsWith("github.io") ||
@@ -43,7 +52,7 @@ function getLocalizedHomeTarget(language) {
   return homeTarget.endsWith("-es") ? homeTarget.slice(0, -3) : homeTarget;
 }
 
-if (homeTarget) {
+if (homeTarget && isContextualServicePage) {
   const homeBase = `./${homeTarget}.html`;
   const localizedPrefixes =
     currentLanguage === "es"
@@ -52,7 +61,7 @@ if (homeTarget) {
 
   rewriteLinks(localizedPrefixes, homeBase);
 
-  if (window.location.pathname.endsWith("/minimal-services.html") || window.location.pathname.endsWith("/minimal-services-es.html")) {
+  if (currentPage === "minimal-services.html" || currentPage === "minimal-services-es.html") {
     document.querySelectorAll(".language-switch__link").forEach((link) => {
       const href = link.getAttribute("href") || "";
       if (href.includes("minimal-services-es.html")) {
