@@ -142,9 +142,8 @@ button { font: inherit; }
   width: clamp(100px, 10vw, 136px);
   height: auto;
   filter:
-    drop-shadow(-8px 10px 0 rgba(7, 7, 7, 0.18))
-    drop-shadow(-14px 18px 18px rgba(7, 7, 7, 0.14))
-    drop-shadow(0 3px 8px rgba(182, 123, 36, 0.2));
+    drop-shadow(-12px 14px 0 rgba(7, 7, 7, 0.36))
+    drop-shadow(-16px 20px 6px rgba(7, 7, 7, 0.24));
 }
 .executive-nav {
   display: flex;
@@ -931,9 +930,8 @@ body.show-back-to-top .back-to-top {
   width: 84px;
   height: auto;
   filter:
-    drop-shadow(-8px 10px 0 rgba(7, 7, 7, 0.18))
-    drop-shadow(-14px 18px 18px rgba(7, 7, 7, 0.14))
-    drop-shadow(0 3px 8px rgba(182, 123, 36, 0.2));
+    drop-shadow(-10px 12px 0 rgba(7, 7, 7, 0.36))
+    drop-shadow(-14px 18px 6px rgba(7, 7, 7, 0.24));
 }
 .executive-footer__brand strong {
   display: block;
