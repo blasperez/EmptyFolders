@@ -812,6 +812,17 @@ body.show-back-to-top .back-to-top {
 .site-footer__media img,
 .site-footer__media video { display: block; width: 100%; height: 100%; object-fit: cover; }
 .site-footer__inner { position: relative; display: grid; grid-template-columns: 1.3fr 0.7fr 0.8fr; gap: 28px; padding: 72px 0; }
+.site-footer__inner::after {
+  content: "Developed By Blas Perez";
+  grid-column: 1 / -1;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.56);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
 .brand--footer { margin-bottom: 18px; color: #fff; }
 .brand--footer .brand__mark {
   width: clamp(148px, 16vw, 184px);

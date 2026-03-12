@@ -816,7 +816,20 @@ body.show-back-to-top .back-to-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
   gap: 20px;
+}
+.executive-footer__inner::after {
+  content: "Developed By Blas Perez";
+  display: block;
+  flex: 1 0 100%;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.54);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 .executive-footer__brand {
   display: inline-flex;
