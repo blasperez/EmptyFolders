@@ -142,8 +142,8 @@ button { font: inherit; }
   width: 200px;
   height: 50px;
   object-fit: contain;
-  -webkit-filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.4)) drop-shadow(0px 7px 13px rgba(0, 0, 0, 0.3));
-  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.4)) drop-shadow(0px 7px 13px rgba(0, 0, 0, 0.3));
+  -webkit-filter: drop-shadow(5px 5px 5px #222);
+  filter: drop-shadow(5px 5px 5px #222);
 }
 .executive-nav {
   display: flex;
@@ -962,8 +962,8 @@ body.show-back-to-top .back-to-top {
   width: 200px;
   height: 50px;
   object-fit: contain;
-  -webkit-filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.4)) drop-shadow(0px 7px 13px rgba(0, 0, 0, 0.3));
-  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.4)) drop-shadow(0px 7px 13px rgba(0, 0, 0, 0.3));
+  -webkit-filter: drop-shadow(5px 5px 5px #222);
+  filter: drop-shadow(5px 5px 5px #222);
 }
 .executive-footer__brand strong {
   display: block;
