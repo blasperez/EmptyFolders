@@ -194,7 +194,7 @@ button { font: inherit; }
   min-height: clamp(380px, 50vw, 690px);
   background:
     linear-gradient(90deg, rgba(8, 34, 70, 0.82) 0%, rgba(8, 34, 70, 0.62) 35%, rgba(8, 34, 70, 0.18) 60%, rgba(8, 34, 70, 0.1) 100%),
-    url("./assets/images/bg-banner.jpg") center/cover no-repeat;
+    url("./assets/images/headermovil.png") center/cover no-repeat;
   overflow: hidden;
 }
 .utb-hero::after {
