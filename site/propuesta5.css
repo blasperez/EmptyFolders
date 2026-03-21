@@ -8,7 +8,7 @@
   --blue-900: #0f3a70;
   --ink: #12151b;
   --muted: #5f6875;
-  --paper: #f6f8fb;
+  --paper: #ffffff;
   --white: #fff;
   --line: rgba(9, 30, 66, 0.12);
   --container: min(1220px, calc(100vw - 40px));
@@ -251,7 +251,7 @@ button { font: inherit; }
 }
 
 .section { padding: 76px 0; }
-.section--alt { background: #eef2f8; }
+.section--alt { background: #ffffff; }
 .section h2 {
   margin: 0 0 10px;
   color: var(--red-dark);
