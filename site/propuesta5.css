@@ -77,7 +77,7 @@ button { font: inherit; }
   top: 0;
   z-index: 40;
   background: rgba(255, 255, 255, 0.98);
-  border-bottom: 1px solid var(--line);
+  border-bottom: 0;
 }
 .utb-header__inner {
   min-height: 92px;
@@ -206,7 +206,7 @@ button { font: inherit; }
   min-height: inherit;
   align-items: center;
 }
-.utb-copy { color: #fff; padding: 34px 0; }
+.utb-copy { color: #fff; padding: 12px 0 28px; }
 .utb-kicker {
   margin: 0 0 8px;
   font-size: clamp(1.7rem, 3.2vw, 3rem);
@@ -428,7 +428,7 @@ body.show-back-to-top .back-to-top {
     background-position: 68% center;
   }
   .utb-hero__inner { grid-template-columns: 1fr; }
-  .utb-copy { padding: 42px 0 52px; }
+  .utb-copy { padding: 16px 0 30px; }
   .utb-grid { grid-template-columns: 1fr 1fr; }
 }
 
