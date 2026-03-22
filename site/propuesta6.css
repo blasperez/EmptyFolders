@@ -2,16 +2,15 @@
 @font-face { font-family: "Montserrat"; src: url("./assets/fonts/Montserrat-700.woff2") format("woff2"); font-style: normal; font-weight: 700; font-display: swap; }
 
 :root {
-  --red: #121212;
-  --red-dark: #000000;
-  --blue-950: #191919;
-  --blue-900: #262626;
-  --ink: #111111;
-  --muted: #555555;
-  --gold: #b9903b;
+  --red: #d1122f;
+  --red-dark: #a00d24;
+  --blue-950: #0a2a54;
+  --blue-900: #0f3a70;
+  --ink: #12151b;
+  --muted: #5f6875;
   --paper: #ffffff;
   --white: #fff;
-  --line: rgba(0, 0, 0, 0.16);
+  --line: rgba(9, 30, 66, 0.12);
   --container: min(1220px, calc(100vw - 40px));
 }
 
@@ -49,7 +48,7 @@ button { font: inherit; }
 .proposal-switch__link.is-active { color: var(--ink); }
 
 .utb-topbar {
-  background: #000;
+  background: var(--red);
   color: #fff;
   font-size: 0.82rem;
 }
@@ -72,7 +71,6 @@ button { font: inherit; }
 }
 .utb-topbar__lang a { opacity: 0.82; }
 .utb-topbar__lang a.is-active { opacity: 1; font-weight: 700; }
-.utb-topbar__lang a.is-active { color: var(--gold); }
 
 .utb-header {
   position: sticky;
@@ -145,8 +143,6 @@ button { font: inherit; }
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
-.utb-nav__list a:hover,
-.utb-nav__list button:hover { color: var(--gold); }
 
 .primary-nav__item { position: relative; }
 .nav-panel-toggle {
@@ -199,13 +195,12 @@ button { font: inherit; }
   align-items: center;
   min-height: 40px;
   padding: 0 14px;
-  border: 2px solid var(--gold);
-  color: #111;
+  border: 2px solid var(--red);
+  color: var(--red);
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  background: #fff;
 }
 
 .utb-hero {
@@ -238,7 +233,7 @@ button { font: inherit; }
   line-height: 1.05;
   letter-spacing: -0.03em;
 }
-.utb-title span { color: var(--gold); display: block; }
+.utb-title span { color: #ff375d; display: block; }
 .utb-lede {
   max-width: 45ch;
   font-size: 1.07rem;
@@ -259,24 +254,23 @@ button { font: inherit; }
   padding: 0 24px;
   border: 0;
   color: #fff;
-  background: #111;
+  background: var(--red);
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 .utb-btn.utb-btn--ghost {
   background: #fff;
-  color: #111;
-  border: 1px solid #111;
+  color: var(--red);
 }
 
 .capability-band {
-  background: #0b0b0b;
+  background: var(--red-dark);
   color: #fff;
   display: flex;
   overflow: hidden;
-  border-top: 1px solid rgba(185, 144, 59, 0.55);
-  border-bottom: 1px solid rgba(185, 144, 59, 0.55);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 .capability-track {
   flex: 0 0 auto;
@@ -304,7 +298,7 @@ button { font: inherit; }
 .section--alt { background: #ffffff; }
 .section h2 {
   margin: 0 0 10px;
-  color: #111;
+  color: var(--red-dark);
   font-size: clamp(1.8rem, 3vw, 2.8rem);
 }
 .section p { margin: 0; color: var(--muted); font-size: 1.05rem; }
@@ -365,7 +359,7 @@ button { font: inherit; }
   gap: 6px 18px;
 }
 .utb-footer__links a {
-  color: #1c1c1c;
+  color: var(--blue-900);
   font-size: 0.86rem;
 }
 .utb-footer__credit {
@@ -443,7 +437,7 @@ button { font: inherit; }
   z-index: 60;
   width: 48px;
   height: 48px;
-  border: 1px solid rgba(185, 144, 59, 0.55);
+  border: 1px solid rgba(9, 30, 66, 0.28);
   background: #fff;
   color: var(--ink);
   display: grid;
@@ -453,7 +447,6 @@ button { font: inherit; }
   transform: translateY(10px);
   transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
 }
-.back-to-top:hover { box-shadow: 0 0 0 1px rgba(185, 144, 59, 0.45), 0 8px 18px rgba(0, 0, 0, 0.28); }
 body.show-back-to-top .back-to-top {
   opacity: 1;
   visibility: visible;
@@ -581,4 +574,36 @@ body.show-back-to-top .back-to-top {
     padding: 18px 0;
   }
   .utb-footer__links { grid-template-columns: 1fr; }
+}
+
+/* Propuesta 6 palette override: same layout as Propuesta 5 */
+:root {
+  --red: #111111;
+  --red-dark: #000000;
+  --blue-950: #1a1a1a;
+  --blue-900: #2a2a2a;
+  --ink: #101010;
+  --muted: #555555;
+  --line: rgba(0, 0, 0, 0.16);
+  --gold: #b9903b;
+}
+.utb-topbar {
+  background: #000000;
+}
+.utb-topbar__lang a.is-active {
+  color: var(--gold);
+}
+.utb-title span {
+  color: var(--gold);
+}
+.utb-cta {
+  border-color: var(--gold);
+}
+.utb-btn {
+  background: #111111;
+}
+.capability-band {
+  background: #0a0a0a;
+  border-top-color: rgba(185, 144, 59, 0.5);
+  border-bottom-color: rgba(185, 144, 59, 0.5);
 }
