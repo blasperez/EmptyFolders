@@ -294,7 +294,7 @@ button { font: inherit; }
 }
 
 .section { padding: 76px 0; }
-.section#about { padding-top: 0; }
+.section#about { padding: 0; }
 .section--alt { background: #ffffff; }
 .section h2 {
   margin: 0 0 10px;
