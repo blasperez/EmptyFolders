@@ -85,6 +85,7 @@ button { font: inherit; }
   justify-content: space-between;
   align-items: center;
   gap: 20px;
+  position: relative;
 }
 .utb-logo img {
   width: clamp(92px, 8.2vw, 130px);
@@ -118,6 +119,18 @@ button { font: inherit; }
   list-style: none;
   margin: 0;
   padding: 0;
+}
+.utb-nav__list li + li {
+  position: relative;
+  padding-left: 14px;
+}
+.utb-nav__list li + li::before {
+  content: "|";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: rgba(18, 21, 27, 0.35);
+  font-weight: 400;
 }
 .utb-nav__list a,
 .utb-nav__list button {
@@ -439,6 +452,28 @@ body.show-back-to-top .back-to-top {
 }
 .back-to-top span { font-size: 1.15rem; }
 
+@media (min-width: 921px) {
+  .utb-header__inner {
+    min-height: 86px;
+    justify-content: flex-end;
+    padding-left: 160px;
+  }
+  .utb-logo {
+    position: absolute;
+    left: 0;
+    bottom: -34px;
+    z-index: 6;
+  }
+  .utb-logo img {
+    width: 128px;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.28));
+  }
+  .utb-nav {
+    margin-left: auto;
+    gap: 16px;
+  }
+}
+
 @media (max-width: 1060px) {
   .utb-nav__list a,
   .utb-nav__list button { font-size: 0.78rem; }
@@ -473,6 +508,12 @@ body.show-back-to-top .back-to-top {
     flex-direction: column;
     align-items: stretch;
     gap: 10px;
+  }
+  .utb-nav__list li + li {
+    padding-left: 0;
+  }
+  .utb-nav__list li + li::before {
+    content: none;
   }
   .utb-nav__list a,
   .utb-nav__list button {
