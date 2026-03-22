@@ -86,6 +86,7 @@ button { font: inherit; }
   align-items: center;
   gap: 20px;
   position: relative;
+  padding-top: 0;
 }
 .utb-logo img {
   width: clamp(92px, 8.2vw, 130px);
@@ -457,6 +458,7 @@ body.show-back-to-top .back-to-top {
     min-height: 86px;
     justify-content: flex-end;
     padding-left: 160px;
+    padding-top: 0;
   }
   .utb-logo {
     position: absolute;
@@ -487,6 +489,7 @@ body.show-back-to-top .back-to-top {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
+    padding-top: 0;
   }
   .utb-nav {
     position: absolute;
