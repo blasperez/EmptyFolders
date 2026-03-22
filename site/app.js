@@ -25,6 +25,8 @@ const isContextualServicePage = [
   "services-es.html",
   "propuesta5.html",
   "propuesta5-es.html",
+  "propuesta6.html",
+  "propuesta6-es.html",
 ].includes(currentPage);
 const isStaticPreview =
   window.location.protocol === "file:" ||
@@ -70,8 +72,8 @@ if (homeTarget && isContextualServicePage) {
   const homeBase = `./${homeTarget}.html`;
   const localizedPrefixes =
     currentLanguage === "es"
-      ? ["./minimal-es.html", "./propuesta1-es.html", "./propuesta5-es.html"]
-      : ["./minimal.html", "./propuesta1.html", "./propuesta5.html"];
+      ? ["./minimal-es.html", "./propuesta1-es.html", "./propuesta5-es.html", "./propuesta6-es.html"]
+      : ["./minimal.html", "./propuesta1.html", "./propuesta5.html", "./propuesta6.html"];
 
   rewriteLinks(localizedPrefixes, homeBase);
 
