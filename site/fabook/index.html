@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Fabook — Comparte el momento exacto de tu video</title>
+<meta name="description" content="Las historias de Facebook e Instagram siempre arrancan desde el principio del video. Fabook te deja elegir el fragmento exacto —de un segundo a otro— y subirlo a tu historia en segundos. Gratis para Android." />
+<meta property="og:title" content="Fabook — Comparte el momento exacto, no el principio" />
+<meta property="og:description" content="Elige de qué segundo a qué segundo. Recorta el momento perfecto y súbelo a tus historias de Facebook e Instagram." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --violet:#7C3AED;
+    --magenta:#A21CAF;
+    --pink:#EC4899;
+    --ink:#160a24;
+    --ink2:#2a1740;
+    --muted:#6b5b80;
+    --paper:#ffffff;
+    --soft:#faf5ff;
+    --grad:linear-gradient(120deg,#7C3AED 0%,#A21CAF 50%,#EC4899 100%);
+    --grad-soft:linear-gradient(120deg,#f5edff 0%,#ffeef8 100%);
+    --shadow:0 20px 60px -20px rgba(124,58,237,.45);
+    --radius:22px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.brand{font-family:'Sora',sans-serif;letter-spacing:-.02em;line-height:1.1}
+  a{text-decoration:none;color:inherit}
+  .wrap{width:min(1120px,92vw);margin:0 auto}
+  .grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  /* ---------- NAV ---------- */
+  header{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(255,255,255,.72);border-bottom:1px solid rgba(124,58,237,.08)}
+  nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:1.28rem}
+  .logo{width:40px;height:40px;border-radius:12px;flex:none;box-shadow:0 6px 18px -6px rgba(162,28,175,.6)}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;font-weight:700;font-family:'Sora',sans-serif;
+    padding:13px 24px;border-radius:999px;border:none;cursor:pointer;font-size:1rem;
+    background:var(--grad);color:#fff;box-shadow:var(--shadow);transition:transform .18s ease,box-shadow .18s ease;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 26px 60px -18px rgba(236,72,153,.6)}
+  .btn.ghost{background:#fff;color:var(--violet);border:1.5px solid rgba(124,58,237,.25);box-shadow:none}
+  .btn.ghost:hover{border-color:var(--pink);color:var(--pink)}
+  .btn.big{padding:17px 34px;font-size:1.1rem}
+  nav .btn{padding:10px 20px}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;padding:70px 0 90px;overflow:hidden}
+  .blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;z-index:0}
+  .blob.a{width:520px;height:520px;background:#c084fc;top:-160px;right:-120px}
+  .blob.b{width:420px;height:420px;background:#f9a8d4;bottom:-160px;left:-120px}
+  .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:50px;align-items:center}
+  .pill{display:inline-flex;align-items:center;gap:8px;background:var(--grad-soft);border:1px solid rgba(162,28,175,.18);color:var(--magenta);font-weight:600;font-size:.86rem;padding:7px 15px;border-radius:999px;margin-bottom:22px}
+  .pill .dot{width:8px;height:8px;border-radius:50%;background:var(--grad)}
+  .hero h1{font-size:clamp(2.4rem,5.4vw,3.9rem);font-weight:800}
+  .hero h1 em{font-style:normal}
+  .hero p.lead{font-size:1.2rem;color:var(--muted);margin:22px 0 30px;max-width:33ch}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .microcopy{margin-top:16px;font-size:.9rem;color:var(--muted);display:flex;align-items:center;gap:8px}
+  .microcopy b{color:var(--ink)}
+
+  /* phone mockup */
+  .phone-stage{display:flex;justify-content:center;position:relative}
+  .phone{width:270px;height:550px;border-radius:38px;background:#120820;padding:12px;box-shadow:0 40px 90px -30px rgba(124,58,237,.7);position:relative;z-index:2}
+  .screen{width:100%;height:100%;border-radius:28px;background:linear-gradient(170deg,#1c1030,#2a1246);overflow:hidden;display:flex;flex-direction:column;color:#fff;position:relative}
+  .screen .vid{margin:16px;height:200px;border-radius:16px;background:linear-gradient(135deg,#7C3AED,#EC4899);position:relative;display:flex;align-items:center;justify-content:center}
+  .screen .vid svg{width:54px;height:54px;opacity:.95}
+  .track{margin:6px 20px 0;height:34px;border-radius:10px;background:rgba(255,255,255,.08);position:relative;overflow:hidden}
+  .track .sel{position:absolute;top:0;bottom:0;left:26%;width:42%;background:var(--grad);border-radius:10px;box-shadow:0 0 0 2px rgba(255,255,255,.35) inset}
+  .lbl{margin:14px 20px 0;font-family:'Sora';font-weight:700;font-size:.98rem}
+  .lbl span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{margin:4px 20px 0;font-size:.78rem;color:#c9b8e6}
+  .screen .go{margin:auto 18px 20px;text-align:center;background:var(--grad);border-radius:12px;padding:12px;font-family:'Sora';font-weight:700;font-size:.9rem}
+
+  /* ---------- SECTION SHELL ---------- */
+  section.block{padding:80px 0}
+  .eyebrow{font-family:'Sora';font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:.8rem;color:var(--pink);margin-bottom:12px}
+  .h2{font-size:clamp(1.9rem,3.8vw,2.7rem);font-weight:800;max-width:20ch}
+  .section-lead{color:var(--muted);font-size:1.12rem;margin-top:14px;max-width:52ch}
+
+  /* problem/solution split */
+  .ps{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:46px}
+  .card{border-radius:var(--radius);padding:34px;border:1px solid rgba(124,58,237,.1)}
+  .card.problem{background:#fff5f8;border-color:rgba(236,72,153,.18)}
+  .card.solution{background:var(--grad);color:#fff;box-shadow:var(--shadow)}
+  .card .tag{font-family:'Sora';font-weight:700;font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px;display:inline-flex;align-items:center;gap:8px}
+  .card.problem .tag{color:var(--pink)}
+  .card h3{font-size:1.5rem;margin-bottom:10px}
+  .card.problem h3{color:var(--ink)}
+  .card p{font-size:1.05rem}
+  .card.problem p{color:#7a6076}
+  .card.solution p{color:rgba(255,255,255,.92)}
+
+  /* features */
+  .features{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:50px}
+  .feat{background:var(--soft);border:1px solid rgba(124,58,237,.09);border-radius:var(--radius);padding:30px;transition:transform .2s ease,box-shadow .2s ease}
+  .feat:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+  .feat .ic{width:56px;height:56px;border-radius:16px;background:var(--grad);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+  .feat .ic svg{width:28px;height:28px;stroke:#fff}
+  .feat h3{font-size:1.22rem;margin-bottom:8px}
+  .feat p{color:var(--muted);font-size:1rem}
+
+  /* steps */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:50px}
+  .step{position:relative;padding:34px 28px;border-radius:var(--radius);background:#fff;border:1px solid rgba(124,58,237,.12)}
+  .step .num{font-family:'Sora';font-weight:800;font-size:2.6rem;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
+  .step h3{font-size:1.2rem;margin:12px 0 6px}
+  .step p{color:var(--muted)}
+
+  /* download band */
+  .download{position:relative;margin:40px auto;border-radius:34px;background:var(--grad);color:#fff;padding:66px 40px;text-align:center;overflow:hidden;box-shadow:var(--shadow)}
+  .download::before,.download::after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.14);filter:blur(10px)}
+  .download::before{width:260px;height:260px;top:-90px;left:-60px}
+  .download::after{width:200px;height:200px;bottom:-80px;right:-40px}
+  .download .inner{position:relative;z-index:1}
+  .download h2{font-size:clamp(2rem,4vw,2.9rem);font-weight:800;margin-bottom:14px}
+  .download p{font-size:1.15rem;color:rgba(255,255,255,.92);margin-bottom:30px;max-width:46ch;margin-inline:auto}
+  .btn.invert{background:#fff;color:var(--magenta)}
+  .btn.invert:hover{color:var(--violet)}
+  .dl-note{margin-top:16px;font-size:.9rem;color:rgba(255,255,255,.8)}
+  .badge-soon{display:inline-flex;align-items:center;gap:8px;margin-top:22px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);padding:9px 18px;border-radius:999px;font-size:.86rem;font-weight:600}
+
+  /* faq */
+  details{background:var(--soft);border:1px solid rgba(124,58,237,.1);border-radius:16px;padding:20px 24px;margin-bottom:14px;cursor:pointer}
+  details summary{font-family:'Sora';font-weight:700;font-size:1.05rem;list-style:none;display:flex;justify-content:space-between;align-items:center}
+  details summary::-webkit-details-marker{display:none}
+  details summary::after{content:"+";font-size:1.5rem;color:var(--pink);transition:transform .2s}
+  details[open] summary::after{transform:rotate(45deg)}
+  details p{margin-top:12px;color:var(--muted)}
+
+  /* footer */
+  footer{background:var(--ink);color:#cbb9e6;padding:50px 0 34px;margin-top:20px}
+  footer .fgrid{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
+  footer .brand{color:#fff}
+  footer a:hover{color:#fff}
+  footer .links{display:flex;gap:24px;flex-wrap:wrap}
+  footer .fine{margin-top:26px;font-size:.82rem;color:#7a6698;border-top:1px solid rgba(255,255,255,.08);padding-top:20px}
+
+  @media(max-width:860px){
+    .hero-grid,.ps,.features,.steps{grid-template-columns:1fr}
+    .phone-stage{order:-1}
+    .hero{padding:44px 0 60px}
+    section.block{padding:56px 0}
+    nav .brand span.full{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header>
+  <div class="wrap">
+    <nav>
+      <a class="brand" href="#top">
+        <svg class="logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#7C3AED"/><stop offset=".5" stop-color="#A21CAF"/><stop offset="1" stop-color="#EC4899"/>
+          </linearGradient></defs>
+          <rect width="48" height="48" rx="13" fill="url(#lg)"/>
+          <path d="M19 15 L34 24 L19 33 Z" fill="#fff"/>
+          <rect x="13" y="14" width="3" height="20" rx="1.5" fill="#fff" opacity=".85"/>
+        </svg>
+        <span>Fabook</span>
+      </a>
+      <a class="btn" href="#descargar">Descargar gratis</a>
+    </nav>
+  </div>
+</header>
+
+<a id="top"></a>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="blob a"></div>
+  <div class="blob b"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="pill"><span class="dot"></span> Para historias de Facebook e Instagram</span>
+      <h1>Comparte el <em class="grad-text">momento exacto</em>. No el principio.</h1>
+      <p class="lead">Las historias siempre arrancan desde el inicio del video… justo la parte que <b>no</b> querías mostrar. Fabook te deja elegir el fragmento perfecto y subirlo en segundos.</p>
+      <div class="cta-row">
+        <a class="btn big" href="#descargar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l4-4m-4 4l-4-4M4 21h16"/></svg>
+          Descargar para Android
+        </a>
+        <a class="btn ghost big" href="#como">Ver cómo funciona</a>
+      </div>
+      <p class="microcopy">✨ <b>Gratis</b> · Sin registro · Android 8.0+</p>
+    </div>
+
+    <div class="phone-stage">
+      <div class="phone">
+        <div class="screen">
+          <div class="vid">
+            <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="track"><div class="sel"></div></div>
+          <div class="lbl">Fragmento: <span>0:34 → 1:04</span></div>
+          <div class="sub">Elige de qué segundo a qué segundo</div>
+          <div class="go">Recortar y compartir a historia</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROBLEM / SOLUTION ============ -->
+<section class="block" style="background:var(--soft)">
+  <div class="wrap">
+    <p class="eyebrow">El problema</p>
+    <h2 class="h2">Ese momentazo del segundo 0:34… se pierde entre partes aburridas.</h2>
+    <div class="ps">
+      <div class="card problem">
+        <span class="tag">😤 Lo de siempre</span>
+        <h3>Subes tu historia y arranca desde cero</h3>
+        <p>Facebook e Instagram empiezan el video por el inicio. Para llegar a la parte buena, tu público tiene que aguantar lo que no importa… o simplemente se salta la historia.</p>
+      </div>
+      <div class="card solution">
+        <span class="tag">🎯 Con Fabook</span>
+        <h3>Marcas el momento exacto y solo subes eso</h3>
+        <p>Eliges inicio y fin —“de 0:34 a 1:04”— y compartes justo el momento que querías. Directo a tu historia, sin vueltas. El impacto llega en el primer segundo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURES ============ -->
+<section class="block">
+  <div class="wrap">
+    <p class="eyebrow">Por qué te va a encantar</p>
+    <h2 class="h2">Todo lo que necesitas para bordar tus historias.</h2>
+    <div class="features">
+      <div class="feat">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1" fill="#fff"/></svg></div>
+        <h3>El momento exacto</h3>
+        <p>Marca inicio y fin al segundo. Comparte justo lo que importa, no el relleno.</p>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></div>
+        <h3>Rápido y sin perder calidad</h3>
+        <p>Recorte instantáneo, sin recodificar. Tu clip se ve igual de nítido que el original.</p>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18h2"/></svg></div>
+        <h3>Facebook e Instagram</h3>
+        <p>Sube tu recorte directo a la app de donde vino, en un toque. Sin menús eternos.</p>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l4-4m-4 4l-4-4M4 21h16"/></svg></div>
+        <h3>Guarda tus clips</h3>
+        <p>¿Quieres conservar el recorte? Guárdalo en tu galería con un solo botón.</p>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>Simple de verdad</h3>
+        <p>Sin cuentas, sin líos. Abres, recortas, compartes. Listo en menos de un minuto.</p>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h10M4 17h7"/></svg></div>
+        <h3>Vista del rango en vivo</h3>
+        <p>Ves “de 0:34 a 1:04” mientras ajustas. Sabes exactamente qué vas a subir.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="block" id="como" style="background:var(--soft)">
+  <div class="wrap">
+    <p class="eyebrow">Cómo funciona</p>
+    <h2 class="h2">En 3 pasos. Sin curva de aprendizaje.</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h3>Manda el video a Fabook</h3>
+        <p>Comparte el video desde Facebook o Instagram a la app, o pégalo directo.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h3>Elige el momento exacto</h3>
+        <p>Desliza para marcar de qué segundo a qué segundo quieres compartir.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h3>Súbelo a tu historia</h3>
+        <p>Un toque y vuelves a la app con tu recorte listo para publicar. ¡Ya está!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DOWNLOAD ============ -->
+<section class="block" id="descargar">
+  <div class="wrap">
+    <div class="download">
+      <div class="inner">
+        <h2>Descarga Fabook gratis</h2>
+        <p>Empieza a compartir el momento exacto de tus videos hoy mismo. Sin registro, sin costo.</p>
+        <a class="btn invert big" href="./fabook-enhanced.apk" download>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A21CAF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l4-4m-4 4l-4-4M4 21h16"/></svg>
+          Descargar APK para Android
+        </a>
+        <p class="dl-note">Android 8.0 o superior · Instalación directa (APK)</p>
+        <div class="badge-soon">📲 Muy pronto también en Google Play</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="block">
+  <div class="wrap" style="max-width:760px">
+    <p class="eyebrow" style="text-align:center">Preguntas frecuentes</p>
+    <h2 class="h2" style="text-align:center;margin:0 auto 40px">¿Dudas? Aquí las respondemos.</h2>
+    <details open>
+      <summary>¿Fabook es gratis?</summary>
+      <p>Sí, la descarga y el uso son totalmente gratis. La app se mantiene con publicidad discreta.</p>
+    </details>
+    <details>
+      <summary>¿Cómo instalo el APK?</summary>
+      <p>Descarga el archivo, ábrelo y acepta “Instalar apps de esta fuente” si Android te lo pide. Es el proceso normal para apps fuera de la tienda.</p>
+    </details>
+    <details>
+      <summary>¿Se pierde calidad al recortar?</summary>
+      <p>No. Fabook recorta sin recodificar, así que tu clip conserva la misma nitidez del video original.</p>
+    </details>
+    <details>
+      <summary>¿Funciona con Instagram además de Facebook?</summary>
+      <p>Sí. Puedes subir tu recorte a las historias de ambos. Fabook te devuelve directo a la app de donde vino el video.</p>
+    </details>
+    <details>
+      <summary>¿Cuánto puede durar mi recorte?</summary>
+      <p>Hasta 55 segundos, el máximo que suben sin problemas las historias de Facebook e Instagram.</p>
+    </details>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <a class="brand" href="#top" style="font-size:1.15rem">
+        <svg class="logo" viewBox="0 0 48 48" style="width:34px;height:34px" aria-hidden="true">
+          <defs><linearGradient id="lg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7C3AED"/><stop offset=".5" stop-color="#A21CAF"/><stop offset="1" stop-color="#EC4899"/></linearGradient></defs>
+          <rect width="48" height="48" rx="13" fill="url(#lg2)"/><path d="M19 15 L34 24 L19 33 Z" fill="#fff"/><rect x="13" y="14" width="3" height="20" rx="1.5" fill="#fff" opacity=".85"/>
+        </svg>
+        Fabook
+      </a>
+      <div class="links">
+        <a href="#como">Cómo funciona</a>
+        <a href="#descargar">Descargar</a>
+        <a href="./privacy-policy.html">Política de privacidad</a>
+      </div>
+    </div>
+    <p class="fine">© 2026 Fabook · apptools.online · Comparte el momento exacto de tus videos. Fabook no está afiliada a Facebook, Instagram ni Meta.</p>
+  </div>
+</footer>
+
+</body>
+</html>
